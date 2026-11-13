@@ -29,7 +29,8 @@
             <span class="cf-l">{{ f.label }}{% if not f.required %} <em>Optional</em>{% endif %}</span>
 {% if f.type == 'select' %}
             <select id="{{ id }}" name="{{ f.key }}"{% if f.required %} required{% endif %}>
-{% for o in f.options %}
+{% if f.key != 'service' %}              <option value="" selected>Select one</option>
+{% endif %}{% for o in f.options %}
               <option{% if o == cf.service %} selected{% endif %}>{{ o }}</option>
 {% endfor %}
             </select>

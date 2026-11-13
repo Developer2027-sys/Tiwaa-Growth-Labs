@@ -6,7 +6,7 @@
 //!   3. create its sections in templates/sections/about/...
 //! Then run `npm run build` (or `npm run dev` to preview).
 
-use crate::contact_form::CfConfig;
+use crate::contact_form::{CfConfig, Field};
 use serde_json::{json, Value};
 
 /// Request path -> page id. Built to public/index.html, public/services.html, ...
@@ -24,6 +24,7 @@ pub fn routes() -> &'static [(&'static str, &'static str)] {
         ("/services/analytics-crm", "analytics-crm"),
         ("/blog", "blog"),
         ("/contact", "contact"),
+        ("/industries/real-estate", "real-estate"),
     ]
 }
 
@@ -34,6 +35,9 @@ pub fn redirects() -> &'static [(&'static str, &'static str)] {
         ("/home", "/"),
         ("/blogs", "/blog"),
         ("/contact-us", "/contact"),
+        ("/real-estate.html", "/industries/real-estate"),
+        ("/real-estate", "/industries/real-estate"),
+        ("/real-estate-marketing", "/industries/real-estate"),
         ("/contact.html", "/contact"),
         ("/contact-us.html", "/contact"),
         // file names used in the design artifact
@@ -247,6 +251,36 @@ pub fn page(id: &str) -> Option<Page> {
             ],
             ..Page::default()
         },
+        // Industry page; same building blocks as a service page plus its own stylesheet.
+        "real-estate" => {
+            let mut p = service_page(ServicePage {
+                id: "real-estate",
+                title: "Real Estate Digital Marketing Agency in Gurugram | Tiwaa Growth Labs",
+                description: "Real estate marketing in Gurugram for developers, channel partners and brokers: pre-launch campaigns, qualified buyer leads, WhatsApp follow-up, site visits and CRM by Tiwaa Growth Labs.",
+                keywords: "real estate digital marketing agency gurugram, real estate lead generation, property marketing agency, real estate marketing delhi ncr, site visit campaigns, real estate whatsapp marketing",
+                path: "/industries/real-estate",
+                service: "Real Estate Marketing",
+                sections: vec![
+                    s("industry/real-estate/01-hero"),
+                    s("industry/real-estate/02-stats"),
+                    s("industry/real-estate/03-problem"),
+                    s("industry/real-estate/04-journey"),
+                    s("industry/real-estate/05-lead-to-visit-flow"),
+                    s("industry/real-estate/06-project-types"),
+                    s("industry/real-estate/07-services"),
+                    s("industry/real-estate/08-case-study"),
+                    s("shared/reviews"),
+                    s("industry/real-estate/09-faq"),
+                ],
+            });
+            p.css.push("css/real-estate.css");
+            p.contact_form = Some(CfConfig {
+                service: Some("Real Estate Marketing"),
+                fields: Some(vec![Field::Key("name"), Field::Key("phone"), Field::Key("email"), Field::Key("company"), Field::Key("service"), Field::Key("budget"), Field::Key("message")]),
+                ..CfConfig::default()
+            });
+            p
+        }
         "seo" => service_page(ServicePage {
             id: "seo",
             title: "SEO Services in Gurugram | SEO Company | Tiwaa Growth Labs",
@@ -446,6 +480,9 @@ pub fn page(id: &str) -> Option<Page> {
             description: "The page you were looking for could not be found.",
             path: "/404",
             robots: "noindex, follow",
+            css: vec!["css/404.css"],
+            // shows the typed address, "did you mean", page search
+            js: vec!["js/404.js".into()],
             contact_form: None,
             sections: vec![s("shared/not-found")],
             ..Page::default()

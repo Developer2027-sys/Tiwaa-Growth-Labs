@@ -21,7 +21,7 @@
         <li class="nv-item has-dd"><a class="nv-top" href="{{ '#industries' if is_home or is_services else url('/#industries') }}">Industries</a><button class="nv-caret" type="button" aria-expanded="false" aria-label="Show industries"><svg viewBox="0 0 12 12"><path d="M3 4.5l3 3 3-3"/></svg></button>
           <div class="nv-dd" role="group" aria-label="Industries">
             <div class="nv-list">
-              <a href="{{ '#industries' if is_home or is_services else url('/#industries') }}" data-ind="re"><i class="ni" style="--c:#007AFF"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-6h6v6"/></svg></i><span><b>Real Estate</b><small>Site visits &amp; qualified buyers</small></span></a>
+              <a href="{{ url('/industries/real-estate') }}" data-ind="re"{% if page.path == '/industries/real-estate' %} class="on-page" aria-current="page"{% endif %}><i class="ni" style="--c:#007AFF"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-6h6v6"/></svg></i><span><b>Real Estate</b><small>Site visits &amp; qualified buyers</small></span></a>
             </div>
           </div></li>
         <li class="nv-item has-dd"><span class="nv-top nv-nolink" tabindex="0">Products</span><button class="nv-caret" type="button" aria-expanded="false" aria-label="Show products"><svg viewBox="0 0 12 12"><path d="M3 4.5l3 3 3-3"/></svg></button>

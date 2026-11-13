@@ -1,14 +1,84 @@
-  <section class="section nf" aria-labelledby="nf-h">
-    <div class="wrap">
-      <div class="sec-hd center">
-        <span class="pill">Page not found</span>
-        <p class="nf-code gt" aria-hidden="true">404</p>
-        <h1 class="h2" id="nf-h">This page took a wrong turn</h1>
-        <p class="lead">The link may be old or mistyped. Let's get you back to growing.</p>
-        <div class="nf-acts">
-          <a class="btn btn-grad" href="{{ url('/') }}">Back to home <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-          <a class="btn btn-line" href="{{ url('/services') }}">Explore services</a>
+{#- 404 page (any unknown URL). The dev server and Cloudflare (`not_found_handling: 404-page`) both
+    serve this with status 404. assets/js/404.js shows the typed path, suggests the closest page
+    and powers the page search; the list of pages it searches is the hidden #nfPages list at the bottom. -#}
+{%- set pages = [
+  ["Home", "/", "Digital marketing agency in Gurugram", "home main start index tiwaa"],
+  ["About us", "/#about", "Who we are and how we work", "about us team company who we are story"],
+  ["All services", "/services", "Everything we do, in one place", "services offerings what we do"],
+  ["SEO services", "/services/seo", "Rank on page one for buyer searches", "seo search engine optimization google ranking organic"],
+  ["Google Ads (PPC)", "/services/google-ads", "Search, Performance Max and YouTube", "google ads ppc adwords paid search sem performance max youtube"],
+  ["Meta & Instagram Ads", "/services/meta-ads", "Lead forms, Reels and retargeting", "meta facebook instagram ads fb paid social"],
+  ["Social media marketing", "/services/social-media-marketing", "Content calendars, Reels and community", "social media smm instagram linkedin management"],
+  ["WhatsApp automation", "/services/whatsapp-automation", "Instant replies, broadcasts and chatbots", "whatsapp automation chatbot bot broadcast api"],
+  ["Website design", "/services/website-design", "Fast websites and landing pages", "website web design development landing page wordpress"],
+  ["Content & video", "/services/content-video", "Films, Reels and blog content", "content video production reels shoot blog writing"],
+  ["Analytics & CRM", "/services/analytics-crm", "Tracking, dashboards and lead pipelines", "analytics crm ga4 tracking reporting dashboard leadspulse"],
+  ["Real estate marketing", "/industries/real-estate", "Site visits and qualified buyer leads", "real estate realestate property properties builder developer site visit industries realty"],
+  ["Blog & insights", "/blog", "SEO, ads and growth playbooks", "blog articles insights news guides"],
+  ["Contact us", "/contact", "Call, WhatsApp, email or visit us", "contact contactus call phone email address office reach support location"],
+] -%}
+  <section class="nf" aria-labelledby="nf-h">
+    <div class="nf-bg" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="wrap nf-in">
+      <div class="nf-art" aria-hidden="true">
+        <span class="nf-d">4</span>
+        <span class="nf-o">
+          <svg viewBox="0 0 120 120">
+            <circle class="nf-ring r1" cx="60" cy="60" r="54"/>
+            <circle class="nf-ring r2" cx="60" cy="60" r="40"/>
+            <circle class="nf-ring r3" cx="60" cy="60" r="26"/>
+            <path class="nf-sweep" d="M60 60 L60 6 A54 54 0 0 1 106.8 33 Z"/>
+            <circle class="nf-blip b1" cx="88" cy="30" r="3.5"/>
+            <circle class="nf-blip b2" cx="32" cy="80" r="3"/>
+            <circle class="nf-core" cx="60" cy="60" r="6"/>
+          </svg>
+        </span>
+        <span class="nf-d">4</span>
+      </div>
+
+      <span class="pill nf-pill">Error 404 · Page not found</span>
+      <h1 class="nf-h" id="nf-h">This page took a <span class="gt">wrong turn</span></h1>
+      <p class="nf-lead">We couldn't find <code class="nf-path" id="nfPath">this page</code>. The link may be old or mistyped, but the page you need is probably one of these.</p>
+
+      <a class="nf-sug" id="nfSug" href="{{ url('/') }}" hidden>
+        <span class="nf-sug-l">Did you mean</span>
+        <b id="nfSugT">Home</b>
+        <small id="nfSugU">/</small>
+        <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+
+      <form class="nf-search" id="nfSearch" role="search" autocomplete="off">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <label class="sr-only" for="nfQ">Search the site</label>
+        <input id="nfQ" type="search" placeholder="Search pages: SEO, WhatsApp, real estate…" aria-controls="nfRes">
+        <kbd>Enter</kbd>
+      </form>
+      <ul class="nf-res" id="nfRes" role="listbox" aria-label="Matching pages" hidden></ul>
+
+      <div class="nf-acts">
+        <a class="btn btn-grad" href="{{ url('/') }}">Back to home <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        <a class="btn btn-line" href="{{ url('/contact') }}">Contact us</a>
+      </div>
+
+      <div class="nf-pop">
+        <p class="nf-pop-h">Popular pages</p>
+        <div class="nf-grid">
+          <a class="nf-c" href="{{ url('/services/seo') }}" style="--c:#007AFF;--i:0"><span class="nf-ic"><img src="{{ asset('images/brands/google.png') }}" alt="" width="22" height="22" loading="lazy"></span><b>SEO services</b><small>Rank on page one</small></a>
+          <a class="nf-c" href="{{ url('/services/google-ads') }}" style="--c:#34C759;--i:1"><span class="nf-ic"><img src="{{ asset('images/brands/google-ads.svg') }}" alt="" width="22" height="22" loading="lazy"></span><b>Google Ads</b><small>Search &amp; Performance Max</small></a>
+          <a class="nf-c" href="{{ url('/services/meta-ads') }}" style="--c:#5856D6;--i:2"><span class="nf-ic"><img src="{{ asset('images/brands/meta.svg') }}" alt="" width="22" height="22" loading="lazy"></span><b>Meta &amp; Instagram Ads</b><small>Leads from Reels &amp; forms</small></a>
+          <a class="nf-c" href="{{ url('/services/whatsapp-automation') }}" style="--c:#25D366;--i:3"><span class="nf-ic"><img src="{{ asset('images/brands/whatsapp-business.png') }}" alt="" width="22" height="22" loading="lazy"></span><b>WhatsApp automation</b><small>Instant replies, 24×7</small></a>
+          <a class="nf-c" href="{{ url('/industries/real-estate') }}" style="--c:#FF9500;--i:4"><span class="nf-ic"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-6h6v6"/></svg></span><b>Real estate</b><small>Site visits &amp; buyer leads</small></a>
+          <a class="nf-c" href="{{ url('/blog') }}" style="--c:#FF2D55;--i:5"><span class="nf-ic"><svg viewBox="0 0 24 24"><path d="M4 4h12l4 4v12H4z"/><path d="M8 12h8M8 16h5"/></svg></span><b>Blog &amp; insights</b><small>Growth playbooks</small></a>
+        </div>
+      </div>
+
+      <div class="nf-help">
+        <div><b>Still can't find it?</b><span>Tell us what you were looking for and we'll send it over.</span></div>
+        <div class="nf-help-a">
+          <a href="tel:+{{ site.phone_intl }}"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-3 2a11 11 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>{{ site.phone_display }}</a>
+          <a class="wa" href="https://wa.me/{{ site.phone_intl }}?text=Hi%20Tiwaa%2C%20I%20was%20looking%20for%20a%20page%20on%20your%20website." target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>WhatsApp us</a>
         </div>
       </div>
     </div>
+    <ul id="nfPages" hidden>{% for p in pages %}<li data-t="{{ p[0] }}" data-u="{{ url(p[1]) }}" data-d="{{ p[2] }}" data-k="{{ p[3] }}"></li>{% endfor %}{% for b in blog_posts %}{% if b.url %}<li data-t="{{ b.title }}" data-u="{{ url(b.url) }}" data-d="Blog article" data-k="{{ b.tag }} {{ b.cat }} blog article"></li>{% endif %}{% endfor %}</ul>
   </section>
