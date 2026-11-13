@@ -33,6 +33,7 @@ Home, services, eight service detail pages and the blog, built from the design a
 | `crates/leads/` | Lead validation shared by the Worker and the dev server (with tests) |
 | `worker/src/lib.rs` | **Cloudflare Worker:** `/api/leads` on D1, everything else from `public/` |
 | `assets/` | CSS, JS, logos and images. Your logo files go in `assets/images/`. `css/service-page.css` and `js/service/<page>.js` are used by the service detail pages |
+| `templates/sections/contact/` | The /contact page (form, office + map, clients, FAQ). Styles in `css/contact.css`, script in `js/contact.js` (the form posts to the same lead API, `form: "contact"`). Structured data in `templates/layout/contact-ld.html` |
 | `migrations/` | D1 table schema |
 | `public/` | Generated output. Don't edit it by hand; it is rebuilt on every build |
 

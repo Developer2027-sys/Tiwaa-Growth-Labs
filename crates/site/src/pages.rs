@@ -23,6 +23,7 @@ pub fn routes() -> &'static [(&'static str, &'static str)] {
         ("/services/content-video", "content-video"),
         ("/services/analytics-crm", "analytics-crm"),
         ("/blog", "blog"),
+        ("/contact", "contact"),
     ]
 }
 
@@ -32,6 +33,9 @@ pub fn redirects() -> &'static [(&'static str, &'static str)] {
     &[
         ("/home", "/"),
         ("/blogs", "/blog"),
+        ("/contact-us", "/contact"),
+        ("/contact.html", "/contact"),
+        ("/contact-us.html", "/contact"),
         // file names used in the design artifact
         ("/seo-services.html", "/services/seo"),
         ("/seo-services", "/services/seo"),
@@ -218,6 +222,29 @@ pub fn page(id: &str) -> Option<Page> {
                 ..CfConfig::default()
             }),
             sections: vec![s("blog/01-hero"), s("blog/02-list")],
+            ..Page::default()
+        },
+        "contact" => Page {
+            id: "contact",
+            title: "Contact Tiwaa Growth Labs | Digital Marketing Agency in Gurugram",
+            og_title: Some("Contact Tiwaa Growth Labs"),
+            description: "Contact Tiwaa Growth Labs, a digital marketing agency in Gurugram. Call or WhatsApp +91 90501 26213, email info@tiwaagrowthlab.com or visit Spaze I Tech Park, Sector 49.",
+            keywords: "contact tiwaa growth labs, digital marketing agency gurugram contact, marketing agency sohna road, free marketing audit, seo company gurugram contact",
+            path: "/contact",
+            css: vec!["css/contact.css"],
+            js: vec!["js/contact.js".into()],
+            // ContactPage, LocalBusiness and FAQ structured data
+            head_extra: HeadExtra::File("layout/contact-ld.html".into()),
+            // the page has its own enquiry form (sections/contact/01-hero.html)
+            contact_form: None,
+            sections: vec![
+                s("contact/01-hero"),    // intro, contact cards and the enquiry form
+                s("contact/02-office"),  // address, hours and Google Map
+                s("contact/03-clients"), // client logos and testimonials
+                s("contact/04-explore"), // services, work, Tiwaa.io, LeadsPulse
+                s("contact/05-faq"),     // FAQ with topic tabs
+                s("contact/06-cta"),
+            ],
             ..Page::default()
         },
         "seo" => service_page(ServicePage {

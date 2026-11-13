@@ -2106,3 +2106,7 @@ nav.main a.on-page{color:var(--ink);font-weight:600}
 /* Current service page inside the Services dropdown */
 nav.main .nv-dd a.on-page{background:var(--x-hover)}
 nav.main .nv-dd a.on-page b{color:var(--green-ink)}
+
+/* "Contact Us" inside the menu only on phones, where the header pill is hidden */
+nav.main .nv-item.nv-mob{display:none}
+@media (max-width:520px){nav.main .nv-item.nv-mob{display:block}}
