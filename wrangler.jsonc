@@ -10,8 +10,8 @@
   //   1. render templates/ + content/ into public/   (Rust: crates/site)
   //   2. compile the Worker to wasm                   (worker-build, run inside worker/)
   "build": {
-    "command": "cargo run --release -q -p tgl-site -- build && cd worker && worker-build --release",
-    "watch_dir": ["worker/src", "crates", "templates", "content", "assets"]
+    "command": "sh scripts/build.sh",
+    "watch_dir": ["worker/src", "crates", "templates", "content", "assets", "scripts"]
   },
 
   // Static site built by `npm run build`
@@ -31,7 +31,7 @@
     {
       "binding": "DB",
       "database_name": "tiwaa-leads",
-      "database_id": "REPLACE_WITH_YOUR_D1_DATABASE_ID",
+      "database_id": "743f210a-6558-48e4-bf6a-e34233896938",
       "migrations_dir": "migrations"
     }
   ],

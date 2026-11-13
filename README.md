@@ -74,6 +74,8 @@ npm run deploy                              # builds public/ + the Rust Worker, 
 
 After that, run `npm run deploy` for every update.
 
+**Deploying from GitHub (Cloudflare Workers Builds):** the D1 database `tiwaa-leads` is already created and migrated, and its id is in `wrangler.jsonc`. Every push to `master` builds and deploys. Cloudflare's build machine has no Rust, so `scripts/build.sh` (used by both `npm run build` and the wrangler build step) installs a minimal Rust toolchain and worker-build on the first run. That makes the first build take several minutes. Build settings in the dashboard: build command `npm run build`, deploy command `npx wrangler deploy`.
+
 **Custom domain:** in the Cloudflare dashboard go to Workers → tiwaa-growth-labs → Settings → Domains & Routes, or uncomment `routes` in `wrangler.jsonc`.
 
 ## Viewing leads

@@ -5,7 +5,8 @@
   "description": "Tiwaa Growth Labs website: Rust (site generator + Cloudflare Worker), Cloudflare D1",
   "scripts": {
     "dev": "cargo run -q -p tgl-site -- serve",
-    "build": "cargo run --release -q -p tgl-site -- build",
+    "build": "sh scripts/build.sh",
+    "build:site": "sh scripts/build.sh --site",
     "test": "cargo test -q -p tgl-leads -p tgl-site",
     "dev:worker": "wrangler d1 migrations apply tiwaa-leads --local && wrangler dev",
     "deploy": "wrangler deploy",
