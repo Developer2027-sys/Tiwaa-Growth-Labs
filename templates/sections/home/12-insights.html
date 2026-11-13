@@ -1,0 +1,15 @@
+  <!-- ===== INSIGHTS (posts live in content/blog.toml) ===== -->
+  <section class="section y-ins" id="insights" aria-labelledby="ins-h">
+    <div class="wrap">
+      <div class="sec-hd split">
+        <div><span class="pill rv">Insights</span><h2 class="h2 rv" id="ins-h" style="--d:1">Marketing ideas <span class="gt">you can use today</span></h2></div>
+        <p class="lead rv" style="--d:2">Practical playbooks from campaigns we run every week.</p>
+        <div class="ins-more rv" style="--d:3"><a class="btn btn-line" href="{{ url('/blog') }}">Explore all articles <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+      </div>
+      <div class="ins-grid">
+{% for p in blog_posts[:3] %}
+        {{ blog_card(p, loop.index0) }}
+{% endfor %}
+      </div>
+    </div>
+  </section>

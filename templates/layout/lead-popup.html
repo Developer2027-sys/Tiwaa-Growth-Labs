@@ -1,0 +1,46 @@
+{# Two-step lead popup. Submits to /api/leads (see assets/js/leads.js). #}<div class="pop" id="pop" role="dialog" aria-modal="true" aria-labelledby="pop-h" hidden>
+  <div class="pop-bg" data-close></div>
+  <div class="pop-card" data-lenis-prevent>
+    <button class="pop-x" type="button" aria-label="Close" data-close>
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 5l10 10M15 5L5 15"/></svg>
+    </button>
+    <div class="pop-art">
+      <span class="eyebrow" id="pop-eb">Free growth audit</span>
+      <h2 id="pop-h">Find out where your next 100 leads are hiding</h2>
+      <ul class="pop-list" id="pop-list">
+        <li>Website speed &amp; SEO health check</li>
+        <li>Ad account and landing page review</li>
+        <li>A 90-day plan with clear targets</li>
+      </ul>
+      <div class="pop-contact">
+        <span><svg viewBox="0 0 24 24"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>{{ site.phone_display }}</span>
+        <span><svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Spaze I Tech Park, Sector 49, Gurugram</span>
+      </div>
+      <div class="pop-proof"><span class="pp-av" aria-hidden="true"><i style="--c:#0A84FF">GP</i><i style="--c:#FF9500">EM</i><i style="--c:#34C759">SO</i><i style="--c:#AF52DE">BR</i></span><span><b>90+ brands</b> growing with us<br><small>★★★★★ rated by our clients</small></span></div>
+    </div>
+    <form class="pop-form" id="popForm" novalidate>
+      <h3 id="pop-t">Get your free audit</h3>
+      <p class="sub" id="pop-s">Takes 30 seconds. Our strategist replies within 24 hours.</p>
+      <ol class="pf-steps" aria-hidden="true"><li class="on"><i>1</i>Your business</li><li><i>2</i>Your details</li></ol>
+      <div class="pf-s1">
+      <label for="p-site"><span class="pfl">Your website <em>Optional</em></span><input id="p-site" type="url" placeholder="www.yourbrand.com"></label>
+      <div class="pg-wrap"><span class="pfl" id="pgLbl">What do you need help with?</span><div class="pg-chips" id="pgChips" role="radiogroup" aria-labelledby="pgLbl"></div></div>
+      <label for="p-goal" class="pg-hidden">Service you need
+        <select id="p-goal"><option>Free growth audit</option><option>Search Engine Optimization</option><option>Social Media Optimization</option><option>Google / Meta Ads (PPC)</option><option>WhatsApp &amp; SMS Marketing</option><option>Content Marketing</option><option>Real Estate Marketing</option><option>Website Design &amp; Development</option><option>Graphic Designing</option><option>E-Commerce Solution</option><option>Website Maintenance</option><option>Not sure yet</option></select></label>
+      <button class="btn btn-green pf-next" type="button" id="pfNext">Continue <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+      </div>
+      <div class="pf-s2">
+      <label for="p-name"><span class="pfl">Your name</span><input id="p-name" autocomplete="name" placeholder="Rahul Sharma"></label>
+      <label for="p-phone"><span class="pfl">Phone / WhatsApp</span><input id="p-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 98765 43210"></label>
+      <p class="err" id="p-err" role="alert"></p>
+      <button class="btn btn-green" type="submit" id="pop-b">Claim My Free Audit
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+      <button class="pf-back" type="button" id="pfBack">← Back</button>
+      </div>
+      <p class="pf-safe"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Your details stay private. No spam, ever.</p>
+      <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" name="company_website" id="p-hp" tabindex="-1" autocomplete="off"></label></div>
+      <div class="ok" id="p-ok" hidden></div>
+      <button class="pop-later" type="button" data-close>Maybe later</button>
+    </form>
+  </div>
+</div>

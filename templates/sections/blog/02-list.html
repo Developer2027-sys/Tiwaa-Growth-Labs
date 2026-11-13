@@ -1,0 +1,28 @@
+{#- All posts come from content/blog.toml. #}
+  <section class="section y-ins bg-list" aria-label="All articles">
+    <div class="wrap">
+      <div class="bg-filters rv" role="group" aria-label="Filter articles by topic">
+        <button type="button" class="bg-chip on" data-tag="all" aria-pressed="true">All</button>
+{% for t in blog_tags %}
+        <button type="button" class="bg-chip" data-tag="{{ t }}" aria-pressed="false">{{ t }}</button>
+{% endfor %}
+      </div>
+      <div class="ins-grid" id="blogGrid">
+{% for p in blog_posts %}
+        {{ blog_card(p, loop.index0, true) }}
+{% endfor %}
+      </div>
+    </div>
+  </section>
+  <script>
+  (function () {
+    var chips = document.querySelectorAll('.bg-chip'), cards = document.querySelectorAll('#blogGrid .ins');
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () {
+        var t = c.dataset.tag;
+        chips.forEach(function (x) { var on = x === c; x.classList.toggle('on', on); x.setAttribute('aria-pressed', on); });
+        cards.forEach(function (card) { card.hidden = t !== 'all' && card.dataset.tag !== t; });
+      });
+    });
+  })();
+  </script>

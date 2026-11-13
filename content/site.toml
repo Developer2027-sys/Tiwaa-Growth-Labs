@@ -1,0 +1,26 @@
+# Site-wide settings. Change contact details here and they update everywhere
+# (header, footer, popup, contact form, structured data, JS messages).
+# After editing, rebuild:  npm run build   (or just deploy: npm run deploy)
+
+name          = "Tiwaa Growth Labs"
+legal_name    = "Tiwaa Growth Lab Private Limited"
+
+# Public site address, used for canonical URLs, Open Graph and the sitemap.
+site_url      = "https://www.tiwaagrowthlab.com"
+
+phone_display = "+91 90501 26213"
+phone_intl    = "919050126213"     # digits only, used for tel: and WhatsApp links
+email         = "info@tiwaagrowthlab.com"
+
+# Lead API endpoint (the Rust Worker in worker/, backed by D1).
+api_path      = "/api/leads"
+
+# Active colour palette from the design (see assets/css/main.css, :root[data-pal="..."]).
+palette       = "ocean2"
+
+[address]
+street   = "Tower B1, Spaze I Tech Park, 32B & 33A, Badshahpur Sohna Road, Sector 49"
+city     = "Gurugram"
+region   = "Haryana"
+postcode = "122018"
+country  = "IN"

@@ -1,0 +1,15 @@
+[package]
+name = "tgl-worker"
+description = "Cloudflare Worker: /api/leads backed by D1; everything else is served from public/"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+tgl-leads = { path = "../crates/leads" }
+worker = { version = "0.9", features = ["d1"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order"] }

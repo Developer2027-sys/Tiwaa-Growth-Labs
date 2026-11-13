@@ -1,0 +1,18 @@
+{
+  "name": "tiwaa-growth-labs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tiwaa Growth Labs website: Rust (site generator + Cloudflare Worker), Cloudflare D1",
+  "scripts": {
+    "dev": "cargo run -q -p tgl-site -- serve",
+    "build": "cargo run --release -q -p tgl-site -- build",
+    "test": "cargo test -q -p tgl-leads -p tgl-site",
+    "dev:worker": "wrangler d1 migrations apply tiwaa-leads --local && wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:migrate": "wrangler d1 migrations apply tiwaa-leads --remote",
+    "db:leads": "wrangler d1 execute tiwaa-leads --remote --command \"SELECT id, created_at, form, name, phone, email, service, page FROM leads ORDER BY id DESC LIMIT 50\""
+  },
+  "devDependencies": {
+    "wrangler": "^4.40.0"
+  }
+}

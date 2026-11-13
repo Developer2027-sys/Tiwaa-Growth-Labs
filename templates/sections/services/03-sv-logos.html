@@ -1,0 +1,2 @@
+{% set trusted = ['Godrej Properties', 'Emaar', 'SOBHA', 'Brigade', 'Provident', 'Hotel RR Galaxy'] %}
+  <div class="sv-logos"><div class="wrap"><span>Trusted by</span><ul>{% for name in trusted %}<li>{{ client_logo(name) }}{{ name }}</li>{% endfor %}</ul></div></div>

@@ -1,0 +1,15 @@
+# Tiwaa Growth Labs: Rust workspace
+#   crates/site   - `tgl` CLI: renders templates/ + content/ into public/, and a local dev server
+#   crates/leads  - lead validation shared by the Worker and the dev server
+#   worker        - Cloudflare Worker (wasm): /api/leads backed by D1, static files from public/
+[workspace]
+resolver = "2"
+members = ["crates/leads", "crates/site", "worker"]
+
+[workspace.package]
+edition = "2021"
+version = "1.0.0"
+publish = false
+
+[profile.release.package.tgl-worker]
+opt-level = "z"     # smaller .wasm for the Worker

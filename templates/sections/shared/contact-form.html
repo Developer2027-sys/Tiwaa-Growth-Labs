@@ -1,0 +1,53 @@
+{#-
+  Contact form shown just before the footer on every page (included by layout/base.html).
+  Per-page heading, text, button and fields are set in crates/site/src/pages.rs
+  (CfConfig). Field definitions live in crates/site/src/contact_form.rs.
+  name, phone, email, website, service, message are stored in their own D1 columns;
+  every other field goes into the JSON "extra" column (see migrations/0002).
+#}
+  <section class="section cf-sec" id="contact" aria-labelledby="cf-h">
+    <div class="wrap cf-grid">
+      <div class="cf-side">
+        <span class="pill rv">Contact us</span>
+        <h2 class="h2 rv" id="cf-h" style="--d:1">{{ cf.title | safe }}</h2>
+        <p class="lead rv" style="--d:2">{{ cf.lead }}</p>
+        <ol class="cf-steps rv" style="--d:3">
+          <li><b>1</b><span><strong>We review your details</strong>Your business, market and current marketing.</span></li>
+          <li><b>2</b><span><strong>A strategist calls you</strong>Within one working day, on phone or WhatsApp.</span></li>
+          <li><b>3</b><span><strong>You get a clear plan</strong>Channels, budget and expected leads. No obligation.</span></li>
+        </ol>
+        <div class="cf-direct rv" style="--d:4">
+          <a href="tel:+{{ site.phone_intl }}"><svg viewBox="0 0 24 24"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>{{ site.phone_display }}</a>
+          <a href="mailto:{{ site.email }}"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>{{ site.email }}</a>
+        </div>
+      </div>
+
+      <form class="cf-card rv" style="--d:2" data-lead-form="contact" data-core="{{ cf.core | join(',') }}" novalidate>
+        <div class="cf-fields">
+{% for f in cf.fields %}{% set id = 'cf-' ~ f.key %}
+          <label class="cf-f{% if f.wide or f.type == 'textarea' %} wide{% endif %}" for="{{ id }}">
+            <span class="cf-l">{{ f.label }}{% if not f.required %} <em>Optional</em>{% endif %}</span>
+{% if f.type == 'select' %}
+            <select id="{{ id }}" name="{{ f.key }}"{% if f.required %} required{% endif %}>
+{% for o in f.options %}
+              <option{% if o == cf.service %} selected{% endif %}>{{ o }}</option>
+{% endfor %}
+            </select>
+{% elif f.type == 'textarea' %}
+            <textarea id="{{ id }}" name="{{ f.key }}" rows="4" maxlength="1500" placeholder="{{ f.placeholder }}"{% if f.required %} required{% endif %}></textarea>
+{% else %}
+            <input id="{{ id }}" name="{{ f.key }}" type="{{ f.type }}" placeholder="{{ f.placeholder }}" autocomplete="{{ f.auto }}"{% if f.type == 'tel' %} inputmode="tel"{% endif %}{% if f.required %} required{% endif %}>
+{% endif %}
+          </label>
+{% endfor %}
+        </div>
+        <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" name="hp" tabindex="-1" autocomplete="off"></label></div>
+        <p class="err" role="alert"></p>
+        <div class="cf-ft">
+          <button class="btn btn-grad" type="submit" data-cta="{{ cf.cta }}">{{ cf.cta }} <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+          <small>We reply within one working day. Your details stay private.</small>
+        </div>
+        <div class="ok" role="status" hidden></div>
+      </form>
+    </div>
+  </section>

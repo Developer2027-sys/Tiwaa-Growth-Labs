@@ -1,0 +1,19 @@
+{#- Page shell. Sections are rendered by crates/site/src/render.rs and passed in as main_html. -#}
+<!doctype html>
+<html lang="en" data-pal="{{ site.palette }}">
+<head>
+{% include "layout/head.html" %}</head>
+<body class="page-{{ page.id }}">
+{% include "layout/header.html" %}
+
+<main id="top">
+{{ main_html | safe }}{% if cf %}{% include "sections/shared/contact-form.html" %}{% endif %}</main>
+
+{% include "layout/footer.html" %}
+
+{% include "layout/lead-popup.html" %}
+
+{% include "layout/quick-contact.html" %}
+
+{% include "layout/scripts.html" %}</body>
+</html>

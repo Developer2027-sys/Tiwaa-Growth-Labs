@@ -1,0 +1,65 @@
+# Blog posts, shared by the home "Insights" section (first three) and the /blog page.
+#
+# Until full articles are published, each card opens the lead popup offering the
+# guide (cta). When an article page exists, add  url = "/blog/your-article"  to the
+# post and the card links there instead.
+
+[[posts]]
+tag     = "Real Estate"
+cat     = "Lead generation"
+mins    = 6
+g1      = "#0A84FF"
+g2      = "#5E5CE6"
+title   = "How to cut cost per site visit with Meta lead forms"
+excerpt = "The form questions, targeting and follow-up timing we use to bring real buyers to project sites."
+cta     = "Send me the real estate lead playbook"
+
+[[posts]]
+tag     = "SEO"
+cat     = "Local SEO"
+mins    = 5
+g1      = "#34C759"
+g2      = "#30B0C7"
+title   = "The Google Business Profile checklist for clinics and stores"
+excerpt = "Categories, photos, reviews and posts: the small fixes that move you into the local map pack."
+cta     = "Send me the local SEO checklist"
+
+[[posts]]
+tag     = "WhatsApp"
+cat     = "Automation"
+mins    = 4
+g1      = "#FF9500"
+g2      = "#FF2D55"
+title   = "Reply in under 60 seconds: setting up WhatsApp auto-replies that convert"
+excerpt = "Welcome flows, quick replies and hand-off rules that keep new leads talking to you."
+cta     = "Send me the WhatsApp automation guide"
+
+[[posts]]
+tag     = "Google Ads"
+cat     = "Paid search"
+mins    = 7
+g1      = "#5E5CE6"
+g2      = "#AF52DE"
+title   = "Negative keywords: the quiet fix for wasted Google Ads spend"
+excerpt = "How we read search term reports every week and stop paying for clicks that never convert."
+cta     = "Send me the Google Ads negative keyword list"
+
+[[posts]]
+tag     = "Website"
+cat     = "Conversion"
+mins    = 5
+g1      = "#30B0C7"
+g2      = "#0A84FF"
+title   = "Five landing page changes that lift enquiries without more traffic"
+excerpt = "Headline, proof, form length, speed and a clear next step, tested on real campaigns."
+cta     = "Send me the landing page checklist"
+
+[[posts]]
+tag     = "Analytics"
+cat     = "Tracking"
+mins    = 6
+g1      = "#FF2D55"
+g2      = "#FF9500"
+title   = "Know which rupee brought which customer: a simple GA4 tracking setup"
+excerpt = "Events, conversions and UTM habits that make your monthly report tie spend to revenue."
+cta     = "Send me the GA4 tracking guide"

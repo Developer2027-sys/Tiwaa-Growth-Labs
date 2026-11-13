@@ -1,0 +1,4 @@
+# This project is no longer PHP. Nothing in this folder should be served by XAMPP/Apache
+# (storage/ can hold real leads from local testing).
+# Preview locally with:  npm run dev   ->  http://localhost:8000
+Require all denied

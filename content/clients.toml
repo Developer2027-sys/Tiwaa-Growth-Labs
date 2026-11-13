@@ -1,0 +1,83 @@
+# Clients shown with client_logo() (e.g. the "Trusted by" strip on /services).
+#   logo     = file in assets/images/brands/ (leave out to show an initials tile)
+#   initials = text on the tile when there is no logo
+#   color    = tile colour
+# To add a logo: drop the file in assets/images/brands/ and set logo below.
+
+[[clients]]
+name = "Godrej Properties"
+logo = "godrej-properties.svg"
+initials = "GP"
+color = "#1F6FEB"
+
+[[clients]]
+name = "Emaar"
+logo = "emaar.png"
+initials = "EM"
+color = "#B8860B"
+
+[[clients]]
+name = "Shapoorji Pallonji"
+logo = "shapoorji-pallonji.png"
+initials = "SP"
+color = "#C8102E"
+
+[[clients]]
+name = "SOBHA"
+logo = "sobha.png"
+initials = "SO"
+color = "#7A5C2E"
+
+[[clients]]
+name = "Brigade"
+logo = "brigade.png"
+initials = "BR"
+color = "#E35205"
+
+[[clients]]
+name = "Provident"
+logo = "provident.png"
+initials = "PH"
+color = "#00A3A1"
+
+[[clients]]
+name = "Central Park"
+logo = "central-park.png"
+initials = "CP"
+color = "#2E7D32"
+
+[[clients]]
+name = "Capital Avenue"
+initials = "CA"
+color = "#5856D6"
+
+[[clients]]
+name = "Nanded City"
+logo = "nanded-city.png"
+initials = "NC"
+color = "#0E7490"
+
+[[clients]]
+name = "Hotel RR Galaxy"
+initials = "RR"
+color = "#AF52DE"
+
+[[clients]]
+name = "Dreamland"
+initials = "DL"
+color = "#FF2D55"
+
+[[clients]]
+name = "MyWear"
+initials = "MW"
+color = "#FF9500"
+
+[[clients]]
+name = "Printek"
+initials = "PT"
+color = "#30B0C7"
+
+[[clients]]
+name = "ShipKaro"
+initials = "SK"
+color = "#007AFF"
