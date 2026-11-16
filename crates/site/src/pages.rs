@@ -23,6 +23,7 @@ pub fn routes() -> &'static [(&'static str, &'static str)] {
         ("/services/content-video", "content-video"),
         ("/services/analytics-crm", "analytics-crm"),
         ("/blog", "blog"),
+        ("/about", "about"),
         ("/contact", "contact"),
         ("/industries/real-estate", "real-estate"),
     ]
@@ -34,6 +35,9 @@ pub fn redirects() -> &'static [(&'static str, &'static str)] {
     &[
         ("/home", "/"),
         ("/blogs", "/blog"),
+        ("/about-us", "/about"),
+        ("/about.html", "/about"),
+        ("/about-us.html", "/about"),
         ("/contact-us", "/contact"),
         ("/real-estate.html", "/industries/real-estate"),
         ("/real-estate", "/industries/real-estate"),
@@ -226,6 +230,34 @@ pub fn page(id: &str) -> Option<Page> {
                 ..CfConfig::default()
             }),
             sections: vec![s("blog/01-hero"), s("blog/02-list")],
+            ..Page::default()
+        },
+        "about" => Page {
+            id: "about",
+            title: "About Us | Tiwaa Growth Labs, Full-Service Digital Marketing Agency in Gurugram",
+            og_title: Some("About Tiwaa Growth Labs"),
+            description: "Tiwaa Growth Labs is a Gurugram-based digital marketing and growth team: strategy, performance ads, content, WhatsApp automation, websites and CRM under one roof, measured in customers.",
+            keywords: "about tiwaa growth labs, digital marketing agency gurugram, growth marketing team india, tiwaa.io, leadspulse",
+            path: "/about",
+            css: vec!["css/services.css", "css/service-page.css", "css/about.css"],
+            js: vec!["js/about.js".into()],
+            // AboutPage + breadcrumb structured data
+            head_extra: HeadExtra::File("layout/ld/about.html".into()),
+            // the office section has its own message form (sections/about/10-office.html)
+            contact_form: None,
+            sections: vec![
+                s("about/01-hero"),
+                s("about/02-stats"),
+                s("about/03-approach"),        // growth loop
+                s("about/04-mission-vision"),
+                s("about/05-why-choose-us"),
+                s("about/06-principles"),      // pinned horizontal scroll on desktop
+                s("about/07-platforms"),       // Tiwaa.io + LeadsPulse
+                s("about/08-trusted-brands"),  // logo strip, filled by assets/js/main.js
+                s("about/09-expertise"),
+                s("shared/reviews"),
+                s("about/10-office"),          // map + message form
+            ],
             ..Page::default()
         },
         "contact" => Page {

@@ -3,7 +3,7 @@
     <a class="logo" href="{{ '#top' if is_home else url('/') }}" aria-label="Tiwaa Growth Labs home"><img class="lg-l" src="{{ asset('images/logo.png') }}" alt="Tiwaa Growth Labs" width="200" height="90"><img class="lg-d" src="{{ asset('images/logo-white.png') }}" alt="Tiwaa Growth Labs" width="200" height="90"></a>
     <nav class="main" id="nav" aria-label="Main">
       <ul class="nv">
-        <li class="nv-item"><a class="nv-top" href="{{ home('#about') }}">About Us</a></li>
+        <li class="nv-item"><a class="nv-top{% if page.id == 'about' %} on-page{% endif %}" href="{{ url('/about') }}"{% if page.id == 'about' %} aria-current="page"{% endif %}>About Us</a></li>
         <li class="nv-item has-dd"><a class="nv-top{% if in_services %} on-page{% endif %}" href="{{ url('/services') }}"{% if is_services %} aria-current="page"{% endif %}>Services</a><button class="nv-caret" type="button" aria-expanded="false" aria-label="Show services"><svg viewBox="0 0 12 12"><path d="M3 4.5l3 3 3-3"/></svg></button>
           <div class="nv-dd nv-mega" role="group" aria-label="Services">
             <div class="nv-grid">

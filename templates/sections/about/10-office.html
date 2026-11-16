@@ -1,0 +1,37 @@
+  <!-- OFFICE -->
+  <section class="section ab-of" id="office" aria-labelledby="of-h">
+    <div class="wrap">
+      <div class="sec-hd split"><div><span class="pill rv">Our office</span><h2 class="h2 rv" id="of-h" style="--d:1">Visit our <span class="gt">Gurugram studio</span></h2></div><p class="lead rv" style="--d:2">Meet the team behind your growth. Drop in by appointment, or send us a message and a strategist will call you back.</p></div>
+      <div class="of-g">
+        <div class="of-map rv" id="locMap">
+          <div class="loc-fb" aria-hidden="true">
+            <svg viewBox="0 0 800 480" preserveAspectRatio="xMidYMid slice">
+              <rect width="800" height="480" class="m-bg"/>
+              <path class="m-park" d="M30 30h150v110H30zM600 330h170v120H600zM330 380h120v80H330z"/>
+              <path class="m-blk" d="M210 30h110v80H210zM350 30h120v80H350zM520 40h90v70h-90zM640 40h130v90H640zM30 180h120v100H30zM200 170h90v90h-90zM330 170h110v70H330zM620 170h150v80H620zM40 330h140v110H40zM210 330h100v110H210zM480 330h90v110h-90z"/>
+              <path class="m-hl" d="M478 186h112v72H478z"/>
+              <path class="m-rd big" d="M-20 300 C180 290 330 315 480 292 S700 268 820 276"/>
+              <path class="m-rd big" d="M600 -20 C596 140 612 300 606 500"/>
+              <path class="m-rd" d="M-20 152 L820 140M185 -20 L195 500M325 140 L316 500M470 -20 L462 140M460 300 L468 500"/>
+              <text x="40" y="288" class="m-lb">Badshahpur Sohna Road</text><text x="618" y="70" class="m-lb" transform="rotate(90 618 70)">Sector 49</text>
+              <g transform="translate(534 222)"><ellipse class="pin-sh" cx="0" cy="2" rx="18" ry="6"/><g class="pin-b"><path d="M0 0C-4-9-16-17-16-29a16 16 0 0 1 32 0C16-17 4-9 0 0z" fill="#EA4335"/><circle cy="-29" r="6" fill="#7A1A12"/></g></g>
+            </svg>
+          </div>
+          <div class="of-addr"><span class="of-lg">T</span><div><b>Tiwaa Growth Labs</b><small>Spaze I Tech Park, 32B &amp; 33A, Badshahpur Sohna Road, Sector 49, Gurugram 122018</small></div><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Spaze+I+Tech+Park+Sector+49+Gurugram" target="_blank" rel="noopener">Directions ↗</a></div>
+        </div>
+        <div class="of-side">
+          <form class="of-form rv" id="ofForm" novalidate>
+            <h3>Send us a message</h3><p>A strategist replies within 24 hours.</p>
+            <label><span>Name *</span><input id="ofN" type="text" autocomplete="name" placeholder="Your name"></label>
+            <label><span>Phone *</span><input id="ofP" type="tel" autocomplete="tel" placeholder="+91 98765 43210"></label>
+            <label><span>How can we help?</span><textarea id="ofM" rows="2" placeholder="Your goals or questions"></textarea></label>
+            <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" id="ofHp" tabindex="-1" autocomplete="off"></label></div>
+            <p class="of-err" id="ofE" role="alert"></p>
+            <button class="btn btn-grad" type="submit">Send message <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+            <div class="of-ok" id="ofOk" role="status" hidden></div>
+          </form>
+          <div class="of-ct rv" style="--d:1"><a href="tel:+{{ site.phone_intl }}"><span class="of-ic call"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-3 2a11 11 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span><div><small>Call</small><b>{{ site.phone_display }}</b></div></a><a href="https://wa.me/{{ site.phone_intl }}" target="_blank" rel="noopener"><span class="of-ic wa"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></span><div><small>WhatsApp</small><b>Chat now</b></div></a><a href="mailto:{{ site.email }}"><span class="of-ic mail"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><div><small>Email</small><b>{{ site.email }}</b></div></a></div>
+        </div>
+      </div>
+    </div>
+  </section>
