@@ -1,23 +1,41 @@
-  <!-- HERO -->
-  <section class="sx-hero ab-hero" aria-labelledby="abh">
-    <div class="wrap sx-hero-in">
-      <div class="sx-copy">
-        <nav class="crumb rv" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><b>About us</b></nav>
-        <span class="sx-eb rv ab-eb" style="--d:1"><i></i>About Tiwaa Growth Labs · Gurugram</span>
-        <h1 class="rv" id="abh" style="--d:1">A growth partner <span class="gt">accountable for results</span></h1>
-        <p class="lead rv" style="--d:2">Tiwaa Growth Labs is a full-service digital marketing and growth agency. Strategy, performance media, content, WhatsApp automation, websites and CRM work as one system, measured by the customers it brings you.</p>
-        <div class="sv-cta rv" style="--d:3"><a class="btn btn-grad" href="#approach">See how we work <svg viewBox="0 0 16 16"><path d="M8 3v10M4 9l4 4 4-4"/></svg></a><a class="btn btn-line" href="#office">Visit our studio</a></div>
+{# The page wrapper <div class="a7 a8"> opens here and closes at the end of 08-office.html (the artifact scopes its about styles to it). #}
+<div class="a7 a8">
+
+  <!-- ===== 1 · HERO: story-led ===== -->
+  <section class="a8-hero" id="a8-hero" aria-labelledby="a8h">
+    <div class="a8-hbg" aria-hidden="true"><i></i><i></i></div>
+    <div class="wrap a8-hero-in">
+      <div class="a8-hc">
+        <nav class="a8-crumb rv" aria-label="Breadcrumb"><a href="{{ url('/') }}">Home</a><span>/</span><b>About us</b></nav>
+        <span class="pill rv">About Tiwaa Growth Labs</span>
+        <h1 class="a8-h1 rv" id="a8h" style="--d:1">Real estate marketing, <span class="gt">from first ad to booked site visit.</span></h1>
+        <p class="lead rv" style="--d:2">We are a Gurugram marketing agency built only for real estate. Our team plans and runs launches for developers, builders, channel partners and brokers, and measures every campaign in site visits and bookings.</p>
+        <div class="a8-cta rv" style="--d:3"><a class="btn btn-grad" href="#office">Plan my project launch <svg viewBox="0 0 16 16" width="16" height="16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="btn btn-line" href="#process">See how our marketing works</a></div>
       </div>
-      <div class="abv" id="abv" aria-hidden="true">
+      <div class="abv rv" style="--d:1" id="abv" aria-hidden="true">
         <svg class="abv-g" viewBox="0 0 480 300" preserveAspectRatio="none"><defs><linearGradient id="abG" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#0A84FF" stop-opacity=".28"/><stop offset="1" stop-color="#0A84FF" stop-opacity="0"/></linearGradient><linearGradient id="abL" x1="0" x2="1"><stop offset="0" stop-color="#30B0C7"/><stop offset=".5" stop-color="#0A84FF"/><stop offset="1" stop-color="#5856D6"/></linearGradient></defs>
           <path class="abv-a" d="M0 270 C60 262 90 240 140 236 S220 200 260 170 S340 120 380 90 S450 40 480 26 L480 300 L0 300Z" fill="url(#abG)"/>
           <path class="abv-l" d="M0 270 C60 262 90 240 140 236 S220 200 260 170 S340 120 380 90 S450 40 480 26" fill="none" stroke="url(#abL)" stroke-width="4" stroke-linecap="round"/></svg>
-        <div class="abv-m m1" data-t=".34"><i></i><span><b>Strategy</b><small>Audit &amp; plan</small></span></div>
-        <div class="abv-m m2" data-t=".58"><i></i><span><b>Launch</b><small>Ads, content, site</small></span></div>
-        <div class="abv-m m3" data-t=".86"><i></i><span><b>Scale</b><small>More of what works</small></span></div>
-        <div class="abv-c c1"><small>Leads this month</small><b data-n="1840">0</b><em>▲ 3.1x</em></div>
-        <div class="abv-c c2"><span class="mh-ic" style="background:#25D366">✓</span><div><b>Reply in 42s</b><small>WhatsApp follow-up</small></div></div>
-        <div class="abv-c c3"><span class="abv-av"><i style="--c:#0A84FF">S</i><i style="--c:#FF9500">P</i><i style="--c:#34C759">C</i><i style="--c:#AF52DE">D</i></span><small>One team, every channel</small></div>
+        <div class="abv-m m1" data-t=".34"><i></i><span><b>Study &amp; plan</b><small>Project, market, buyers</small></span></div>
+        <div class="abv-m m2" data-t=".58"><i></i><span><b>Launch</b><small>Films, ads, landing page</small></span></div>
+        <div class="abv-m m3" data-t=".86"><i></i><span><b>Site visits</b><small>More of what works</small></span></div>
+        <div class="abv-c c1"><small>Buyer leads this month</small><b data-n="1840">0</b><em>▲ 3.1x</em></div>
+        <div class="abv-c c2"><span class="mh-ic" style="background:#25D366">✓</span><div><b>Called in 4 min</b><small>WhatsApp alert via LeadsPulse</small></div></div>
+        <div class="abv-c c3"><span class="abv-av"><i style="--c:#0A84FF">S</i><i style="--c:#FF9500">P</i><i style="--c:#34C759">C</i><i style="--c:#AF52DE">D</i></span><small>One team for your launch</small></div>
       </div>
     </div>
   </section>
+
+  <div class="logo-band a8-lb" aria-label="Real estate brands we work with">
+    <p class="lb-cap">Trusted by developers, builders and channel partners across India</p>
+    <ul class="lb-row" id="lbRow1"></ul>
+  </div>
+
+  <div class="a8-nums">
+    <div class="wrap"><dl>
+      <div class="rv"><dt>Projects marketed</dt><dd><span class="a7-cu" data-to="300">0</span>+</dd></div>
+      <div class="rv" style="--d:1"><dt>Brands served</dt><dd><span class="a7-cu" data-to="90">0</span>+</dd></div>
+      <div class="rv" style="--d:2"><dt>Buyer leads generated</dt><dd><span class="a7-cu" data-to="45000">0</span>+</dd></div>
+      <div class="rv" style="--d:3"><dt>Average first reply</dt><dd>&lt;<span class="a7-cu" data-to="60">0</span>s</dd></div>
+    </dl></div>
+  </div>

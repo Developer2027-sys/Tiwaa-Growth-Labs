@@ -48,6 +48,7 @@ color = "#2E7D32"
 
 [[clients]]
 name = "Capital Avenue"
+logo = "capital-avenue.webp"
 initials = "CA"
 color = "#5856D6"
 
@@ -59,25 +60,36 @@ color = "#0E7490"
 
 [[clients]]
 name = "Hotel RR Galaxy"
+logo = "hotel-rr-galaxy.webp"
 initials = "RR"
 color = "#AF52DE"
 
 [[clients]]
-name = "Dreamland"
+name = "Dreamland Realtors"
+logo = "dreamland.webp"
 initials = "DL"
 color = "#FF2D55"
 
 [[clients]]
-name = "MyWear"
+name = "My Wear Hub"
+logo = "mywear.webp"
 initials = "MW"
 color = "#FF9500"
 
 [[clients]]
 name = "Printek"
+logo = "printek.webp"
 initials = "PT"
 color = "#30B0C7"
 
 [[clients]]
 name = "ShipKaro"
+logo = "shipkaro.webp"
 initials = "SK"
 color = "#007AFF"
+
+[[clients]]
+name = "BVEG"
+logo = "bveg.webp"
+initials = "BV"
+color = "#2E7D32"

@@ -71,7 +71,7 @@
         bad.focus();
         err.textContent = bad.name === 'phone' ? 'Please enter a valid phone number, for example +91 98765 43210.'
           : bad.type === 'email' && bad.value ? 'Please enter a valid email address.'
-          : 'Please fill in: ' + (bad.closest('label').querySelector('.cf-l').firstChild.textContent.trim()) + '.';
+          : 'Please fill in: ' + (bad.closest('label').querySelector('.ef-l').firstChild.textContent.trim()) + '.';
         return;
       }
       submit(payload, { button: btn, err: err, ok: ok, form: form });

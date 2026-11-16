@@ -1,4 +1,4 @@
-{# Two-step lead popup. Submits to /api/leads (see assets/js/leads.js). #}<div class="pop" id="pop" role="dialog" aria-modal="true" aria-labelledby="pop-h" hidden>
+{# One-step lead popup. Submits to /api/leads (see assets/js/leads.js). #}<div class="pop" id="pop" role="dialog" aria-modal="true" aria-labelledby="pop-h" hidden>
   <div class="pop-bg" data-close></div>
   <div class="pop-card" data-lenis-prevent>
     <button class="pop-x" type="button" aria-label="Close" data-close>
@@ -21,21 +21,16 @@
     <form class="pop-form" id="popForm" novalidate>
       <h3 id="pop-t">Get your free audit</h3>
       <p class="sub" id="pop-s">Takes 30 seconds. Our strategist replies within 24 hours.</p>
-      <ol class="pf-steps" aria-hidden="true"><li class="on"><i>1</i>Your business</li><li><i>2</i>Your details</li></ol>
-      <div class="pf-s1">
-      <label for="p-site"><span class="pfl">Your website <em>Optional</em></span><input id="p-site" type="url" placeholder="www.yourbrand.com"></label>
-      <div class="pg-wrap"><span class="pfl" id="pgLbl">What do you need help with?</span><div class="pg-chips" id="pgChips" role="radiogroup" aria-labelledby="pgLbl"></div></div>
-      <label for="p-goal" class="pg-hidden">Service you need
-        <select id="p-goal"><option>Free growth audit</option><option>Search Engine Optimization</option><option>Social Media Optimization</option><option>Google / Meta Ads (PPC)</option><option>WhatsApp &amp; SMS Marketing</option><option>Content Marketing</option><option>Real Estate Marketing</option><option>Website Design &amp; Development</option><option>Graphic Designing</option><option>E-Commerce Solution</option><option>Website Maintenance</option><option>Not sure yet</option></select></label>
-      <button class="btn btn-green pf-next" type="button" id="pfNext">Continue <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
-      </div>
-      <div class="pf-s2">
-      <label for="p-name"><span class="pfl">Your name</span><input id="p-name" autocomplete="name" placeholder="Rahul Sharma"></label>
-      <label for="p-phone"><span class="pfl">Phone / WhatsApp</span><input id="p-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 98765 43210"></label>
+      <div class="pf-one">
+      <div class="pf-row"><label for="p-name"><span class="pfl">Full name</span><input id="p-name" autocomplete="name" placeholder="Rahul Sharma"></label>
+      <label for="p-phone"><span class="pfl">Phone / WhatsApp</span><input id="p-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 98765 43210"></label></div>
+      <label for="p-email"><span class="pfl">Email <em>Optional</em></span><input id="p-email" type="email" autocomplete="email" placeholder="you@company.com"></label>
+      <div class="pg-wrap" hidden><div class="pg-chips" id="pgChips"></div></div>
+      <label for="p-goal" class="pg-sel"><span class="pfl">Service needed</span>
+        <select id="p-goal"><option>Real Estate Marketing</option><option>Free growth audit</option><option>Search Engine Optimization</option><option>Social Media Optimization</option><option>Google / Meta Ads (PPC)</option><option>WhatsApp &amp; SMS Marketing</option><option>Content Marketing</option><option>LeadsPulse CRM demo</option><option>Website Design &amp; Development</option><option>Graphic Designing</option><option>E-Commerce Solution</option><option>Website Maintenance</option><option>Not sure yet</option></select></label>
       <p class="err" id="p-err" role="alert"></p>
-      <button class="btn btn-green" type="submit" id="pop-b">Claim My Free Audit
+      <button class="btn btn-green" type="submit" id="pop-b">Send my enquiry
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
-      <button class="pf-back" type="button" id="pfBack">← Back</button>
       </div>
       <p class="pf-safe"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Your details stay private. No spam, ever.</p>
       <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" name="company_website" id="p-hp" tabindex="-1" autocomplete="off"></label></div>

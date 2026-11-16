@@ -1,27 +1,54 @@
+{#- Wrapper .rp (page theme) opens here and closes at the end of 07-faq.html; shared/reviews sits inside it. -#}
+<div class="rp">
+
   <!-- HERO -->
-  <section class="sx-hero re-hero" aria-labelledby="reh">
-    <div class="wrap sx-hero-in">
-      <div class="sx-copy">
-        <nav class="crumb rv" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/#industries">Industries</a><span>/</span><b>Real Estate</b></nav>
-        <span class="sx-eb rv re-eb" style="--d:1"><i></i>Real estate marketing agency, Gurugram</span>
-        <h1 class="rv" id="reh" style="--d:1">Fill your site visits, <span class="gt">not just your inbox</span></h1>
-        <p class="lead rv" style="--d:2">Pre-launch buzz, budget-qualified buyer leads, instant WhatsApp follow-up and a CRM that tracks every enquiry to booking. Built for developers, channel partners and brokers.</p>
-        <ul class="sx-ticks rv" style="--d:2"><li>Own your leads, stop paying for shared portal leads</li><li>Every enquiry answered on WhatsApp in under 60 seconds</li><li>RERA details built into every ad and page</li></ul>
-        <div class="sv-cta rv" style="--d:3"><a class="btn btn-grad" href="#contact" data-cta="Plan my project launch">Plan my project launch <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="btn btn-line" href="#re-journey">See the playbook</a></div>
+  <section class="rp-hero" id="re-hero" aria-labelledby="rph">
+    <div class="wrap rp-hero-in">
+      <div class="rp-hc">
+        <nav class="crumb rp-crumb rv" aria-label="Breadcrumb"><a href="{{ url('/') }}">Home</a><span>/</span><a href="{{ home('#industries') }}">Industries</a><span>/</span><b>Real Estate</b></nav>
+        <span class="rp-chip rv" style="--d:1"><i></i>Real estate marketing · Gurugram</span>
+        <h1 class="rv" id="rph" style="--d:1">Sell out launches. <span class="rp-gt">Not just collect leads.</span></h1>
+        <p class="rp-lead rv" style="--d:2">We bring budget-qualified buyers, reply on WhatsApp in seconds, book site visits and track every lead to the booking amount. For developers, channel partners and brokers.</p>
+        <ul class="rp-checks rv" style="--d:2">
+          <li><i></i>Leads filtered by budget, configuration and timeline</li>
+          <li><i></i>First reply in under 60 seconds, day or night</li>
+          <li><i></i>Every enquiry tracked from first click to booking</li>
+        </ul>
+        <div class="rp-cta rv" style="--d:3"><a class="rp-btn" href="#contact" data-cta="Plan my project launch">Plan my launch <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="rp-btn line" href="#re-how">See how it works</a></div>
       </div>
-      <div class="rh" id="rh" aria-hidden="true">
-        <div class="rh-card">
-          <div class="rh-img"><span class="rh-cl c1"></span><span class="rh-cl c2"></span><div class="rh-sky" id="rhSky"><i class="bd b1" data-r="5" data-c="2"></i><i class="bd b2" data-r="10" data-c="3"></i><i class="bd b3" data-r="7" data-c="2"></i><i class="bd b4" data-r="8" data-c="3"></i><i class="cr"><span class="cr-h"></span></i></div><span class="rh-tag">New launch · Sector 65</span><div class="rh-tx"><b>Sector 65 Residences</b><small>3 &amp; 4 BHK · from ₹1.6 Cr</small></div></div>
-          <div class="rh-fun">
-            <div class="rh-hd"><b>Launch dashboard</b><span><i></i>Live · Day <em id="rhDay">1</em></span></div>
-            <div class="rfn" style="--c:#AF52DE;--w:100%"><span>Reach</span><i><s></s></i><b data-n="420000">0</b></div>
-            <div class="rfn" style="--c:#0A84FF;--w:62%"><span>Enquiries</span><i><s></s></i><b data-n="1240">0</b></div>
-            <div class="rfn" style="--c:#FF9500;--w:34%"><span>Site visits</span><i><s></s></i><b data-n="342">0</b></div>
-            <div class="rfn" style="--c:#34C759;--w:16%"><span>Bookings</span><i><s></s></i><b data-n="38">0</b></div>
+
+      <div class="rp-dw rv" style="--d:2" aria-hidden="true">
+        <div class="rp-dash">
+          <div class="rd-top">
+            <div class="rd-proj"><span class="rd-av">S65</span><div><b>Sector 65 Residences</b><small>Launch campaign · Day 42</small></div></div>
+            <span class="rd-live"><i></i>Live</span>
+          </div>
+          <div class="rd-kpis">
+            <div><small>Leads</small><b data-count="1240">1,240</b><em>+18%</em></div>
+            <div><small>Site visits</small><b data-count="342">342</b><em>+24%</em></div>
+            <div><small>Bookings</small><b data-count="38">38</b><em>+9</em></div>
+            <div><small>Cost / visit</small><b>₹1,450</b><em class="dn">−38%</em></div>
+          </div>
+          <div class="rd-chart">
+            <div class="rd-h"><b>Leads this week</b><small>Meta · Google · Portals</small></div>
+            <div class="rd-bars"><span style="--h:61%;--i:0"><i></i><em>M</em></span><span style="--h:71%;--i:1"><i></i><em>T</em></span><span style="--h:61%;--i:2"><i></i><em>W</em></span><span style="--h:85%;--i:3"><i></i><em>T</em></span><span style="--h:90%;--i:4"><i></i><em>F</em></span><span style="--h:100%;--i:5"><i></i><em>S</em></span><span style="--h:80%;--i:6"><i></i><em>S</em></span></div>
+          </div>
+          <div class="rd-feed">
+            <div class="rd-h"><b>Latest enquiries</b><small>Auto-replied on WhatsApp</small></div>
+            <ul id="rdFeed">
+              <li><span class="fa" style="--c:#007AFF">RS</span><div><b>Rohit S.</b><small>3 BHK · ₹1.5–2 Cr</small></div><em class="src">Meta</em><span class="st">Replied 6s</span></li>
+              <li><span class="fa" style="--c:#34C759">AK</span><div><b>Anita K.</b><small>4 BHK · ₹2.5 Cr+</small></div><em class="src">Google</em><span class="st vis">Visit Sat</span></li>
+              <li><span class="fa" style="--c:#FF9500">VM</span><div><b>Vikas M.</b><small>3 BHK · NRI · Dubai</small></div><em class="src">YouTube</em><span class="st">Replied 9s</span></li>
+            </ul>
           </div>
         </div>
-        <div class="mh2-chip rc1"><span class="mh-ic" style="background:#25D366">✓</span><div><b>Site visit booked</b><small id="rcT">Sat, 11:00 AM · 3 BHK</small></div></div>
-        <div class="mh2-chip rc2"><small>Cost per site visit</small><b>₹1,450 <em>▼ 38%</em></b></div>
+        <div class="rd-float f1"><span>✓</span><div><b>Site visit booked</b><small>Sat, 11:00 AM · 3 BHK</small></div></div>
+        <p class="rd-note">Sample dashboard for illustration</p>
       </div>
     </div>
   </section>
+
+  <div class="logo-band" aria-label="Real estate brands we work with">
+    <p class="lb-cap">Trusted by 9+ real estate brands across India</p>
+    <ul class="lb-row" id="lbRow1"></ul>
+  </div>

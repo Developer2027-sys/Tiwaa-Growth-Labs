@@ -6,7 +6,7 @@
 //!   3. create its sections in templates/sections/about/...
 //! Then run `npm run build` (or `npm run dev` to preview).
 
-use crate::contact_form::{CfConfig, Field};
+use crate::contact_form::CfConfig;
 use serde_json::{json, Value};
 
 /// Request path -> page id. Built to public/index.html, public/services.html, ...
@@ -170,7 +170,8 @@ pub fn page(id: &str) -> Option<Page> {
             id: "home",
             title: "Tiwaa Growth Labs",
             og_title: Some("Tiwaa Growth Labs | Digital Marketing & Web Development Agency in Gurugram"),
-            description: "Tiwaa Growth Labs is a Gurugram digital marketing agency offering SEO, social media, Google & Facebook Ads, WhatsApp marketing, content and website development. Get a free consultation.",
+            description: "Tiwaa Growth Labs is a real estate marketing agency in Gurugram for developers, builders, channel partners and brokers: launch campaigns, walkthrough films, Meta and Google lead ads, landing pages, WhatsApp follow-up and LeadsPulse CRM.",
+            keywords: "real estate marketing agency gurugram, real estate digital marketing, property marketing agency delhi ncr, real estate lead generation, builder marketing, channel partner marketing, site visit campaigns, leadspulse crm, tiwaa growth labs",
             path: "/",
             // FAQ structured data is filled in by assets/js/main.js from the FAQ list.
             head_extra: HeadExtra::Html(r#"<script type="application/ld+json" id="faq-ld"></script>"#),
@@ -179,16 +180,20 @@ pub fn page(id: &str) -> Option<Page> {
                 s("home/02-logo-band"),  // scrolling client + platform logos
                 s("home/03-about"),      // "Built for impact" stats
                 s("home/04-services"),   // funnel diagram + Attract / Engage / Convert
-                s("shared/industries"),
-                s("shared/process"),     // 5-step timeline
+                s("home/05-industries"), // real estate segments
+                s("home/06-process"),    // 5-step timeline
                 s("home/07-work"),       // case studies + before/after slider
-                s("shared/reviews"),     // testimonial loop
+                sv("shared/reviews", json!({ "reviews_lead": "Developers, builders and channel partners across India trust us with their launches." })),
                 s("home/09-roi"),        // ROI calculator
                 s("home/10-why"),        // "Why Tiwaa" dark carousel
                 s("home/11-clients"),    // brand grid + tech stack
                 s("home/12-insights"),   // first 3 posts from content/blog.toml
                 s("home/13-faq"),
             ],
+            contact_form: Some(CfConfig {
+                title: Some(r#"Tell us about your project. <span class="gt">We'll take it from there.</span>"#),
+                ..CfConfig::default()
+            }),
             ..Page::default()
         },
         "services" => Page {
@@ -239,24 +244,22 @@ pub fn page(id: &str) -> Option<Page> {
             description: "Tiwaa Growth Labs is a Gurugram-based digital marketing and growth team: strategy, performance ads, content, WhatsApp automation, websites and CRM under one roof, measured in customers.",
             keywords: "about tiwaa growth labs, digital marketing agency gurugram, growth marketing team india, tiwaa.io, leadspulse",
             path: "/about",
-            css: vec!["css/services.css", "css/service-page.css", "css/about.css"],
+            css: vec!["css/about.css"],
             js: vec!["js/about.js".into()],
-            // AboutPage + breadcrumb structured data
+            // AboutPage, breadcrumb and FAQ structured data
             head_extra: HeadExtra::File("layout/ld/about.html".into()),
-            // the office section has its own message form (sections/about/10-office.html)
+            // the office section has its own message form (sections/about/08-office.html)
             contact_form: None,
             sections: vec![
-                s("about/01-hero"),
-                s("about/02-stats"),
-                s("about/03-approach"),        // growth loop
-                s("about/04-mission-vision"),
-                s("about/05-why-choose-us"),
-                s("about/06-principles"),      // pinned horizontal scroll on desktop
-                s("about/07-platforms"),       // Tiwaa.io + LeadsPulse
-                s("about/08-trusted-brands"),  // logo strip, filled by assets/js/main.js
-                s("about/09-expertise"),
+                s("about/01-hero"),      // story hero + growth curve, logo band (#lbRow1, main.js), numbers
+                s("about/02-journey"),   // "What we built for real estate" timeline
+                s("about/03-offer"),     // service list + live preview, pinned on desktop
+                s("about/04-software"),  // dark LeadsPulse app demo + capture/assign/alert/report flow
+                s("about/05-process"),   // 5-step timeline
+                s("about/06-why-us"),    // sideways-scrolling reasons
                 s("shared/reviews"),
-                s("about/10-office"),          // map + message form
+                s("about/07-faq"),
+                s("about/08-office"),    // map + message form
             ],
             ..Page::default()
         },
@@ -283,36 +286,33 @@ pub fn page(id: &str) -> Option<Page> {
             ],
             ..Page::default()
         },
-        // Industry page; same building blocks as a service page plus its own stylesheet.
-        "real-estate" => {
-            let mut p = service_page(ServicePage {
-                id: "real-estate",
-                title: "Real Estate Digital Marketing Agency in Gurugram | Tiwaa Growth Labs",
-                description: "Real estate marketing in Gurugram for developers, channel partners and brokers: pre-launch campaigns, qualified buyer leads, WhatsApp follow-up, site visits and CRM by Tiwaa Growth Labs.",
-                keywords: "real estate digital marketing agency gurugram, real estate lead generation, property marketing agency, real estate marketing delhi ncr, site visit campaigns, real estate whatsapp marketing",
-                path: "/industries/real-estate",
-                service: "Real Estate Marketing",
-                sections: vec![
-                    s("industry/real-estate/01-hero"),
-                    s("industry/real-estate/02-stats"),
-                    s("industry/real-estate/03-problem"),
-                    s("industry/real-estate/04-journey"),
-                    s("industry/real-estate/05-lead-to-visit-flow"),
-                    s("industry/real-estate/06-project-types"),
-                    s("industry/real-estate/07-services"),
-                    s("industry/real-estate/08-case-study"),
-                    s("shared/reviews"),
-                    s("industry/real-estate/09-faq"),
-                ],
-            });
-            p.css.push("css/real-estate.css");
-            p.contact_form = Some(CfConfig {
-                service: Some("Real Estate Marketing"),
-                fields: Some(vec![Field::Key("name"), Field::Key("phone"), Field::Key("email"), Field::Key("company"), Field::Key("service"), Field::Key("budget"), Field::Key("message")]),
-                ..CfConfig::default()
-            });
-            p
-        }
+        // Industry page. Like the artifact it loads only its own stylesheet (no services.css /
+        // service-page.css); sections are wrapped in .rp, opened in 01-hero and closed in 07-faq.
+        "real-estate" => Page {
+            id: "real-estate",
+            title: "Real Estate Digital Marketing Agency in Gurugram | Tiwaa Growth Labs",
+            description: "Real estate marketing in Gurugram for developers, channel partners and brokers: pre-launch campaigns, qualified buyer leads, WhatsApp follow-up, site visits and CRM by Tiwaa Growth Labs.",
+            keywords: "real estate digital marketing agency gurugram, real estate lead generation, property marketing agency, real estate marketing delhi ncr, site visit campaigns, real estate whatsapp marketing",
+            path: "/industries/real-estate",
+            css: vec!["css/real-estate.css"],
+            js: vec!["js/service/real-estate.js".into()],
+            // Service, FAQ and breadcrumb structured data
+            head_extra: HeadExtra::File("layout/ld/real-estate.html".into()),
+            // no inline platform logos: the artifact page has none (and their .plf styles live in services.css)
+            // Heading, text and fields as in the artifact's enquiry form; "Real Estate Marketing" pre-selected.
+            contact_form: Some(CfConfig { service: Some("Real Estate Marketing"), ..CfConfig::default() }),
+            sections: vec![
+                s("industry/real-estate/01-hero"),          // dashboard hero + logo band (opens .rp)
+                s("industry/real-estate/02-how"),           // "how it works" tabs
+                s("industry/real-estate/03-lead-to-visit"), // timeline + WhatsApp chat
+                s("industry/real-estate/04-services"),      // services hub + list
+                s("industry/real-estate/05-projects"),      // property types
+                s("industry/real-estate/06-case-study"),    // before/after toggle + charts
+                s("shared/reviews"),
+                s("industry/real-estate/07-faq"),           // closes .rp
+            ],
+            ..Page::default()
+        },
         "seo" => service_page(ServicePage {
             id: "seo",
             title: "SEO Services in Gurugram | SEO Company | Tiwaa Growth Labs",

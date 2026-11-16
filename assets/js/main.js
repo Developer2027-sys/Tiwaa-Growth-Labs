@@ -47,12 +47,12 @@
   addEventListener('scroll',onScroll,{passive:true}); onScroll();
 
   // Hero rotating audience
-  var swap=($('swap')||{}).firstElementChild, aud=['Ambitious Brands','Real Estate Developers','Clinics & Hospitals','D2C & E-commerce','Schools & Coaching','B2B Companies'], ai=0;
+  var swap=($('swap')||{}).firstElementChild, aud=['Real Estate Developers','Builders','Channel Partners','Property Brokers'], ai=0;
   if(false) setInterval(function(){swap.classList.add('out');setTimeout(function(){ai=(ai+1)%aud.length;swap.textContent=aud[ai];swap.classList.remove('out');},350);},2600);
 
   // Brands (stand-in wordmarks until real logos are supplied)
   var BR=[['Godrej Properties','a','re'],['Emaar','e','re'],['Shapoorji Pallonji','b','re'],['SOBHA','c','re'],['Brigade','d','re'],['Provident','f','re'],['Central Park','b','re'],['Capital Avenue','a','re'],['Nanded City','e','re'],
-          ['Hotel RR Galaxy','f','hos'],['Dreamland','d','hos'],['MyWear','d','ret'],['Printek','a','ret'],['ShipKaro','d','b2b']];
+          ['Hotel RR Galaxy','f','hos'],['Dreamland Realtors','d','re'],['My Wear Hub','d','ret'],['Printek','a','ret'],['ShipKaro','d','b2b'],['BVEG','f','ret']];
   function wm(b){return '<span class="wm '+b[1]+'">'+b[0]+'</span>';}
   var half=Math.ceil(BR.length/2), r1=BR.slice(0,half).map(function(b){return '<li>'+wm(b)+'</li>';}).join(''), r2=BR.slice(half).concat(BR.slice(0,3)).map(function(b){return '<li>'+wm(b)+'</li>';}).join('');
   if($('lbRow1'))$('lbRow1').innerHTML=r1+r1+r1.replace(/<li>/g,'<li aria-hidden="true">')+r1.replace(/<li>/g,'<li aria-hidden="true">');
@@ -82,7 +82,18 @@
   // Reveal on scroll (content stays visible if JS or observers are unavailable)
   if('IntersectionObserver' in window && !reduce){
     var vh=innerHeight;
-    document.querySelectorAll('.rv').forEach(function(el){if(el.getBoundingClientRect().top<vh)el.classList.add('in');});
+    // entrance variants for service pages: tag blocks that have no reveal yet and give grids a stagger
+    (function(){function tag(sel,v,stag){document.querySelectorAll(sel).forEach(function(el,i){if(el.closest('[aria-hidden="true"] .rv'))return;el.classList.add('rv');if(v)el.classList.add(v);if(stag)el.style.setProperty('--d',i%stag);});}
+      tag('.sx-hero-in > :last-child','rv-z');
+      tag('.fmt > .hold, .sx-ai-in > .lf2, .st-in > .st-card, .cal-in > .smcal, .fc > .fc-vis','rv-r');
+      tag('.fc > .fc-story','rv-l');
+      tag('.jn','rv-z');
+      tag('.fc-kpi > div',null,3);tag('.cr > .cr-c',null,2);tag('.sfaq > details',null,4);tag('.jn-steps > li',null,4);
+      tag('.fmt-tabs > button',null,5);tag('.sx-tools > span','rv-f',6);
+      ['.ss-grid','.mo-grid','.si-grid','.rl-grid','.sw-grid','.wk-grid','.pb'].forEach(function(g){document.querySelectorAll(g).forEach(function(w){[].forEach.call(w.children,function(c,i){if(c.classList.contains('rv'))c.style.setProperty('--d',i%4);});});});
+    })();
+    var first=[];document.querySelectorAll('.rv').forEach(function(el){if(el.getBoundingClientRect().top<vh)first.push(el);});
+    requestAnimationFrame(function(){requestAnimationFrame(function(){first.forEach(function(el){el.classList.add('in');});});});
     root.classList.add('anim');
     var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
     document.querySelectorAll('.rv:not(.in)').forEach(function(el){ro.observe(el);});
@@ -263,11 +274,11 @@
     var GA='<svg viewBox="0 0 24 24" fill="#4285F4"><path d="M3.9998 22.9291C1.7908 22.9291 0 21.1383 0 18.9293s1.7908-3.9998 3.9998-3.9998 3.9998 1.7908 3.9998 3.9998-1.7908 3.9998-3.9998 3.9998zm19.4643-6.0004L15.4632 3.072C14.3586 1.1587 11.9121.5028 9.9988 1.6074S7.4295 5.1585 8.5341 7.0718l8.0009 13.8567c1.1046 1.9133 3.5511 2.5679 5.4644 1.4646 1.9134-1.1046 2.568-3.5511 1.4647-5.4644zM7.5137 4.8438L1.5645 15.1484A4.5 4.5 0 0 1 4 14.4297c2.5597-.0075 4.6248 2.1585 4.4941 4.7148l3.2168-5.5723-3.6094-6.25c-.4499-.7793-.6322-1.6394-.5878-2.4784z"/></svg>', ME='<svg viewBox="0 0 24 24" fill="#0467DF"><path d="M6.915 4.03c-1.968 0-3.683 1.28-4.871 3.113C.704 9.208 0 11.883 0 14.449c0 .706.07 1.369.21 1.973a6.624 6.624 0 0 0 .265.86 5.297 5.297 0 0 0 .371.761c.696 1.159 1.818 1.927 3.593 1.927 1.497 0 2.633-.671 3.965-2.444.76-1.012 1.144-1.626 2.663-4.32l.756-1.339.186-.325c.061.1.121.196.183.3l2.152 3.595c.724 1.21 1.665 2.556 2.47 3.314 1.046.987 1.992 1.22 3.06 1.22 1.075 0 1.876-.355 2.455-.843a3.743 3.743 0 0 0 .81-.973c.542-.939.861-2.127.861-3.745 0-2.72-.681-5.357-2.084-7.45-1.282-1.912-2.957-2.93-4.716-2.93-1.047 0-2.088.467-3.053 1.308-.652.57-1.257 1.29-1.82 2.05-.69-.875-1.335-1.547-1.958-2.056-1.182-.966-2.315-1.303-3.454-1.303zm10.16 2.053c1.147 0 2.188.758 2.992 1.999 1.132 1.748 1.647 4.195 1.647 6.4 0 1.548-.368 2.9-1.839 2.9-.58 0-1.027-.23-1.664-1.004-.496-.601-1.343-1.878-2.832-4.358l-.617-1.028a44.908 44.908 0 0 0-1.255-1.98c.07-.109.141-.224.211-.327 1.12-1.667 2.118-2.602 3.358-2.602zm-10.201.553c1.265 0 2.058.791 2.675 1.446.307.327.737.871 1.234 1.579l-1.02 1.566c-.757 1.163-1.882 3.017-2.837 4.338-1.191 1.649-1.81 1.817-2.486 1.817-.524 0-1.038-.237-1.383-.794-.263-.426-.464-1.13-.464-2.046 0-2.221.63-4.535 1.66-6.088.454-.687.964-1.226 1.533-1.533a2.264 2.264 0 0 1 1.088-.285z"/></svg>', IG='<svg viewBox="0 0 24 24" fill="#E4405F"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg>', GO='<svg viewBox="0 0 24 24" fill="#4285F4"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>';
     var C=[
       ['Godrej Properties','a','Google Performance Max with offline conversion tracking to drive qualified site visits.','linear-gradient(140deg,#0B1A0E,#0F2A14 60%,#1C4D1F)','linear-gradient(140deg,var(--p),#5856D6)',[['32%','lower CPL'],['2.4x','qualified leads']],GA,'Google Ads','Real Estate',''],
-      ['Hotel RR Galaxy','f','Reels and influencer collaborations that turned a city hotel into a weekend destination.','linear-gradient(140deg,#16110A,#2A1D0E 60%,#4A3212)','linear-gradient(140deg,#FFB347,#FF6B3D)',[['3.1x','Instagram reach'],['+48%','direct bookings']],IG,'Instagram','Hospitality',''],
+      ['Luxury Villas, Sohna','f','Walkthrough films and Instagram Reels that filled the EOI list before bookings opened.','linear-gradient(140deg,#16110A,#2A1D0E 60%,#4A3212)','linear-gradient(140deg,#FFB347,#FF6B3D)',[['3.1x','EOI sign-ups'],['+48%','site visits']],IG,'Instagram','Real Estate','Film Case Study'],
       ['Sobha','c','Hyperlocal SEO and project landing pages ranking for high-intent property searches.','linear-gradient(140deg,#0A1420,#10233A 60%,#173A5E)','linear-gradient(140deg,var(--p-l),var(--p))',[['#1','for 18 keywords'],['+160%','organic leads']],GO,'SEO','Real Estate','SEO Case Study'],
-      ['MyWear','d','Meta catalogue ads and retargeting that scaled a D2C apparel brand profitably.','linear-gradient(140deg,#1A0B16,#2D1026 60%,#4A1840)','linear-gradient(140deg,#FF5FA2,#FF9B3D)',[['4.2x','ROAS'],['-27%','cost per purchase']],ME,'Meta Ads','Retail & D2C',''],
+      ['Channel Partner, NCR','d','Lead ads for 12 projects with LeadsPulse auto-assignment, so every buyer got a call within minutes.','linear-gradient(140deg,#1A0B16,#2D1026 60%,#4A1840)','linear-gradient(140deg,#FF5FA2,#FF9B3D)',[['4 min','to first call'],['3x','follow-ups']],ME,'Meta + LeadsPulse','Real Estate','CRM Case Study'],
       ['Emaar','e','Meta lead-form campaigns with WhatsApp follow-ups within 60 seconds of every enquiry.','linear-gradient(140deg,#0B0F0C,#14211A 60%,#20402E)','linear-gradient(140deg,var(--p2),var(--p))',[['25%','lower CPL'],['15%','lower CPQL']],ME,'Meta Ads','Real Estate',''],
-      ['ShipKaro','d','A conversion-first website and Google Search campaigns for a logistics startup.','linear-gradient(140deg,#0D0D10,#1A1A24 60%,#26263A)','linear-gradient(140deg,#8C7CFF,var(--p))',[['+210%','demo requests'],['1.8s','page load']],GA,'Web + Google','Logistics & B2B','Web Case Study']];
+      ['Plotted Township','d','A fast project landing page with plot maps and price, plus Google Search for investors.','linear-gradient(140deg,#0D0D10,#1A1A24 60%,#26263A)','linear-gradient(140deg,#8C7CFF,var(--p))',[['+210%','visit requests'],['1.8s','page load']],GA,'Web + Google','Real Estate','Web Case Study']];
     var html='';
     C.forEach(function(c){html+='<a class="case rv" href="#contact" data-cta="Talk to an expert"><div class="case-art" style="--g:'+c[3]+';--arc:'+c[4]+'">'+(c[9]?'<span class="case-tag">'+c[9]+'</span>':'')+
       '<span class="case-glass">View case study <svg viewBox="0 0 16 16"><path d="M5 11L11 5M6 5h5v5"/></svg></span><div class="case-in"><div style="padding-top:'+(c[9]?'30px':'0')+'"><span class="wm '+c[1]+' case-brand">'+c[0]+'</span><p class="case-desc" style="margin-top:10px">'+c[2]+'</p></div>'+
@@ -333,12 +344,12 @@
 
   // FAQ + structured data
   var faqs=[
-    ["What services does Tiwaa Growth Labs offer?","We are a full-service digital marketing agency offering SEO, Google and Meta Ads, social media marketing, content marketing, WhatsApp and SMS marketing, and website design and development."],
-    ["How soon will I start seeing results?","Paid campaigns usually bring enquiries within the first 1 to 2 weeks. SEO builds steadily, with clear ranking gains typically visible in 3 to 6 months."],
-    ["What budget do I need to start?","Most clients start with an ad budget of ₹25,000 to ₹1,00,000 per month. Use the ROI calculator above to see what different budgets can deliver."],
-    ["Do you work with businesses outside Gurugram?","Yes. We are based in Gurugram and work with brands across Delhi NCR and the rest of India, fully online."],
-    ["How will I know my money is working?","You get a live dashboard and a plain-language monthly report covering leads, cost per lead, sales and next steps."],
-    ["Do you build websites as well as run marketing?","Yes. We design and develop fast, SEO-ready websites and online stores, so your campaigns land on pages built to convert."]
+    ["What does Tiwaa Growth Labs do for real estate?","We run marketing for real estate projects: pre-launch and launch campaigns, Meta and Google lead ads, walkthrough films, project landing pages, WhatsApp follow-up, social media and SEO. Our goal is site visits and bookings, not just leads."],
+    ["Who do you work with?","Developers and builders, channel partners, brokers, and the marketing and sales teams behind them. We market apartments, villas, plots, offices and retail across Delhi NCR and other Indian cities."],
+    ["How soon will we start getting leads?","Most campaigns go live in the second or third week, once the plan, film and landing page are ready. Leads start the day the ads run."],
+    ["How do you make sure leads are genuine buyers?","Every lead form asks budget, configuration and timeline, ads are targeted by micro-market, and every enquiry gets an instant WhatsApp reply so serious buyers move ahead quickly."],
+    ["What is LeadsPulse, and do we get it?","LeadsPulse is the real estate CRM we built. Our marketing clients use it to get every lead assigned to the right salesperson in about 3 seconds, with a WhatsApp alert in about 5 seconds and a weekly report of leads and site visits."],
+    ["What budget do we need to start?","Most projects start with an ad budget of ₹1,00,000 to ₹5,00,000 per month, depending on the city and price point. Use the ROI calculator above to see what different budgets can deliver."]
   ];
   if($('faqList'))faqs.forEach(function(f,i){var d=document.createElement('details');if(i===0)d.open=true;var s=document.createElement('summary');s.textContent=f[0];var p=document.createElement('p');p.textContent=f[1];d.appendChild(s);d.appendChild(p);$('faqList').appendChild(d);d.addEventListener('toggle',function(){if(d.open)[].forEach.call($('faqList').querySelectorAll('details[open]'),function(o){if(o!==d)o.open=false;});});});
   if($('faq-ld'))$('faq-ld').textContent=JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":faqs.map(function(f){return {"@type":"Question","name":f[0],"acceptedAnswer":{"@type":"Answer","text":f[1]}};})});
@@ -482,7 +493,7 @@
     if(/graphic|designer/.test(t))return 'gfx'; if(/e-commerce|store/.test(t))return 'ecom'; if(/maintenance|care plan/.test(t))return 'care';
     if(/website/.test(t))return 'web'; return null;}
   function fillPop(cfg){
-    popEb.textContent=cfg.eb; popH.textContent=cfg.h; popT.textContent=cfg.t; popS.textContent=cfg.s; popB.innerHTML=cfg.b+' '+ARROW;
+    popEb.textContent=cfg.eb; popH.textContent=cfg.h; popT.textContent='Send us an enquiry'; popS.textContent='Fill in your details and our team will call you within 24 hours.'; popB.innerHTML='Send enquiry '+ARROW;
     popL.innerHTML=''; cfg.l.forEach(function(x){var li=document.createElement('li');li.textContent=x;popL.appendChild(li);});
     [].forEach.call(popG.options,function(o){if(o.text===cfg.g)popG.value=o.value;});
     document.getElementById('p-ok').hidden=true; document.getElementById('p-err').textContent='';
@@ -503,7 +514,7 @@
     function scrolled(){var se=document.scrollingElement||document.documentElement;
     return Math.max(window.scrollY||0,window.pageYOffset||0,se.scrollTop||0,document.documentElement.scrollTop||0,document.body.scrollTop||0);}
   // Auto-open once per visit when the "What we do" (services) section reaches the middle of the screen
-  var thirdSec=document.getElementById('services')||document.getElementById('google-ads');
+  var thirdSec=document.getElementById('services')||document.getElementById('google-ads')||document.getElementById('seo-services');
   function checkAuto(){if(autoShown||!thirdSec)return; if(thirdSec.getBoundingClientRect().top<innerHeight*0.55){autoShown=true;setTimeout(function(){if(pop.hidden)openPop();},350);}}
   if(thirdSec&&'IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)checkAuto();});},{threshold:[0,.25,.5]}).observe(thirdSec);}
   window.addEventListener('scroll',checkAuto,{passive:true}); document.addEventListener('scroll',checkAuto,{passive:true,capture:true});
@@ -511,7 +522,14 @@
 
   // Every CTA that points at #contact (except the nav link) opens the matching popup
   document.addEventListener('click',function(e){
-    var a=e.target.closest&&e.target.closest('a[href="#contact"]'); if(!a||a.closest('nav.main'))return;
+    var a=e.target.closest&&e.target.closest('a[href="#contact"]'); if(!a)return;
+    if(a.classList.contains('nv-promo')||a.hasAttribute('data-audit')){e.preventDefault();autoShown=true;var nv=document.getElementById('nav'),mb=document.getElementById('menuBtn');
+      if(nv)nv.classList.remove('open');if(mb)mb.setAttribute('aria-expanded','false');
+      [].forEach.call(document.querySelectorAll('.nv-item.open,.nv-item.dd-open'),function(li){li.classList.remove('open','dd-open');});
+      [].forEach.call(document.querySelectorAll('.nv-caret[aria-expanded="true"]'),function(c){c.setAttribute('aria-expanded','false');});
+      if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();
+      openPop(DEFAULT);return;}
+    if(a.closest('nav.main'))return;
     e.preventDefault(); autoShown=true;
     var label=(a.dataset.cta||a.textContent).replace(/[→›]/g,'').trim(), card=a.closest('.svc,.feature'),
         ctx=card?card.querySelector('h3').textContent:label, k=keyFor(ctx)||keyFor(label);
@@ -527,7 +545,8 @@
     if(!n){er.textContent='Please enter your name.';return;}
     if(!/^[+\d][\d\s-]{7,}$/.test(ph)){er.textContent='Please enter a valid phone number, for example +91 98765 43210.';return;}
     er.textContent='';
-    TGLLeads.submit({form:'popup',name:n,phone:ph,service:document.getElementById('p-goal').value,website:document.getElementById('p-site').value.trim(),cta:document.getElementById('pop-t').textContent.trim(),hp:document.getElementById('p-hp').value},{button:document.getElementById('pop-b'),err:er,ok:document.getElementById('p-ok'),form:this});});
+    var em=document.getElementById('p-email');if(em&&em.value.trim()&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())){er.textContent='Please check your email address.';return;}
+    TGLLeads.submit({form:'popup',name:n,phone:ph,service:document.getElementById('p-goal').value,email:document.getElementById('p-email').value.trim(),cta:document.getElementById('pop-t').textContent.trim(),hp:document.getElementById('p-hp').value},{button:document.getElementById('pop-b'),err:er,ok:document.getElementById('p-ok'),form:this});});
 
 })();
 ;
@@ -561,12 +580,13 @@ document.querySelectorAll('.palx button').forEach(function(b){b.addEventListener
   }
 
   /* ---------- Brand + platform band ---------- */
-  var CL=[['Godrej Properties','GP','#1F6FEB','godrej-properties.svg'],['Emaar','EM','#B8860B','emaar.png'],['Shapoorji Pallonji','SP','#C8102E','shapoorji-pallonji.png'],['SOBHA','SO','#7A5C2E','sobha.png'],['Brigade','BR','#E35205','brigade.png'],['Provident','PH','#00A3A1','provident.png'],['Central Park','CP','#2E7D32','central-park.png'],['Capital Avenue','CA','#5856D6'],['Nanded City','NC','#0E7490','nanded-city.png'],['Hotel RR Galaxy','RR','#AF52DE'],['Dreamland','DL','#FF2D55'],['MyWear','MW','#FF9500'],['Printek','PT','#30B0C7'],['ShipKaro','SK','#007AFF']];
+  var CL=[['Godrej Properties','GP','#1F6FEB','godrej-properties.svg'],['Emaar','EM','#B8860B','emaar.png'],['Shapoorji Pallonji','SP','#C8102E','shapoorji-pallonji.png'],['SOBHA','SO','#7A5C2E','sobha.png'],['Brigade','BR','#E35205','brigade.png'],['Provident','PH','#00A3A1','provident.png'],['Central Park','CP','#2E7D32','central-park.png'],['Capital Avenue','CA','#5856D6','capital-avenue.webp'],['Nanded City','NC','#0E7490','nanded-city.png'],['Hotel RR Galaxy','RR','#AF52DE','hotel-rr-galaxy.webp'],['Dreamland Realtors','DL','#FF2D55','dreamland.webp'],['My Wear Hub','MW','#FF9500','mywear.webp'],['Printek','PT','#30B0C7','printek.webp'],['ShipKaro','SK','#007AFF','shipkaro.webp'],['BVEG','BV','#2E7D32','bveg.webp']];
   var PL=[['Google Ads','G','#4285F4','google-ads.svg'],['Meta Ads','M','#0866FF','meta.svg'],['Instagram','IG','#E1306C','instagram.png'],['YouTube','YT','#FF0000','youtube.png'],['WhatsApp Business','WA','#25D366','whatsapp-business.png'],['Google Analytics 4','GA','#F9AB00','google-analytics.svg'],['LinkedIn Ads','in','#0A66C2','linkedin.png'],['Shopify','S','#5E8E3E','shopify.png'],['WordPress','W','#21759B','wordpress.png'],['HubSpot','H','#FF7A59','hubspot.png'],['Zoho CRM','Z','#E42527','zoho-crm.svg'],['LeadSquared','LS','#1F6FEB','leadsquared.png'],['Razorpay','R','#0C2451','razorpay.png']];
   /* b = [name, initials, colour, logo file in assets/images/brands/ (optional)]. No logo file = coloured initials tile. */
   var LOGO_DIR=(window.TGL&&window.TGL.brands)||'/assets/images/brands/';
   var FULL=/^(emaar|sobha|instagram|hubspot|linkedin|leadsquared)./; /* logos that already have their own square background */
-  function item(b){var t=b[3]?'<span class="lb-t lb-logo'+(FULL.test(b[3])?' lb-full':'')+'"><img src="'+LOGO_DIR+b[3]+'" alt="" width="38" height="38" loading="lazy" decoding="async"></span>':'<span class="lb-t" style="--c:'+b[2]+'">'+b[1]+'</span>';return '<li><span class="lb-i">'+t+b[0]+'</span></li>';}
+  var DARK=/^(capital-avenue|dreamland)./; /* white logos on transparent: dark tile */
+  function item(b){var t=b[3]?'<span class="lb-t lb-logo'+(FULL.test(b[3])?' lb-full':'')+(DARK.test(b[3])?' lb-dark':'')+'"><img src="'+LOGO_DIR+b[3]+'" alt="" width="38" height="38" loading="lazy" decoding="async"></span>':'<span class="lb-t" style="--c:'+b[2]+'">'+b[1]+'</span>';return '<li><span class="lb-i">'+t+b[0]+'</span></li>';}
   function fill(id,arr){var ul=$(id);if(!ul)return;var h=arr.map(item).join('');ul.innerHTML=h+h.replace(/<li>/g,'<li aria-hidden="true">');}
   fill('lbRow1',CL);fill('lbRow2',PL);
 
@@ -746,17 +766,9 @@ if('IntersectionObserver' in window)new IntersectionObserver(function(e){vis=e[0
 (function(){
   function $(i){return document.getElementById(i);}
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  /* two-step audit form */
+  /* single-step enquiry form */
   var f=$('popForm'),pop=$('pop');
-  if(f){var steps=f.querySelectorAll('.pf-steps li');
-    function setStep(n){f.setAttribute('data-step',n);steps.forEach(function(l,i){l.classList.toggle('on',i<n);});
-      setTimeout(function(){var el=n===1?$('p-site'):$('p-name');if(el)el.focus({preventScroll:true});},60);}
-    setStep(1);
-    $('pfNext').addEventListener('click',function(){setStep(2);});
-    $('pfBack').addEventListener('click',function(){setStep(1);});
-    f.addEventListener('submit',function(e){if(f.getAttribute('data-step')!=='2'){e.preventDefault();e.stopImmediatePropagation();setStep(2);}},true);
-    if(pop)new MutationObserver(function(){if(!pop.hidden){setStep(1);}}).observe(pop,{attributes:true,attributeFilter:['hidden']});
-  }
+  if(f&&pop)new MutationObserver(function(){if(!pop.hidden)setTimeout(function(){var el=$('p-name');if(el)el.focus({preventScroll:true});},80);}).observe(pop,{attributes:true,attributeFilter:['hidden']});
   /* exit intent, once per visit */
   var exitDone=false;
   try{exitDone=sessionStorage.getItem('tgl-exit')==='1';}catch(e){}

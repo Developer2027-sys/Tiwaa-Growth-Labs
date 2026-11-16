@@ -11,12 +11,12 @@
         ["Godrej Properties","godrej-properties.svg","GP","#1F6FEB"],["Emaar","emaar.png","EM","#B8860B"],
         ["Shapoorji Pallonji","shapoorji-pallonji.png","SP","#C8102E"],["SOBHA","sobha.png","SO","#7A5C2E"],
         ["Brigade","brigade.png","BR","#E35205"],["Provident","provident.png","PH","#00A3A1"],
-        ["Central Park","central-park.png","CP","#2E7D32"],["Capital Avenue","","CA","#5856D6"],
-        ["Nanded City","nanded-city.png","NC","#0E7490"],["Hotel RR Galaxy","","RR","#AF52DE"],
-        ["Dreamland","","DL","#FF2D55"],["MyWear","","MW","#FF9500"],["Printek","","PT","#30B0C7"],["ShipKaro","","SK","#007AFF"]] %}
+        ["Central Park","central-park.png","CP","#2E7D32"],["Capital Avenue","capital-avenue.webp","CA","#5856D6"],
+        ["Nanded City","nanded-city.png","NC","#0E7490"],["Hotel RR Galaxy","hotel-rr-galaxy.webp","RR","#AF52DE"],
+        ["Dreamland Realtors","dreamland.webp","DL","#FF2D55"],["My Wear Hub","mywear.webp","MW","#FF9500"],["Printek","printek.webp","PT","#30B0C7"],["ShipKaro","shipkaro.webp","SK","#007AFF"],["BVEG","bveg.webp","BV","#2E7D32"]] %}
       <ul class="mq-t">
         {%- for pass in [0, 1] %}{% for b in brands %}
-        <li{% if pass %} aria-hidden="true"{% endif %}>{% if b[1] %}<span class="lb-t lb-logo"><img src="{{ asset('images/brands/' ~ b[1]) }}" alt="" width="38" height="38" loading="lazy" decoding="async"></span>{% else %}<span class="lb-t" style="--c:{{ b[3] }}">{{ b[2] }}</span>{% endif %}{{ b[0] }}</li>
+        <li{% if pass %} aria-hidden="true"{% endif %}>{% if b[1] %}<span class="lb-t lb-logo{% if b[1] in ['capital-avenue.webp', 'dreamland.webp'] %} lb-dark{% endif %}"><img src="{{ asset('images/brands/' ~ b[1]) }}" alt="" width="38" height="38" loading="lazy" decoding="async"></span>{% else %}<span class="lb-t" style="--c:{{ b[3] }}">{{ b[2] }}</span>{% endif %}{{ b[0] }}</li>
         {%- endfor %}{% endfor %}
       </ul>
     </div>
