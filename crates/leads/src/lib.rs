@@ -28,6 +28,21 @@ pub struct Lead {
     pub message: String,
     /// JSON object with page-specific fields (budget, city, ...), or "".
     pub extra: String,
+    // ---- Attribution (assets/js/leads.js): last non-direct touch within 90 days. ----
+    pub utm_source: String,
+    pub utm_medium: String,
+    pub utm_campaign: String,
+    pub utm_term: String,
+    pub utm_content: String,
+    /// Ad click IDs: Google (gclid), Meta (fbclid), Microsoft (msclkid).
+    pub gclid: String,
+    pub fbclid: String,
+    pub msclkid: String,
+    /// First page of the visit that brought the lead (path + query) and the site that referred it.
+    pub landing_page: String,
+    pub landing_referrer: String,
+    /// JSON object: the very first touch (source, medium, campaign, ..., date), or "".
+    pub first_touch: String,
 }
 
 /// Single-line text: strings and numbers only, whitespace runs collapsed, trimmed, cut to `max` chars.
@@ -132,6 +147,12 @@ pub fn valid_email(email: &str) -> bool {
     chars.iter().enumerate().any(|(i, c)| *c == '.' && i >= 1 && chars.len() - i - 1 >= 2)
 }
 
+/// Ad click ID: only URL-safe characters (letters, digits, - _ . ~), max 300. Anything else is dropped.
+pub fn clean_click_id(v: Option<&Value>) -> String {
+    let s = clean(v, 300);
+    if s.chars().all(|c| c.is_ascii_alphanumeric() || matches!(c, '-' | '_' | '.' | '~')) { s } else { String::new() }
+}
+
 /// True when the hidden honeypot field was filled in (a bot). Pretend success, store nothing.
 pub fn is_spam(input: &Value) -> bool {
     !clean(input.get("hp"), 200).is_empty()
@@ -153,6 +174,17 @@ pub fn validate(input: &Value) -> Result<Lead, String> {
         message: clean_text(get("message"), 1500),
         extra: clean_extra(get("extra")),
         slot: String::new(),
+        utm_source: clean(get("utm_source"), 150),
+        utm_medium: clean(get("utm_medium"), 150),
+        utm_campaign: clean(get("utm_campaign"), 150),
+        utm_term: clean(get("utm_term"), 150),
+        utm_content: clean(get("utm_content"), 150),
+        gclid: clean_click_id(get("gclid")),
+        fbclid: clean_click_id(get("fbclid")),
+        msclkid: clean_click_id(get("msclkid")),
+        landing_page: clean(get("landing_page"), 300),
+        landing_referrer: clean(get("landing_referrer"), 300),
+        first_touch: clean_extra(get("first_touch")),
     };
     if !FORMS.contains(&d.form.as_str()) {
         return Err("Unknown form.".into());
@@ -222,6 +254,28 @@ mod tests {
         assert!(with("phone", json!("+1 2345 67890 12345 67")).starts_with("Please enter a valid phone"));
         assert_eq!(with("email", json!("bad@x")), "Please enter a valid email address.");
         assert_eq!(with("email", json!("a@b@c.com")), "Please enter a valid email address.");
+    }
+
+    #[test]
+    fn keeps_attribution_fields() {
+        let d = ok(json!({
+            "form": "popup", "name": "Asha", "phone": "9876543210",
+            "utm_source": " facebook ", "utm_medium": "paid_social", "utm_campaign": "sector65  launch",
+            "utm_term": "3 bhk gurugram", "utm_content": "walkthrough-film",
+            "gclid": "Cj0KCQ-abc_123", "fbclid": "bad value<script>",
+            "landing_page": "/industries/real-estate?utm_source=facebook", "landing_referrer": "https://l.facebook.com/",
+            "first_touch": {"source": "google", "medium": "organic", "date": "2026-11-01", "Bad Key": "x"}
+        }));
+        assert_eq!(d.utm_source, "facebook");
+        assert_eq!(d.utm_campaign, "sector65 launch");
+        assert_eq!(d.utm_term, "3 bhk gurugram");
+        assert_eq!(d.gclid, "Cj0KCQ-abc_123");
+        assert_eq!(d.fbclid, "");
+        assert_eq!(d.msclkid, "");
+        assert_eq!(d.landing_page, "/industries/real-estate?utm_source=facebook");
+        assert_eq!(d.first_touch, r#"{"source":"google","medium":"organic","date":"2026-11-01"}"#);
+        let long = ok(json!({"form": "popup", "name": "Asha", "phone": "9876543210", "utm_campaign": "x".repeat(400)}));
+        assert_eq!(long.utm_campaign.len(), 150);
     }
 
     #[test]

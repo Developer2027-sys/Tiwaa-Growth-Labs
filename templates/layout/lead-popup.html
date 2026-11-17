@@ -1,22 +1,27 @@
-{# One-step lead popup. Submits to /api/leads (see assets/js/leads.js). #}<div class="pop" id="pop" role="dialog" aria-modal="true" aria-labelledby="pop-h" hidden>
+{# One-step lead popup. Heading, text and button follow the button that opened it (assets/js/main.js, fillPop). The left panel (.pj) plays a buyer journey on a phone: ad, enquiry, WhatsApp, site visit. Submits to /api/leads (see assets/js/leads.js). #}<div class="pop" id="pop" role="dialog" aria-modal="true" aria-labelledby="pop-h" hidden>
   <div class="pop-bg" data-close></div>
   <div class="pop-card" data-lenis-prevent>
     <button class="pop-x" type="button" aria-label="Close" data-close>
       <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 5l10 10M15 5L5 15"/></svg>
     </button>
-    <div class="pop-art">
+    <div class="pop-art pj">
       <span class="eyebrow" id="pop-eb">Free growth audit</span>
-      <h2 id="pop-h">Find out where your next 100 leads are hiding</h2>
-      <ul class="pop-list" id="pop-list">
-        <li>Website speed &amp; SEO health check</li>
-        <li>Ad account and landing page review</li>
-        <li>A 90-day plan with clear targets</li>
-      </ul>
-      <div class="pop-contact">
-        <span><svg viewBox="0 0 24 24"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>{{ site.phone_display }}</span>
-        <span><svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Spaze I Tech Park, Sector 49, Gurugram</span>
+      <h2 id="pop-h" class="pj-h">Find out where your next 100 leads are hiding</h2>
+      <ul class="pop-list" id="pop-list" hidden></ul>
+      <div class="pj-stage" aria-hidden="true">
+        <div class="pj-ph"><span class="pj-notch"></span><div class="pj-scr">
+          <div class="pj-sc pjs1"><div class="ig-h"><i>S</i><span><b>Sector 65 Residences</b><small>Sponsored</small></span></div><div class="ig-img"><svg viewBox="0 0 160 110" preserveAspectRatio="xMidYMax slice"><rect x="18" y="38" width="30" height="72" rx="2"/><rect x="54" y="14" width="40" height="96" rx="2"/><rect x="100" y="46" width="34" height="64" rx="2"/><g class="w"><rect x="60" y="22" width="6" height="6"/><rect x="72" y="22" width="6" height="6"/><rect x="84" y="22" width="6" height="6"/><rect x="60" y="34" width="6" height="6"/><rect x="72" y="34" width="6" height="6"/><rect x="84" y="34" width="6" height="6"/><rect x="60" y="46" width="6" height="6"/><rect x="72" y="46" width="6" height="6"/><rect x="84" y="46" width="6" height="6"/><rect x="24" y="46" width="6" height="6"/><rect x="36" y="46" width="6" height="6"/><rect x="106" y="54" width="6" height="6"/><rect x="118" y="54" width="6" height="6"/></g></svg><span class="ig-pl"></span></div><b class="ig-t">3 BHK from ₹1.6 Cr · Golf Course Ext. Road</b><span class="ig-cta">Get price sheet</span><span class="ig-ic">♡ 💬 ↗</span><i class="tap t1"></i></div>
+          <div class="pj-sc pjs2"><b class="fm-t">Get the price sheet</b><small>Your budget?</small><div class="fm-o"><span>Under ₹1.5 Cr</span><span class="pick">₹1.5–2 Cr</span><span>Above ₹2 Cr</span></div><small>Configuration?</small><div class="fm-o"><span>2 BHK</span><span class="pick d2">3 BHK</span><span>4 BHK</span></div><div class="fm-b"><i class="fb1">Submit</i><i class="fb2">Submitted ✓</i></div><i class="tap t2"></i></div>
+          <div class="pj-sc pjs3"><div class="wa-h"><i>S</i><span><b>Sector 65 Residences</b><small>online</small></span></div><div class="wa-b"><span class="m in m1"><u>PDF</u>Brochure &amp; price sheet</span><span class="m in m2">Hi Rahul 👋 Would you like to visit the sample flat this Saturday?</span><span class="m out m3">Yes, 11 AM works 👍</span></div></div>
+          <div class="pj-sc pjs4"><span class="cl"><i>SAT</i><b>22</b><small>NOV</small></span><b class="cl-t">Site visit booked</b><small class="cl-s">11:00 AM · Sector 65 sales office</small><span class="cl-r">✓ Reminder sent on WhatsApp</span><span class="cl-pin"></span></div>
+        </div></div>
+        <span class="pj-chip c1"><i style="--c:#E1306C">◎</i>Ad shown to buyers in Gurugram</span>
+        <span class="pj-chip c2"><i style="--c:#5856D6">⚡</i>Lead in LeadsPulse · 3 sec</span>
+        <span class="pj-chip c3"><i style="--c:#25D366">✓</i>WhatsApp reply in 52 sec</span>
+        <span class="pj-chip c4"><i style="--c:#34C759">★</i>Site visit confirmed</span>
       </div>
-      <div class="pop-proof"><span class="pp-av" aria-hidden="true"><i style="--c:#0A84FF">GP</i><i style="--c:#FF9500">EM</i><i style="--c:#34C759">SO</i><i style="--c:#AF52DE">BR</i></span><span><b>90+ brands</b> growing with us<br><small>★★★★★ rated by our clients</small></span></div>
+      <ol class="pj-steps" aria-hidden="true"><li><i></i>Ad</li><li><i></i>Enquiry</li><li><i></i>WhatsApp</li><li><i></i>Site visit</li></ol>
+      <p class="pj-foot">{{ site.phone_display }} · Spaze I Tech Park, Sector 49, Gurugram</p>
     </div>
     <form class="pop-form" id="popForm" novalidate>
       <h3 id="pop-t">Get your free audit</h3>
@@ -27,7 +32,9 @@
       <label for="p-email"><span class="pfl">Email <em>Optional</em></span><input id="p-email" type="email" autocomplete="email" placeholder="you@company.com"></label>
       <div class="pg-wrap" hidden><div class="pg-chips" id="pgChips"></div></div>
       <label for="p-goal" class="pg-sel"><span class="pfl">Service needed</span>
-        <select id="p-goal"><option>Real Estate Marketing</option><option>Free growth audit</option><option>Search Engine Optimization</option><option>Social Media Optimization</option><option>Google / Meta Ads (PPC)</option><option>WhatsApp &amp; SMS Marketing</option><option>Content Marketing</option><option>LeadsPulse CRM demo</option><option>Website Design &amp; Development</option><option>Graphic Designing</option><option>E-Commerce Solution</option><option>Website Maintenance</option><option>Not sure yet</option></select></label>
+        <select id="p-goal"><option>Real Estate Marketing</option><option>Free growth audit</option><option>Search Engine Optimization</option><option>Social Media Optimization</option><option>Google / Meta Ads (PPC)</option><option>WhatsApp &amp; SMS Marketing</option><option>Content Marketing</option><option>LeadsPulse CRM demo</option><option>Conversions API (CAPI) setup</option><option>Website Design &amp; Development</option><option>Graphic Designing</option><option>E-Commerce Solution</option><option>Website Maintenance</option><option value="other">Other (I will describe it)</option></select></label>
+      <label for="p-other" class="pf-other" hidden><span class="pfl">Your service</span><input id="p-other" maxlength="110" placeholder="e.g. Brochure design, NRI campaign"></label>
+      <label for="p-msg"><span class="pfl">Message <em>Optional</em></span><textarea id="p-msg" rows="2" maxlength="1500" placeholder="Tell us about your project or goals"></textarea></label>
       <p class="err" id="p-err" role="alert"></p>
       <button class="btn btn-green" type="submit" id="pop-b">Send my enquiry
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>

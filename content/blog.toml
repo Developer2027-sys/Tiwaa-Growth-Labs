@@ -1,4 +1,4 @@
-# Blog posts, shared by the home "Insights" section (first three) and the /blog page.
+# Blog posts for the home "Insights" section (first three). The /blog page itself is in templates/sections/blog/.
 #
 # Until full articles are published, each card opens the lead popup offering the
 # guide (cta). When an article page exists, add  url = "/blog/your-article"  to the
@@ -7,59 +7,40 @@
 [[posts]]
 tag     = "Real Estate"
 cat     = "Lead generation"
-mins    = 6
+mins    = 9
 g1      = "#0A84FF"
 g2      = "#5E5CE6"
 title   = "How to cut cost per site visit with Meta lead forms"
-excerpt = "The form questions, targeting and follow-up timing we use to bring real buyers to project sites."
+excerpt = "The form type, three qualifying questions and five-minute follow-up that bring buyers who visit, not cheap leads."
 cta     = "Send me the real estate lead playbook"
+url     = "/blog/cut-cost-per-site-visit-meta-lead-forms"
 
 [[posts]]
-tag     = "SEO"
-cat     = "Local SEO"
+tag     = "Launch"
+cat     = "Launch marketing"
 mins    = 5
 g1      = "#34C759"
 g2      = "#30B0C7"
-title   = "The Google Business Profile checklist for clinics and stores"
-excerpt = "Categories, photos, reviews and posts: the small fixes that move you into the local map pack."
-cta     = "Send me the local SEO checklist"
+title   = "How to build an EOI list before your project launch"
+excerpt = "Teaser films, EOI pages and priority-allotment offers that build demand before launch day."
+cta     = "Send me the pre-launch playbook"
 
 [[posts]]
 tag     = "WhatsApp"
-cat     = "Automation"
+cat     = "WhatsApp & CRM"
 mins    = 4
 g1      = "#FF9500"
 g2      = "#FF2D55"
-title   = "Reply in under 60 seconds: setting up WhatsApp auto-replies that convert"
-excerpt = "Welcome flows, quick replies and hand-off rules that keep new leads talking to you."
+title   = "Reply in under 60 seconds: WhatsApp auto-replies for property enquiries"
+excerpt = "The messages, timings and reminders that turn new enquiries into booked visits."
 cta     = "Send me the WhatsApp automation guide"
 
 [[posts]]
-tag     = "Google Ads"
-cat     = "Paid search"
-mins    = 7
-g1      = "#5E5CE6"
-g2      = "#AF52DE"
-title   = "Negative keywords: the quiet fix for wasted Google Ads spend"
-excerpt = "How we read search term reports every week and stop paying for clicks that never convert."
-cta     = "Send me the Google Ads negative keyword list"
-
-[[posts]]
-tag     = "Website"
-cat     = "Conversion"
+tag     = "Content"
+cat     = "Films & content"
 mins    = 5
-g1      = "#30B0C7"
-g2      = "#0A84FF"
-title   = "Five landing page changes that lift enquiries without more traffic"
-excerpt = "Headline, proof, form length, speed and a clear next step, tested on real campaigns."
-cta     = "Send me the landing page checklist"
-
-[[posts]]
-tag     = "Analytics"
-cat     = "Tracking"
-mins    = 6
-g1      = "#FF2D55"
-g2      = "#FF9500"
-title   = "Know which rupee brought which customer: a simple GA4 tracking setup"
-excerpt = "Events, conversions and UTM habits that make your monthly report tie spend to revenue."
-cta     = "Send me the GA4 tracking guide"
+g1      = "#5856D6"
+g2      = "#AF52DE"
+title   = "What to show in a walkthrough film so buyers book a visit"
+excerpt = "Shot lists, length and hooks for project films and Reels that sell the home, not the drone."
+cta     = "Send me the walkthrough film guide"

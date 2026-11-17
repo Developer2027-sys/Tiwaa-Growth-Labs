@@ -1,2 +1,3 @@
-{% set trusted = ['Godrej Properties', 'Emaar', 'SOBHA', 'Brigade', 'Provident', 'Hotel RR Galaxy'] %}
-  <div class="sv-logos"><div class="wrap"><span>Trusted by</span><ul>{% for name in trusted %}<li>{{ client_logo(name) }}{{ name }}</li>{% endfor %}</ul></div></div>
+{# Trusted-by strip: real client logos from content/clients.toml via client_logo(). Pairs are [clients.toml name, label shown]. #}
+{% set trusted = [['Godrej Properties', 'Godrej Properties'], ['Emaar', 'Emaar'], ['SOBHA', 'SOBHA'], ['Brigade', 'Brigade'], ['Provident', 'Provident'], ['Hotel RR Galaxy', 'Hotel RR Galaxy'], ['My Wear Hub', 'MyWear'], ['ShipKaro', 'ShipKaro']] %}
+  <div class="sv-logos"><div class="wrap"><span>Trusted by</span><ul>{% for c in trusted %}<li>{{ client_logo(c[0]) }}{{ c[1] }}</li>{% endfor %}</ul></div></div>

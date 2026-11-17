@@ -22,8 +22,11 @@ pub fn routes() -> &'static [(&'static str, &'static str)] {
         ("/services/website-design", "website-design"),
         ("/services/content-video", "content-video"),
         ("/services/analytics-crm", "analytics-crm"),
+        ("/services/conversions-api", "conversions-api"),
         ("/blog", "blog"),
+        ("/blog/cut-cost-per-site-visit-meta-lead-forms", "blog-meta-lead-forms"),
         ("/about", "about"),
+        ("/our-work", "work"),
         ("/contact", "contact"),
         ("/industries/real-estate", "real-estate"),
     ]
@@ -35,7 +38,13 @@ pub fn redirects() -> &'static [(&'static str, &'static str)] {
     &[
         ("/home", "/"),
         ("/blogs", "/blog"),
+        ("/blog.html", "/blog"),
+        ("/blog-cut-cost-per-site-visit-meta-lead-forms.html", "/blog/cut-cost-per-site-visit-meta-lead-forms"),
         ("/about-us", "/about"),
+        ("/our-work.html", "/our-work"),
+        ("/work", "/our-work"),
+        ("/portfolio", "/our-work"),
+        ("/case-studies", "/our-work"),
         ("/about.html", "/about"),
         ("/about-us.html", "/about"),
         ("/contact-us", "/contact"),
@@ -68,6 +77,19 @@ pub fn redirects() -> &'static [(&'static str, &'static str)] {
         ("/analytics-crm.html", "/services/analytics-crm"),
         ("/analytics-crm", "/services/analytics-crm"),
         ("/services/analytics", "/services/analytics-crm"),
+        ("/services.html", "/services"),
+        ("/service", "/services"),
+        ("/our-services", "/services"),
+        // Conversions API (CAPI) page: artifact file name, short and common alternative URLs
+        ("/conversions-api.html", "/services/conversions-api"),
+        ("/conversions-api", "/services/conversions-api"),
+        ("/conversion-api", "/services/conversions-api"),
+        ("/capi", "/services/conversions-api"),
+        ("/meta-capi", "/services/conversions-api"),
+        ("/meta-conversions-api", "/services/conversions-api"),
+        ("/services/capi", "/services/conversions-api"),
+        ("/services/conversion-api", "/services/conversions-api"),
+        ("/services/meta-conversions-api", "/services/conversions-api"),
     ]
 }
 
@@ -137,7 +159,7 @@ fn service_page(p: ServicePage) -> Page {
         css: vec!["css/services.css", "css/service-page.css"],
         js: vec![format!("js/service/{}.js", p.id)],
         head_extra: HeadExtra::File(format!("layout/ld/{}.html", p.id)),
-        platform_icons: true,
+        platform_icons: false,
         contact_form: Some(CfConfig { service: Some(p.service), ..CfConfig::default() }),
         sections: p.sections,
         ..Page::default()
@@ -199,12 +221,13 @@ pub fn page(id: &str) -> Option<Page> {
         "services" => Page {
             id: "services",
             title: "Digital Marketing Services | Tiwaa Growth Labs",
-            description: "SEO, Google Ads, Meta and Instagram ads, social media, WhatsApp automation, websites, content and analytics from Tiwaa Growth Labs, a digital marketing agency in Gurugram. Get a free growth audit.",
+            description: "SEO, Google Ads, Meta and Instagram ads, social media, WhatsApp automation, websites, content, analytics and Conversions API from Tiwaa Growth Labs, a digital marketing agency in Gurugram. Get a free growth audit.",
             path: "/services",
-            css: vec!["css/services.css"],
+            // Hub page only; css/services.css belongs to the service detail pages.
+            css: vec!["css/services-hub.css"],
             js: vec!["js/services.js".into()],
-            platform_icons: true,
-            // Service list + breadcrumb structured data.
+            platform_icons: false,
+            // Service list + breadcrumb + FAQ structured data.
             head_extra: HeadExtra::File("layout/services-ld.html".into()),
             sections: vec![
                 s("services/01-sv-hero"),
@@ -212,7 +235,8 @@ pub fn page(id: &str) -> Option<Page> {
                 s("services/03-sv-logos"),
                 s("services/04-offer"),            // filterable service cards
                 s("services/05-quiz"),             // 3-question recommender
-                s("services/06-service-details"),  // 8 pinned service panels
+                s("services/06-service-details"),  // 9 pinned service panels
+                s("services/07-bundles"),          // popular service combinations
                 s("services/08-why-choose"),
                 s("services/09-different"),
                 s("services/10-compare"),
@@ -225,16 +249,30 @@ pub fn page(id: &str) -> Option<Page> {
         },
         "blog" => Page {
             id: "blog",
-            title: "Blog & Marketing Insights | Tiwaa Growth Labs",
-            description: "Practical SEO, Google Ads, Meta ads, WhatsApp automation and analytics playbooks from the Tiwaa Growth Labs team in Gurugram.",
+            title: "Real Estate Marketing Blog: Lead Generation & Launch Playbooks | Tiwaa",
+            description: "Practical real estate marketing guides for developers and channel partners: Meta and Google lead ads, launch campaigns, WhatsApp follow-up and cost per site visit.",
+            keywords: "real estate marketing blog, real estate lead generation tips, property marketing guides, meta ads for real estate, real estate launch marketing",
             path: "/blog",
-            contact_form: Some(CfConfig {
-                title: Some(r#"Want these ideas <span class="gt">applied to your business?</span>"#),
-                lead: Some("Tell us what you are working on and a strategist will send you a short, specific plan."),
-                cta: Some("Send me a plan"),
-                ..CfConfig::default()
-            }),
+            css: vec!["css/blog.css"],
+            js: vec!["js/blog.js".into()],
+            // Blog + breadcrumb structured data
+            head_extra: HeadExtra::File("layout/ld/blog.html".into()),
             sections: vec![s("blog/01-hero"), s("blog/02-list")],
+            ..Page::default()
+        },
+        // Blog article. To add another: copy this entry and blog/posts/meta-lead-forms.html,
+        // add the route above and the post (with url) to content/blog.toml.
+        "blog-meta-lead-forms" => Page {
+            id: "blog-meta-lead-forms",
+            title: "How to Cut Cost per Site Visit with Meta Lead Forms | Tiwaa",
+            description: "Real estate guide to Meta lead forms that bring site visits, not cheap leads: Higher intent forms, 3 qualifying questions, 5-minute follow-up and a free calculator.",
+            keywords: "cost per site visit, meta lead forms real estate, facebook lead ads for real estate, real estate lead generation gurugram, property leads to site visits, real estate marketing agency",
+            path: "/blog/cut-cost-per-site-visit-meta-lead-forms",
+            css: vec!["css/blog.css"],
+            js: vec!["js/blog-post.js".into()],
+            // BlogPosting, breadcrumb and FAQ structured data
+            head_extra: HeadExtra::File("layout/ld/blog-meta-lead-forms.html".into()),
+            sections: vec![s("blog/posts/meta-lead-forms"), s("blog/posts/related")],
             ..Page::default()
         },
         "about" => Page {
@@ -260,6 +298,24 @@ pub fn page(id: &str) -> Option<Page> {
                 s("shared/reviews"),
                 s("about/07-faq"),
                 s("about/08-office"),    // map + message form
+            ],
+            ..Page::default()
+        },
+        "work" => Page {
+            id: "work",
+            title: "Our Work | Real Estate Marketing Case Studies | Tiwaa Growth Labs",
+            og_title: Some("Our Work | Tiwaa Growth Labs"),
+            description: "Real estate marketing case studies from Tiwaa Growth Labs: launch campaigns, walkthrough films, lead ads, landing pages and LeadsPulse CRM for developers and channel partners across Delhi NCR.",
+            keywords: "real estate marketing case studies, real estate campaign results, property launch campaign, tiwaa growth labs portfolio, real estate lead generation results",
+            path: "/our-work",
+            css: vec!["css/work.css"],
+            js: vec!["js/work.js".into()],
+            sections: vec![
+                s("work/01-hero"),        // featured case study + counters (opens .wk)
+                s("work/02-cases"),       // filterable case study cards
+                s("work/03-brands"),      // client logos grid
+                sv("shared/reviews", json!({ "reviews_lead": "Developers, builders and channel partners on working with us." })),
+                s("work/04-case-dialog"), // case study dialog + data (closes .wk)
             ],
             ..Page::default()
         },
@@ -310,6 +366,34 @@ pub fn page(id: &str) -> Option<Page> {
                 s("industry/real-estate/06-case-study"),    // before/after toggle + charts
                 s("shared/reviews"),
                 s("industry/real-estate/07-faq"),           // closes .rp
+            ],
+            ..Page::default()
+        },
+        // Conversions API (CAPI) service page. Sections in templates/sections/service/conversions-api/.
+        "conversions-api" => Page {
+            id: "conversions-api",
+            title: "Conversions API (CAPI) Setup for Meta & Google Ads | Tiwaa Growth Labs",
+            description: "Meta Conversions API (CAPI) and Google enhanced conversions setup in Gurugram: server-side tracking that sends leads, site visits and bookings from your CRM back to your ads.",
+            keywords: "conversions api setup, meta capi setup india, facebook conversions api agency, server side tracking gurugram, google enhanced conversions, capi for real estate, offline conversions meta",
+            path: "/services/conversions-api",
+            css: vec!["css/services.css", "css/service-page.css", "css/conversions-api.css"],
+            js: vec!["js/service/conversions-api.js".into()],
+            head_extra: HeadExtra::File("layout/ld/conversions-api.html".into()),
+            contact_form: Some(CfConfig { service: Some("Conversions API (CAPI) setup"), ..CfConfig::default() }),
+            sections: vec![
+                s("service/conversions-api/01-hero"),
+                s("service/conversions-api/02-stats"),
+                s("service/conversions-api/03-what-is-capi"),
+                s("service/conversions-api/04-problem"),
+                s("service/conversions-api/05-pixel-vs-capi"),
+                s("service/conversions-api/06-tools"),            // works with your tools (sources -> CAPI server -> ads)
+                s("service/conversions-api/07-sub-services"),
+                s("service/conversions-api/08-events"),
+                s("service/conversions-api/09-process"),
+                s("service/conversions-api/10-monthly"),
+                s("shared/reviews"),
+                s("service/conversions-api/11-faq"),
+                s("service/conversions-api/12-related"),
             ],
             ..Page::default()
         },

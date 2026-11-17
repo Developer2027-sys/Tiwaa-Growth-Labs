@@ -1074,3 +1074,4 @@
 .a7-tl{gap:clamp(22px,3vw,32px)}
 @media (max-height:760px){.sv2.pin .sv2-st{min-height:330px}.sv2.pin .sv2-in{margin-top:16px}}
 .sv2-sc{padding-bottom:40px}.sv2-note{bottom:10px}
+.wy3-m.sm{font-size:clamp(1.9rem,2.8vw,2.5rem);line-height:1.05;white-space:normal}

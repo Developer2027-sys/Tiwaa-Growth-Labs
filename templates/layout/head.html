@@ -30,7 +30,8 @@
 {% endfor %}
 <script>
 /* Apply the saved light/dark choice before first paint (avoids a flash). */
-try{var m=localStorage.getItem('tgl-theme');if(m)document.documentElement.setAttribute('data-mode',m);}catch(e){}
+/* theme: the visitor's choice (theme button), else the device setting, so every page's [data-mode] styles apply */
+try{var m=null;try{m=localStorage.getItem('tgl-theme');}catch(e){}document.documentElement.setAttribute('data-mode',m||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));}catch(e){}
 window.TGL={{ tgl_json | safe }};
 </script>
 <script type="application/ld+json">{{ org_json | safe }}</script>

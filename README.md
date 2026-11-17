@@ -20,10 +20,11 @@ Home, services, eight service detail pages and the blog, built from the design a
 | Path | What it is |
 |---|---|
 | `content/site.toml` | **Phone, email, address, domain.** Edit here once and it updates everywhere |
-| `content/blog.toml` | Blog posts (home "Insights" shows the first three, `/blog` shows all) |
+| `content/blog.toml` | Blog cards on the home "Insights" section (first three) |
+| `templates/sections/blog/` | The /blog page (search, topic filters, featured article, upcoming articles) and, in `blog/posts/`, each article. Styles in `css/blog.css`; scripts `js/blog.js` (listing) and `js/blog-post.js` (articles: contents, calculator, checklist, FAQ). Structured data in `templates/layout/ld/blog*.html` |
 | `content/clients.toml` | Client names and logo files (for example the "Trusted by" strip) |
 | `templates/sections/home/`, `services/`, `blog/`, `shared/` | One file per page section (hero, ROI, FAQ, …) |
-| `templates/sections/service/<page>/` | Sections of each service detail page (`/services/seo`, `/services/google-ads`, …) |
+| `templates/sections/service/<page>/` | Sections of each service detail page (`/services/seo`, `/services/google-ads`, …, `/services/conversions-api`) |
 | `templates/layout/ld/` | Structured data (Service, FAQ, breadcrumb) for each service detail page |
 | `templates/layout/` | Page shell, head, header/navbar, footer, lead popup, mobile contact bar |
 | `crates/site/src/pages.rs` | **Pages:** routes, titles, meta tags, the order of sections, contact form settings |
@@ -34,6 +35,7 @@ Home, services, eight service detail pages and the blog, built from the design a
 | `worker/src/lib.rs` | **Cloudflare Worker:** `/api/leads` on D1, everything else from `public/` |
 | `assets/` | CSS, JS, logos and images. Your logo files go in `assets/images/`. `css/service-page.css` and `js/service/<page>.js` are used by the service detail pages |
 | `templates/sections/contact/` | The /contact page (form, office + map, clients, FAQ). Styles in `css/contact.css`, script in `js/contact.js` (the form posts to the same lead API, `form: "contact"`). Structured data in `templates/layout/contact-ld.html` |
+| `templates/sections/work/` | The /our-work page (featured case study, filterable case study cards with a pop-up, client logos, reviews). The page wrapper `<div class="wk">` opens in 01-hero and closes in 04-case-dialog, which also holds the case study data (JSON) read by `js/work.js`. Styles in `css/work.css` |
 | `templates/sections/industry/real-estate/` | The /industries/real-estate page (dashboard hero, how it works, lead-to-visit flow, services hub, project types, case study, FAQ; wrapped in `<div class="rp">`, opened in 01-hero and closed in 07-faq). Styles in `css/real-estate.css` (loaded after main.css only), script in `js/service/real-estate.js`, structured data in `templates/layout/ld/real-estate.html`. Its contact form pre-selects "Real Estate Marketing" |
 | `templates/sections/shared/not-found.html` | The 404 page, shown for any unknown URL (dev server, and Cloudflare via `not_found_handling: "404-page"`). It shows the typed address, a "Did you mean" link to the closest page and a page search (`js/404.js`, `css/404.css`). When you add a page, add it to the `pages` list at the top of this template so the 404 can suggest it |
 | `migrations/` | D1 table schema |
@@ -94,7 +96,7 @@ Each lead stores the form (`hero`, `popup` or `contact`), name, phone, email, se
 - **Logo:** replace `assets/images/logo.png` (light theme) and `logo-white.png` (dark theme and footer). Adding `favicon.png` is optional.
 - **Contact details:** `content/site.toml`.
 - **Text in a section:** the matching file in `templates/sections/…`.
-- **Blog posts:** `content/blog.toml`. Until an article page exists, a card opens the lead popup offering that guide; add `url = "/blog/..."` to a post to link to its article instead.
+- **Blog:** the /blog page is `templates/sections/blog/`; home "Insights" cards come from `content/blog.toml`. To publish a new article: add its file in `templates/sections/blog/posts/`, a route and page entry in `pages.rs` (copy `blog-meta-lead-forms`), link it from `blog/02-list.html`, and add `url = "/blog/..."` to its post in `blog.toml`.
 - **Add a page:** add it to `routes()` and `page()` in `crates/site/src/pages.rs`, and put its sections in `templates/sections/<page>/`.
 - **Service detail pages:** eight pages under `/services/...` (SEO, Google Ads, Meta Ads, Social Media Marketing, WhatsApp Automation, Website Design, Content & Video, Analytics & CRM). Edit a section in `templates/sections/service/<page>/`. Titles, descriptions and keywords are in the `service_page(...)` entries in `pages.rs`. Each page's contact form pre-selects its service.
 - **Redirects:** `redirects()` in `pages.rs` (for example `/seo-services.html` → `/services/seo`). They are written to `public/_redirects` for Cloudflare and followed by the dev server.

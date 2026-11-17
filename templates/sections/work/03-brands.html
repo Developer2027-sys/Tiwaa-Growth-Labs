@@ -1,0 +1,8 @@
+  <!-- ===== BRANDS ===== -->
+  <section class="section wk-br" id="brands" aria-labelledby="br-h">
+    <div class="wrap wk-br-in">
+      <div class="wk-br-l"><span class="pill rv">Brands we work with</span><h2 class="h2 rv" id="br-h" style="--d:1">Trusted by developers <span class="gt">across India</span></h2><p class="lead rv" style="--d:2">From national developers to channel partners and townships, brands that trust us with their launches.</p><a class="btn btn-line rv" style="--d:3" href="#contact" data-cta="Plan my project launch">Work with us</a></div>
+      {%- set work_brands = [["Godrej Properties","godrej-properties.svg","#1F6FEB","Developer"],["Emaar","emaar.png","#B8860B","Developer"],["Shapoorji Pallonji","shapoorji-pallonji.png","#C8102E","Developer"],["SOBHA","sobha.png","#7A5C2E","Developer"],["Brigade","brigade.png","#E35205","Developer"],["Provident","provident.png","#00A3A1","Developer"],["Central Park","central-park.png","#2E7D32","Developer"],["Capital Avenue","capital-avenue.webp","#5856D6","Channel partner"],["Nanded City","nanded-city.png","#0E7490","Township"],["Dreamland Realtors","dreamland.webp","#FF2D55","Real estate agency"],["Hotel RR Galaxy","hotel-rr-galaxy.webp","#AF52DE","Hospitality"],["ShipKaro","shipkaro.webp","#007AFF","B2B"]] %}
+      <ul class="wk-bg">{% for b in work_brands %}<li class="wk-b rv" style="--bc:{{ b[2] }};--d:{{ loop.index0 % 4 }}"><span class="b-mk b-img{% if b[1] in ['capital-avenue.webp', 'dreamland.webp'] %} b-dark{% endif %}"><img src="{{ asset('images/brands/' ~ b[1]) }}" alt="" width="44" height="44" loading="lazy" decoding="async"></span><span><b>{{ b[0] }}</b><small>{{ b[3] }}</small></span></li>{% endfor %}</ul>
+    </div>
+  </section>

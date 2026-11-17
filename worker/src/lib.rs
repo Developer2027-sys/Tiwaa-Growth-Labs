@@ -107,13 +107,22 @@ async fn save(env: &Env, d: &Lead, ip: &str, country: &str, ua: &str) -> Result<
     ]
     .iter()
     .map(|s| s.as_str().into())
-    .chain([ip.into(), country.into(), ua.into(), d.email.as_str().into(), d.message.as_str().into(), d.extra.as_str().into()])
+    .chain([ip.into(), country.into(), ua.into()])
+    .chain(
+        [
+            &d.email, &d.message, &d.extra, &d.utm_source, &d.utm_medium, &d.utm_campaign, &d.utm_term, &d.utm_content,
+            &d.gclid, &d.fbclid, &d.msclkid, &d.landing_page, &d.landing_referrer, &d.first_touch,
+        ]
+        .iter()
+        .map(|s| s.as_str().into()),
+    )
     .collect();
 
     let res = db
         .prepare(
-            "INSERT INTO leads (form, name, phone, service, website, cta, slot, page, referrer, ip, country, user_agent, email, message, extra)
-             VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13, ?14, ?15)",
+            "INSERT INTO leads (form, name, phone, service, website, cta, slot, page, referrer, ip, country, user_agent, email, message, extra,
+               utm_source, utm_medium, utm_campaign, utm_term, utm_content, gclid, fbclid, msclkid, landing_page, landing_referrer, first_touch)
+             VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13, ?14, ?15, ?16, ?17, ?18, ?19, ?20, ?21, ?22, ?23, ?24, ?25, ?26)",
         )
         .bind(&args)?
         .run()

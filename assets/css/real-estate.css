@@ -421,3 +421,8 @@ main #contact .enq-form textarea{min-height:64px;height:64px}
 main #contact{padding-bottom:clamp(140px,15svh,160px)!important}
 
 nav.main a.on-page{color:var(--x-ink)}
+
+/* Responsive: "how it works" panel. Let its column shrink to the screen and let the
+   "Running on" platform chips wrap (the panel was 14px wider than a 360px phone). */
+.hw-p{grid-template-columns:minmax(0,1fr)}
+@media (max-width:640px){.hv-side{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px}}

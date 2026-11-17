@@ -11,7 +11,8 @@
     "dev:worker": "wrangler d1 migrations apply tiwaa-leads --local && wrangler dev",
     "deploy": "wrangler deploy",
     "db:migrate": "wrangler d1 migrations apply tiwaa-leads --remote",
-    "db:leads": "wrangler d1 execute tiwaa-leads --remote --command \"SELECT id, created_at, form, name, phone, email, service, page FROM leads ORDER BY id DESC LIMIT 50\""
+    "db:leads": "wrangler d1 execute tiwaa-leads --remote --command \"SELECT id, created_at, form, name, phone, email, service, page, utm_source, utm_medium, utm_campaign FROM leads ORDER BY id DESC LIMIT 50\"",
+    "db:utm": "wrangler d1 execute tiwaa-leads --remote --command \"SELECT LOWER(COALESCE(NULLIF(utm_source,''),'(direct)')) AS source, LOWER(COALESCE(NULLIF(utm_medium,''),'(none)')) AS medium, COALESCE(NULLIF(utm_campaign,''),'-') AS campaign, COUNT(*) AS leads, SUM(status='won') AS won FROM leads WHERE created_at > strftime('%Y-%m-%dT%H:%M:%fZ','now','-30 days') GROUP BY 1,2,3 ORDER BY leads DESC\""
   },
   "devDependencies": {
     "wrangler": "^4.40.0"

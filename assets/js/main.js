@@ -21,13 +21,17 @@
       var id=a.getAttribute('href'); if(id.length<2)return; if(id==='#contact'&&!a.closest('nav.main')&&!a.closest('footer'))return;
       var t=id==='#top'?document.body:document.querySelector(id); if(!t)return;
       e.preventDefault(); if(window.__pipeFinish&&id!=='#top'&&id!=='#about'&&id!=='#services')window.__pipeFinish();
-      lenis.scrollTo(id==='#top'?0:t,{offset:-(document.querySelector('header.site').offsetHeight+10),duration:1.4});
+      var sm=document.getElementById('sxMenu'),smh=sm&&getComputedStyle(sm).position==='sticky'?sm.offsetHeight:0; /* service pages: also clear the sticky section menu */
+      lenis.scrollTo(id==='#top'?0:t,{offset:-(document.querySelector('header.site').offsetHeight+smh+10),duration:1.4});
     });
   }
 
   // Theme toggle
   var dm=matchMedia('(prefers-color-scheme: dark)');
   try{var saved=localStorage.getItem('tgl-theme'); if(saved) root.setAttribute('data-mode',saved);}catch(e){}
+  /* no theme picked: follow the device setting live */
+  var follow=function(){var s=null;try{s=localStorage.getItem('tgl-theme');}catch(e){}if(!s){root.setAttribute('data-mode',dm.matches?'dark':'light');if(window.__drawRoi)window.__drawRoi();if(window.__reachTheme)window.__reachTheme();}};
+  if(dm.addEventListener)dm.addEventListener('change',follow);else if(dm.addListener)dm.addListener(follow);
   function curMode(){var m=root.getAttribute('data-mode')||root.getAttribute('data-theme');return m==='dark'||m==='light'?m:(dm.matches?'dark':'light');}
   $('themeBtn').addEventListener('click',function(){
     var next=curMode()==='dark'?'light':'dark';
@@ -464,11 +468,6 @@
 
 
   // Floating contact button: hover on desktop, tap on touch
-  var fab=document.getElementById('fab'),fabMain=document.getElementById('fabMain');
-  fabMain.addEventListener('click',function(e){e.stopPropagation();var o=fab.classList.toggle('open');fabMain.setAttribute('aria-expanded',o);});
-  fab.addEventListener('mouseleave',function(){fab.classList.remove('open');fabMain.setAttribute('aria-expanded','false');});
-  fab.addEventListener('click',function(e){if(e.target.closest('.fab-item'))setTimeout(function(){fab.classList.remove('open');},50);});
-  document.addEventListener('click',function(e){if(!fab.contains(e.target))fab.classList.remove('open');});
 
 
   // ===== Popup: opens once on scroll past 50px, and from every CTA button =====
@@ -492,10 +491,17 @@
     if(/whatsapp|sms/.test(t))return 'wa'; if(/content/.test(t))return 'content'; if(/real estate|property/.test(t))return 're';
     if(/graphic|designer/.test(t))return 'gfx'; if(/e-commerce|store/.test(t))return 'ecom'; if(/maintenance|care plan/.test(t))return 'care';
     if(/website/.test(t))return 'web'; return null;}
+  /* 'Other' service: show a text box for the visitor's own service; the scene on the left names the chosen service */
+  var popO=document.getElementById('p-other'),popOL=popO.closest('label');
+  function syncOther(){var other=popG.value==='other';popOL.hidden=!other;if(!other)popO.value='';}
+  popG.addEventListener('change',function(){syncOther();if(popG.value==='other')popO.focus();});
+  popO.addEventListener('input',syncOther);
+  document.getElementById('popForm').addEventListener('reset',function(){setTimeout(syncOther,0);});
   function fillPop(cfg){
-    popEb.textContent=cfg.eb; popH.textContent=cfg.h; popT.textContent='Send us an enquiry'; popS.textContent='Fill in your details and our team will call you within 24 hours.'; popB.innerHTML='Send enquiry '+ARROW;
+    popEb.textContent=cfg.eb; popH.textContent=cfg.h; popT.textContent=cfg.t||'Send us an enquiry'; popS.textContent=cfg.s||'Fill in your details and our team will call you within 24 hours.'; popB.innerHTML=(cfg.b||'Send enquiry')+' '+ARROW;
     popL.innerHTML=''; cfg.l.forEach(function(x){var li=document.createElement('li');li.textContent=x;popL.appendChild(li);});
     [].forEach.call(popG.options,function(o){if(o.text===cfg.g)popG.value=o.value;});
+    syncOther();
     document.getElementById('p-ok').hidden=true; document.getElementById('p-err').textContent='';
   }
   var DEFAULT={eb:'Free growth audit',h:'Find out where your next 100 leads are hiding',t:'Get your free audit',s:'Takes 30 seconds. Our strategist replies within 24 hours.',
@@ -546,7 +552,8 @@
     if(!/^[+\d][\d\s-]{7,}$/.test(ph)){er.textContent='Please enter a valid phone number, for example +91 98765 43210.';return;}
     er.textContent='';
     var em=document.getElementById('p-email');if(em&&em.value.trim()&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())){er.textContent='Please check your email address.';return;}
-    TGLLeads.submit({form:'popup',name:n,phone:ph,service:document.getElementById('p-goal').value,email:document.getElementById('p-email').value.trim(),cta:document.getElementById('pop-t').textContent.trim(),hp:document.getElementById('p-hp').value},{button:document.getElementById('pop-b'),err:er,ok:document.getElementById('p-ok'),form:this});});
+    var svc=popG.value;if(svc==='other'){svc=popO.value.trim();if(!svc){er.textContent='Please tell us which service you need.';popO.focus();return;}}
+    TGLLeads.submit({form:'popup',name:n,phone:ph,service:svc,email:document.getElementById('p-email').value.trim(),message:document.getElementById('p-msg').value.trim(),cta:document.getElementById('pop-t').textContent.trim(),hp:document.getElementById('p-hp').value},{button:document.getElementById('pop-b'),err:er,ok:document.getElementById('p-ok'),form:this});});
 
 })();
 ;
@@ -782,7 +789,6 @@ if('IntersectionObserver' in window)new IntersectionObserver(function(e){vis=e[0
   if(peek){var closed=false;try{closed=sessionStorage.getItem('tgl-peek')==='1';}catch(e){}
     $('wpX').addEventListener('click',function(){peek.classList.remove('on');try{sessionStorage.setItem('tgl-peek','1');}catch(e){}});
     if(!closed)setTimeout(function(){if(pop&&!pop.hidden)return;peek.classList.add('on');setTimeout(function(){peek.classList.remove('on');},14000);},15000);
-    var fm=$('fabMain');if(fm)fm.addEventListener('click',function(){peek.classList.remove('on');});
   }
   /* before -> after metric on case cards */
   var BA=[['Cost per lead','₹1,180','₹410'],['Monthly bookings','64','98'],['Organic leads','40','132'],['ROAS','2.1x','4.4x'],['Site visits','28','90'],['Demo requests','12','37']];

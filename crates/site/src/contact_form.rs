@@ -25,6 +25,7 @@ const SERVICES: &[&str] = &[
     "Website Design & Development",
     "Content Marketing",
     "Analytics, CRM & Reporting",
+    "Conversions API (CAPI) setup",
     "Not sure yet",
 ];
 

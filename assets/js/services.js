@@ -1,4 +1,4 @@
-/* Tiwaa Growth Labs: services page interactions */
+/* Tiwaa Growth Labs: services hub page interactions */
 (function(){
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* index scroll-spy */
@@ -38,18 +38,18 @@
   /* quiz */
   var qz=document.getElementById('qz');
   if(qz){var A={},steps=[].slice.call(qz.querySelectorAll('.qz-step')),prog=[].slice.call(qz.querySelectorAll('.qz-prog li')),
-    INFO={'seo':['SEO Services','Free, compounding traffic'],'google-ads':['Google Ads (PPC)','High-intent leads fast'],'meta-ads':['Meta & Instagram Ads','Leads and reach at scale'],'social-media':['Social Media Marketing','Visibility and trust'],'whatsapp':['WhatsApp Automation','Reply in under 60 seconds'],'website':['Website & Landing Pages','Turn visits into enquiries'],'content':['Content & Video','Creative that stops the scroll'],'analytics':['Analytics & CRM','Track every lead to revenue']};
+    INFO={'seo':['SEO Services','Free, compounding traffic'],'google-ads':['Google Ads (PPC)','High-intent leads fast'],'meta-ads':['Meta & Instagram Ads','Leads and reach at scale'],'social-media':['Social Media Marketing','Visibility and trust'],'whatsapp':['WhatsApp Automation','Reply in under 60 seconds'],'website':['Website & Landing Pages','Turn visits into enquiries'],'content':['Content & Video','Creative that stops the scroll'],'analytics':['Analytics & CRM','Track every lead to revenue'],'capi':['Conversions API (CAPI)','Ads that learn from site visits']};
     function show(n){steps.forEach(function(s,i){s.classList.toggle('on',i===n);});prog.forEach(function(p,i){p.classList.toggle('on',i<=Math.min(n,2));});}
     function rec(){var g=A.goal,b=+A.bud,biz=A.biz,r=[];
       if(g==='lead')r=['google-ads','meta-ads','whatsapp'];else if(g==='sell')r=['google-ads','website','meta-ads'];else if(g==='brand')r=['social-media','content','seo'];else r=['whatsapp','analytics','website'];
       if(biz==='local'&&r.indexOf('seo')<0)r[2]='seo';if(biz==='b2b'&&g==='lead')r[1]='seo';
-      if(b>=2&&r.indexOf('analytics')<0)r.push('analytics');if(b>=3&&r.indexOf('seo')<0)r.push('seo');
+      if(b>=2&&r.indexOf('analytics')<0)r.push('analytics');if(b>=2&&(g==='lead'||g==='sell')&&r.indexOf('capi')<0)r.push('capi');if(b>=3&&r.indexOf('seo')<0)r.push('seo');
       document.getElementById('qzTitle').textContent=b>=3?'A full-funnel growth plan':b>=2?'A multi-channel growth plan':'A focused starter plan';
-      document.getElementById('qzRecs').innerHTML=r.map(function(id,i){var sec=document.getElementById(id),ic=sec?sec.querySelector('.svd-eb .ni').innerHTML:'',c=sec?sec.style.getPropertyValue('--c'):'';
-        return '<a class="qz-rec" href="#'+id+'" style="--c:'+c+';animation-delay:'+(i*80)+'ms"><span class="ni">'+ic+'</span><span><b>'+INFO[id][0]+'</b><small>'+INFO[id][1]+'</small></span><em>See details →</em></a>';}).join('');
+      document.getElementById('qzRecs').innerHTML=r.map(function(id,i){var sec=document.getElementById(id),ni=sec?sec.querySelector('.svd-eb .ni'):null,ic=ni?ni.innerHTML:'',nc=ni?ni.className:'ni',c=sec?sec.style.getPropertyValue('--c'):'';
+        return '<a class="qz-rec" href="#'+id+'" style="--c:'+c+';animation-delay:'+(i*80)+'ms"><span class="'+nc+'">'+ic+'</span><span><b>'+INFO[id][0]+'</b><small>'+INFO[id][1]+'</small></span><em>See details →</em></a>';}).join('');
       document.getElementById('qzCta').dataset.cta='Get my plan: '+r.map(function(id){return INFO[id][0];}).slice(0,3).join(', ');}
     steps.forEach(function(s,i){var o=s.querySelector('.qz-opts');if(o)o.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;A[s.dataset.q]=b.dataset.v;if(i===2)rec();show(i+1);});});
-    document.getElementById('qzAgain').addEventListener('click',function(){A={};show(0);});}
+    var qa=document.getElementById('qzAgain');if(qa)qa.addEventListener('click',function(){A={};show(0);});}
   /* sticky audit button */
   var fb=document.createElement('a');fb.className='sv-float';fb.href='#contact';fb.dataset.cta='Get a Free Growth Audit';fb.innerHTML='<i></i>Get a free audit';document.body.appendChild(fb);
   var hero=document.querySelector('.sv-hero'),ct=document.getElementById('contact');
@@ -59,5 +59,5 @@
   var fq=document.getElementById('sFaq');
   if(fq)[].forEach.call(fq.querySelectorAll('details'),function(d){d.addEventListener('toggle',function(){if(d.open)[].forEach.call(fq.querySelectorAll('details[open]'),function(o){if(o!==d)o.open=false;});});});
   /* open the right service when arriving with #hash */
-  if(location.hash){var t=document.querySelector(location.hash);if(t)setTimeout(function(){var y=t.getBoundingClientRect().top+scrollY-120;if(window.__lenis)window.__lenis.scrollTo(y,{immediate:true});else scrollTo(0,y);},300);}
+  if(location.hash){var t=null;try{t=document.querySelector(location.hash);}catch(e){}if(t)setTimeout(function(){var y=t.getBoundingClientRect().top+scrollY-120;if(window.__lenis)window.__lenis.scrollTo(y,{immediate:true});else scrollTo(0,y);},300);}
 })();

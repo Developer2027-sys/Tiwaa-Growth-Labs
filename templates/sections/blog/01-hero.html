@@ -1,7 +1,21 @@
-  <section class="bg-hero" aria-labelledby="blog-h">
-    <div class="wrap">
-      <span class="pill rv">Blog &amp; Insights</span>
-      <h1 class="rv" id="blog-h" style="--d:1">Marketing ideas <span class="gt">you can use today</span></h1>
-      <p class="lead rv" style="--d:2">Playbooks from the campaigns we run every week: lead generation, local SEO, paid ads, WhatsApp and tracking. No fluff, just what works.</p>
+{# /blog page. Opens the wrapper <div class="bl"> (closed in blog/02-list.html). Styles: css/blog.css, script: js/blog.js. #}
+<div class="bl">
+  <section class="bl-hero" aria-labelledby="blh">
+    <div class="bl-hbg" aria-hidden="true"><i></i><i></i></div>
+    <div class="wrap bl-hero-in">
+      <nav class="bp-crumb rv" aria-label="Breadcrumb"><a href="{{ url('/') }}">Home</a><span>/</span><b>Blog</b></nav>
+      <span class="pill rv">Blog &amp; insights</span>
+      <h1 class="bl-h1 rv" id="blh" style="--d:1">Real estate marketing, <span class="gt">explained simply.</span></h1>
+      <p class="lead rv" style="--d:2">Playbooks from the launches we run every week: lead ads, walkthrough films, project pages and follow-up that turns enquiries into site visits.</p>
+      <div class="bl-tools rv" style="--d:3">
+        <label class="bl-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span class="sr">Search articles</span><input type="search" id="blQ" placeholder="Search articles, e.g. site visits" autocomplete="off"></label>
+        <div class="bl-chips" role="toolbar" aria-label="Filter by topic">
+          <button type="button" class="on" data-t="all" aria-pressed="true">All</button>
+          <button type="button" data-t="lead-generation" aria-pressed="false">Lead generation</button>
+          <button type="button" data-t="launch" aria-pressed="false">Launch marketing</button>
+          <button type="button" data-t="whatsapp" aria-pressed="false">WhatsApp &amp; CRM</button>
+          <button type="button" data-t="content" aria-pressed="false">Films &amp; content</button>
+        </div>
+      </div>
     </div>
   </section>

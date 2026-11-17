@@ -1,28 +1,32 @@
-{#- All posts come from content/blog.toml. #}
-  <section class="section y-ins bg-list" aria-label="All articles">
+{#- Featured article + upcoming articles. When an article goes live, add its page (see pages.rs, "blog-*") and link it here and in content/blog.toml. #}
+  <section class="section bl-main" aria-label="Articles">
     <div class="wrap">
-      <div class="bg-filters rv" role="group" aria-label="Filter articles by topic">
-        <button type="button" class="bg-chip on" data-tag="all" aria-pressed="true">All</button>
-{% for t in blog_tags %}
-        <button type="button" class="bg-chip" data-tag="{{ t }}" aria-pressed="false">{{ t }}</button>
-{% endfor %}
+      <a class="bl-feat rv" href="{{ url('/blog/cut-cost-per-site-visit-meta-lead-forms') }}" data-t="lead-generation" data-k="meta lead forms cost per site visit facebook instagram ads real estate leads qualifying questions whatsapp follow-up">
+        <div class="bf-art" aria-hidden="true">
+          <div class="cv-ad sm"><div class="cv-h"><i>S</i><div><b>Sector 65 Residences</b><small>Sponsored · Instant form</small></div></div><div class="cv-q"><span>Your budget?</span><em>₹1.5–2 Cr</em></div><div class="cv-q"><span>Configuration?</span><em>3 BHK</em></div><span class="cv-btn">Get price sheet</span></div>
+          <div class="bf-kpi"><small>Cost per site visit</small><b><s>₹9,000</s> ₹4,700</b></div>
+          <span class="bf-badge">Featured</span>
+        </div>
+        <div class="bf-tx">
+          <small><span class="bf-cat">Lead generation</span> · 9 min read · 17 Nov 2026</small>
+          <h2>How to cut cost per site visit with Meta lead forms</h2>
+          <p>Cheap leads that never pick up? Set up Facebook and Instagram lead forms that bring buyers who visit: the right form type, three qualifying questions, five-minute follow-up and a cost per visit calculator.</p>
+          <span class="bf-go">Read the article <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </div>
+      </a>
+
+      <div class="bl-hd"><h2 class="h3">Coming soon</h2><p>New playbooks every few weeks. Get them on WhatsApp or email when they go live.</p></div>
+      <div class="bl-grid" id="blGrid">
+        <article class="bl-c soon rv" data-t="launch" data-k="eoi pre-launch expression of interest launch list"><span class="bc-art" style="--g1:#34C759;--g2:#30B0C7"><i>Launch marketing</i></span><div><small>Launch marketing · Coming soon</small><h3>How to build an EOI list before your project launch</h3><p>Teaser films, EOI pages and priority-allotment offers that build demand before launch day.</p></div></article>
+        <article class="bl-c soon rv" style="--d:1" data-t="whatsapp" data-k="whatsapp auto reply 60 seconds property enquiries crm"><span class="bc-art" style="--g1:#FF9500;--g2:#FF2D55"><i>WhatsApp &amp; CRM</i></span><div><small>WhatsApp &amp; CRM · Coming soon</small><h3>Reply in under 60 seconds: WhatsApp auto-replies for property enquiries</h3><p>The messages, timings and reminders that turn new enquiries into booked visits.</p></div></article>
+        <article class="bl-c soon rv" style="--d:2" data-t="content" data-k="walkthrough film drone reels video content"><span class="bc-art" style="--g1:#5856D6;--g2:#AF52DE"><i>Films &amp; content</i></span><div><small>Films &amp; content · Coming soon</small><h3>What to show in a walkthrough film so buyers book a visit</h3><p>Shot lists, length and hooks for project films and Reels that sell the home, not the drone.</p></div></article>
       </div>
-      <div class="ins-grid" id="blogGrid">
-{% for p in blog_posts %}
-        {{ blog_card(p, loop.index0, true) }}
-{% endfor %}
+      <p class="bl-none" id="blNone" hidden>No articles match that search yet. Try "site visits" or "WhatsApp".</p>
+
+      <div class="bl-sub rv">
+        <div><b>Get new playbooks first</b><p>Leave your details and we will send each new article when it is published. No spam.</p></div>
+        <a class="btn btn-grad" href="#contact" data-cta="Notify me about new articles">Notify me</a>
       </div>
     </div>
   </section>
-  <script>
-  (function () {
-    var chips = document.querySelectorAll('.bg-chip'), cards = document.querySelectorAll('#blogGrid .ins');
-    chips.forEach(function (c) {
-      c.addEventListener('click', function () {
-        var t = c.dataset.tag;
-        chips.forEach(function (x) { var on = x === c; x.classList.toggle('on', on); x.setAttribute('aria-pressed', on); });
-        cards.forEach(function (card) { card.hidden = t !== 'all' && card.dataset.tag !== t; });
-      });
-    });
-  })();
-  </script>
+</div>
