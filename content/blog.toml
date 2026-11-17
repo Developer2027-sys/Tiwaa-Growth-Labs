@@ -1,8 +1,7 @@
 # Blog posts for the home "Insights" section (first three). The /blog page itself is in templates/sections/blog/.
 #
-# Until full articles are published, each card opens the lead popup offering the
-# guide (cta). When an article page exists, add  url = "/blog/your-article"  to the
-# post and the card links there instead.
+# Each post links to its article page (url). A post without url opens the lead popup offering
+# the guide (cta) instead, useful for an article that is not written yet.
 
 [[posts]]
 tag     = "Real Estate"
@@ -16,31 +15,24 @@ cta     = "Send me the real estate lead playbook"
 url     = "/blog/cut-cost-per-site-visit-meta-lead-forms"
 
 [[posts]]
-tag     = "Launch"
+tag     = "Pre-launch"
 cat     = "Launch marketing"
-mins    = 5
+mins    = 8
 g1      = "#34C759"
 g2      = "#30B0C7"
 title   = "How to build an EOI list before your project launch"
-excerpt = "Teaser films, EOI pages and priority-allotment offers that build demand before launch day."
+excerpt = "When to start, what to offer, which content and ads to run, and how to turn EOIs into bookings."
 cta     = "Send me the pre-launch playbook"
+url     = "/blog/build-eoi-list-before-project-launch"
 
 [[posts]]
 tag     = "WhatsApp"
 cat     = "WhatsApp & CRM"
-mins    = 4
+mins    = 7
 g1      = "#FF9500"
 g2      = "#FF2D55"
 title   = "Reply in under 60 seconds: WhatsApp auto-replies for property enquiries"
-excerpt = "The messages, timings and reminders that turn new enquiries into booked visits."
+excerpt = "Send the brochure in seconds, qualify buyers, book site visits and hand serious buyers to sales."
 cta     = "Send me the WhatsApp automation guide"
+url     = "/blog/whatsapp-auto-replies-property-enquiries"
 
-[[posts]]
-tag     = "Content"
-cat     = "Films & content"
-mins    = 5
-g1      = "#5856D6"
-g2      = "#AF52DE"
-title   = "What to show in a walkthrough film so buyers book a visit"
-excerpt = "Shot lists, length and hooks for project films and Reels that sell the home, not the drone."
-cta     = "Send me the walkthrough film guide"

@@ -25,6 +25,8 @@ pub fn routes() -> &'static [(&'static str, &'static str)] {
         ("/services/conversions-api", "conversions-api"),
         ("/blog", "blog"),
         ("/blog/cut-cost-per-site-visit-meta-lead-forms", "blog-meta-lead-forms"),
+        ("/blog/build-eoi-list-before-project-launch", "blog-eoi-list"),
+        ("/blog/whatsapp-auto-replies-property-enquiries", "blog-whatsapp-auto-replies"),
         ("/about", "about"),
         ("/our-work", "work"),
         ("/contact", "contact"),
@@ -40,6 +42,10 @@ pub fn redirects() -> &'static [(&'static str, &'static str)] {
         ("/blogs", "/blog"),
         ("/blog.html", "/blog"),
         ("/blog-cut-cost-per-site-visit-meta-lead-forms.html", "/blog/cut-cost-per-site-visit-meta-lead-forms"),
+        ("/blog-build-eoi-list-before-project-launch.html", "/blog/build-eoi-list-before-project-launch"),
+        ("/blog/eoi-list", "/blog/build-eoi-list-before-project-launch"),
+        ("/blog-whatsapp-auto-replies-property-enquiries.html", "/blog/whatsapp-auto-replies-property-enquiries"),
+        ("/blog/whatsapp-auto-replies", "/blog/whatsapp-auto-replies-property-enquiries"),
         ("/about-us", "/about"),
         ("/our-work.html", "/our-work"),
         ("/work", "/our-work"),
@@ -260,8 +266,8 @@ pub fn page(id: &str) -> Option<Page> {
             sections: vec![s("blog/01-hero"), s("blog/02-list")],
             ..Page::default()
         },
-        // Blog article. To add another: copy this entry and blog/posts/meta-lead-forms.html,
-        // add the route above and the post (with url) to content/blog.toml.
+        // Blog articles. To add another: copy one of these entries and its blog/posts/*.html,
+        // add the route above, the post (with url) to content/blog.toml and a row in blog/posts/related.html.
         "blog-meta-lead-forms" => Page {
             id: "blog-meta-lead-forms",
             title: "How to Cut Cost per Site Visit with Meta Lead Forms | Tiwaa",
@@ -273,6 +279,30 @@ pub fn page(id: &str) -> Option<Page> {
             // BlogPosting, breadcrumb and FAQ structured data
             head_extra: HeadExtra::File("layout/ld/blog-meta-lead-forms.html".into()),
             sections: vec![s("blog/posts/meta-lead-forms"), s("blog/posts/related")],
+            ..Page::default()
+        },
+        "blog-eoi-list" => Page {
+            id: "blog-eoi-list",
+            title: "How to Build an EOI List Before Your Project Launch | Tiwaa",
+            description: "Pre-launch guide for real estate developers: when to start, the EOI offer, teaser content, EOI landing pages, lead ads and how to turn EOIs into bookings.",
+            keywords: "eoi real estate, pre launch marketing real estate, expression of interest property launch, real estate launch campaign, new project launch marketing gurugram",
+            path: "/blog/build-eoi-list-before-project-launch",
+            css: vec!["css/blog.css"],
+            js: vec!["js/blog-post.js".into()],
+            head_extra: HeadExtra::File("layout/ld/blog-eoi-list.html".into()),
+            sections: vec![s("blog/posts/eoi-list"), s("blog/posts/related")],
+            ..Page::default()
+        },
+        "blog-whatsapp-auto-replies" => Page {
+            id: "blog-whatsapp-auto-replies",
+            title: "WhatsApp Auto-Replies for Property Enquiries | Tiwaa",
+            description: "Set up WhatsApp auto-replies for real estate: send the brochure in seconds, qualify buyers, book site visits and hand serious leads to sales.",
+            keywords: "whatsapp auto reply real estate, whatsapp business api real estate, property enquiry follow up, whatsapp automation for builders, real estate lead follow up",
+            path: "/blog/whatsapp-auto-replies-property-enquiries",
+            css: vec!["css/blog.css"],
+            js: vec!["js/blog-post.js".into()],
+            head_extra: HeadExtra::File("layout/ld/blog-whatsapp-auto-replies.html".into()),
+            sections: vec![s("blog/posts/whatsapp-auto-replies"), s("blog/posts/related")],
             ..Page::default()
         },
         "about" => Page {
