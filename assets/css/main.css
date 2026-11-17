@@ -2248,3 +2248,34 @@ nav.main .nv-item.nv-mob{display:none}
   #workGrid .case-art{aspect-ratio:auto;min-height:240px}
   #workGrid .case-in{position:relative;inset:auto;min-height:240px;gap:14px}
 }
+
+/* ===== Form success: "Application submitted" card (assets/js/leads.js → done()) =====
+   Used by the popup, the home hero form and the contact form before the footer.
+   While it shows, the form's fields are hidden and the card takes their place. */
+form.is-done > :not(.ok):not(.hp){display:none!important}
+form.is-done{align-content:center}
+.ok.sx-ok{grid-column:1/-1;display:grid;justify-items:center;text-align:center;gap:10px;margin:0;padding:clamp(18px,3vw,28px) clamp(14px,2.4vw,24px);
+  border-radius:20px;border:1px solid rgba(52,199,89,.28);background:linear-gradient(180deg,rgba(52,199,89,.10),rgba(52,199,89,.02) 60%,transparent);
+  color:inherit;font-size:.92rem;line-height:1.5;animation:sxOkIn .5s cubic-bezier(.2,.8,.2,1) both}
+.sx-ok-ic{width:64px;height:64px;display:grid;place-items:center;border-radius:50%;background:#34C759;box-shadow:0 0 0 8px rgba(52,199,89,.14),0 14px 30px -10px rgba(52,199,89,.7)}
+.sx-ok-ic svg{width:40px;height:40px;fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.sx-ok-ic circle{stroke:none}
+.sx-ok-ic path{stroke-dasharray:40;stroke-dashoffset:40;animation:sxOkTick .5s .25s ease-out forwards}
+.sx-ok-t{margin-top:6px;font:700 clamp(1.25rem,2.2vw,1.5rem)/1.2 var(--f-display);letter-spacing:-.02em}
+.sx-ok-s{margin:0;max-width:34ch;opacity:.8}
+.sx-ok-s strong{font-weight:600;opacity:1}
+.sx-ok-ref{padding:4px 12px;border-radius:999px;font:600 .74rem var(--f-display);letter-spacing:.04em;background:rgba(127,127,127,.12)}
+.sx-ok-steps{list-style:none;margin:6px 0 0;padding:0;width:100%;max-width:360px;display:grid;gap:8px;text-align:left}
+.sx-ok-steps li{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:center;padding:9px 12px;border-radius:12px;background:rgba(127,127,127,.07);border:1px solid rgba(127,127,127,.12)}
+.sx-ok-steps i{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;font:700 .78rem var(--f-display);font-style:normal;color:#fff;background:linear-gradient(135deg,#0A84FF,#5E5CE6)}
+.sx-ok-steps span{font-size:.8rem;line-height:1.35;opacity:.75}
+.sx-ok-steps b{display:block;font:600 .88rem var(--f-display);opacity:1}
+.sx-ok-cta{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:8px}
+.sx-ok-wa,.sx-ok-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 20px;border-radius:999px;font:600 .9rem var(--f-display);cursor:pointer;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.sx-ok-wa{color:#fff;background:linear-gradient(135deg,#25D366,#128C7E);border:0;box-shadow:0 10px 24px -10px rgba(37,211,102,.8)}
+.sx-ok-btn{color:inherit;background:transparent;border:1px solid rgba(127,127,127,.35)}
+.sx-ok-wa:hover,.sx-ok-btn:hover{transform:translateY(-2px)}
+@keyframes sxOkIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes sxOkTick{to{stroke-dashoffset:0}}
+@media (max-width:640px){.sx-ok-cta{flex-direction:column;width:100%}.sx-ok-wa,.sx-ok-btn{width:100%}}
+@media (prefers-reduced-motion:reduce){.ok.sx-ok{animation:none}.sx-ok-ic path{animation:none;stroke-dashoffset:0}}

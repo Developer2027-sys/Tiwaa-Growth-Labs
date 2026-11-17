@@ -124,7 +124,7 @@ impl Site {
             "areaServed": ["Gurugram", "Delhi NCR", "India"],
             "knowsAbout": ["Search Engine Optimization", "Social Media Marketing", "Pay Per Click Advertising", "WhatsApp Marketing", "Content Marketing", "Website Development"],
         });
-        let tgl = json!({ "api": site.api_path, "phone": site.phone_display, "brands": "/assets/images/brands/" });
+        let tgl = json!({ "api": site.api_path, "phone": site.phone_display, "wa": site.phone_intl, "brands": "/assets/images/brands/" });
         let favicon = self.assets.exists("images/favicon.png").then(|| self.assets.url("images/favicon.png"));
 
         Ok(context! {

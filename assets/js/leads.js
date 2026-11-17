@@ -107,11 +107,9 @@
     if (btn) { if (btn.disabled) return; btn.disabled = true; btn.setAttribute('aria-busy', 'true'); }
     if (ui.ok) ui.ok.hidden = true;
 
-    send(payload).then(function () {
-      var first = (payload.name || '').split(' ')[0];
-      ui.ok.hidden = false;
-      ui.ok.textContent = 'Thanks, ' + first + '! Your request is in. Our growth strategist will call you within 24 hours.';
+    send(payload).then(function (res) {
       if (ui.form) ui.form.reset();
+      done(ui, payload, res);
       if (window.dataLayer) window.dataLayer.push({ event: 'generate_lead', form: payload.form, utm_source: payload.utm_source, utm_medium: payload.utm_medium, utm_campaign: payload.utm_campaign });
     }).catch(function (e) {
       ui.err.textContent = (e && e.message && e.message !== 'Request failed' && e.message !== 'Failed to fetch')
@@ -122,7 +120,35 @@
     });
   }
 
-  window.TGLLeads = { send: send, submit: submit, attribution: attribution };
+  /* "Application submitted" card: replaces the form until the visitor closes it or sends another. */
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function done(ui, payload, res) {
+    var ok = ui.ok, form = ui.form; if (!ok) return;
+    var first = (payload.name || '').trim().split(' ')[0] || 'there';
+    var inPop = form && form.closest('#pop');
+    var ref = res && res.id ? 'TGL-' + String(res.id).padStart(5, '0') : '';
+    var wa = 'https://wa.me/' + (cfg.wa || '') + '?text=' + encodeURIComponent('Hi Tiwaa Growth Labs, I just sent an enquiry' + (ref ? ' (' + ref + ')' : '') + '. My name is ' + (payload.name || '') + '.');
+    ok.classList.add('sx-ok');
+    ok.setAttribute('role', 'status');
+    ok.innerHTML =
+      '<span class="sx-ok-ic" aria-hidden="true"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg></span>' +
+      '<b class="sx-ok-t">Application submitted</b>' +
+      '<p class="sx-ok-s">Thanks, ' + esc(first) + '! We have your details' + (payload.service ? ' for <strong>' + esc(payload.service) + '</strong>' : '') + '.</p>' +
+      (ref ? '<span class="sx-ok-ref">Reference ' + ref + '</span>' : '') +
+      '<ol class="sx-ok-steps"><li><i>1</i><span><b>We review it</b>A strategist reads your enquiry</span></li>' +
+      '<li><i>2</i><span><b>We call you</b>Within 24 hours on ' + esc(payload.phone || 'your number') + '</span></li>' +
+      '<li><i>3</i><span><b>You get a plan</b>Clear next steps and budget</span></li></ol>' +
+      '<div class="sx-ok-cta"><a class="sx-ok-wa" href="' + wa + '" target="_blank" rel="noopener">Chat on WhatsApp now</a>' +
+      (inPop ? '<button type="button" class="sx-ok-btn" data-close>Done</button>' : '<button type="button" class="sx-ok-btn" data-again>Send another enquiry</button>') + '</div>';
+    if (form) form.classList.add('is-done');
+    ok.hidden = false;
+    var again = ok.querySelector('[data-again]');
+    if (again) again.addEventListener('click', function () { reopen(form, ok); var f = form.querySelector('input:not([type=hidden]):not([tabindex="-1"])'); if (f) f.focus(); });
+    if (!inPop && ok.getBoundingClientRect().top < 0) ok.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  }
+  function reopen(form, ok) { if (form) form.classList.remove('is-done'); if (ok) { ok.hidden = true; ok.innerHTML = ''; } }
+
+  window.TGLLeads = { send: send, submit: submit, attribution: attribution, reopen: reopen };
 
   /* Shared contact form before the footer (templates/sections/shared/contact-form.html).
      Fields listed in data-core go to their own columns; anything else goes in "extra". */

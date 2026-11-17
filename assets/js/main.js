@@ -502,7 +502,8 @@
     popL.innerHTML=''; cfg.l.forEach(function(x){var li=document.createElement('li');li.textContent=x;popL.appendChild(li);});
     [].forEach.call(popG.options,function(o){if(o.text===cfg.g)popG.value=o.value;});
     syncOther();
-    document.getElementById('p-ok').hidden=true; document.getElementById('p-err').textContent='';
+    if(window.TGLLeads&&TGLLeads.reopen)TGLLeads.reopen(document.getElementById('popForm'),document.getElementById('p-ok'));else document.getElementById('p-ok').hidden=true;
+    document.getElementById('p-err').textContent='';
   }
   var DEFAULT={eb:'Free growth audit',h:'Find out where your next 100 leads are hiding',t:'Get your free audit',s:'Takes 30 seconds. Our strategist replies within 24 hours.',
     b:'Claim My Free Audit',l:['Website speed & SEO health check','Ad account and landing page review','A 90-day plan with clear targets'],g:'Free growth audit'};
