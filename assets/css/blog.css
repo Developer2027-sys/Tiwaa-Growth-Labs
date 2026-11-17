@@ -194,3 +194,11 @@ a.bl-c:hover .bf-go svg{transform:translateX(4px)}
 .bc-mk.wa span{padding:6px 9px;border-radius:9px;background:#fff;font-size:.74rem;justify-self:start}
 .bc-mk.wa .me{background:#DCF8C6;justify-self:end}
 .cv-ad.eoi .cv-q em{color:#1E9E52}
+
+/* Share buttons: real WhatsApp / LinkedIn logos in brand colours (filled, not outline) */
+.toc-share a.sh-wa,.toc-share a.sh-li{padding:0}
+.toc-share svg.sh-brand{width:18px;height:18px;fill:currentColor;stroke:none}
+.toc-share a.sh-wa{color:#25D366}
+.toc-share a.sh-li{color:#0A66C2}
+.toc-share a.sh-wa:hover{color:#fff;background:#25D366;border-color:#25D366}
+.toc-share a.sh-li:hover{color:#fff;background:#0A66C2;border-color:#0A66C2}
