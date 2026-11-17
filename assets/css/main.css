@@ -2288,3 +2288,28 @@ form.is-done{align-content:center}
 @keyframes sxOkTick{to{stroke-dashoffset:0}}
 @media (max-width:640px){.sx-ok-cta{flex-direction:column;width:100%}.sx-ok-wa,.sx-ok-btn{width:100%}}
 @media (prefers-reduced-motion:reduce){.ok.sx-ok{animation:none}.sx-ok-ic path{animation:none;stroke-dashoffset:0}}
+
+/* Home "Our stack": heading row, then 4 groups (Ads / Tracking / CRM & WhatsApp / Websites) with real logos */
+.stack{position:relative;overflow:hidden;margin-top:clamp(48px,7vw,80px);padding:clamp(22px,3.4vw,44px);border-radius:28px;background:var(--surface);border:1px solid var(--line)}
+.stack::before{content:"";position:absolute;right:-120px;top:-160px;width:420px;height:420px;border-radius:50%;background:radial-gradient(closest-side,rgba(10,132,255,.14),transparent);pointer-events:none}
+.stack-hd{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(16px,4vw,64px);align-items:end;margin-bottom:clamp(20px,3vw,32px)}
+.stack-hd .h2{margin-top:10px;font-size:clamp(1.5rem,2.6vw,2.1rem);line-height:1.12}
+.stack-hd p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.6}
+.st-groups{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.st-g{padding:16px;border-radius:20px;background:var(--bg);border:1px solid var(--line)}
+.st-gh{display:flex;align-items:center;gap:8px;font:700 .72rem var(--f-display);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.st-gh i{width:8px;height:8px;border-radius:50%;background:var(--gc);box-shadow:0 0 0 4px color-mix(in srgb,var(--gc) 18%,transparent)}
+.st-g ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.st-g li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;align-items:center;padding:8px;border-radius:14px;transition:background .25s,transform .25s}
+.st-g li:hover{background:var(--surface);transform:translateX(3px)}
+.st-lg{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:#fff;border:1px solid rgba(15,23,42,.08);box-shadow:0 6px 14px -10px rgba(15,23,42,.45);transition:transform .25s}
+.st-g li:hover .st-lg{transform:scale(1.08)}
+.st-lg img{width:24px;height:24px;object-fit:contain}
+.st-mono{background:var(--c);border-color:transparent;color:#fff;font:800 .78rem var(--f-display);letter-spacing:-.02em}
+.st-mono svg{width:20px;height:20px;fill:#fff}
+.st-g li b{display:block;font:600 .9rem/1.25 var(--f-display);color:var(--ink)}
+.st-g li small{display:block;margin-top:2px;font-size:.76rem;line-height:1.3;color:var(--muted)}
+#clients.section{padding-bottom:clamp(56px,7vw,88px)}
+@media (max-width:1100px){.st-groups{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.stack-hd{grid-template-columns:1fr;align-items:start}}
+@media (max-width:520px){.stack{padding:18px 14px;border-radius:22px}.st-groups{grid-template-columns:1fr}.st-g{padding:14px}}
