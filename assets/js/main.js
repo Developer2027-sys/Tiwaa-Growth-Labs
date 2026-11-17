@@ -364,7 +364,7 @@
     if(!n){er.textContent='Please enter your name.';return;}
     if(!/^[+\d][\d\s-]{7,}$/.test(ph)){er.textContent='Please enter a valid mobile number, for example +91 98765 43210.';return;}
     er.textContent='';
-    TGLLeads.submit({form:'hero',name:n,phone:ph,service:$('h-svc').value,cta:'Talk to Us',hp:$('h-hp').value},{button:this.querySelector('button[type=submit]'),err:er,ok:$('h-ok'),form:this});});
+    TGLLeads.submit({form:'hero',name:n,phone:ph,service:$('h-svc').value,message:$('h-msg')?$('h-msg').value.trim():'',cta:'Talk to Us',hp:$('h-hp').value},{button:this.querySelector('button[type=submit]'),err:er,ok:$('h-ok'),form:this});});
 
 
   // Liquid glass: specular highlight follows the pointer (one write per frame)
