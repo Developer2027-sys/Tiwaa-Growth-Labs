@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title>Reply in under 60 seconds: WhatsApp auto-replies for property enquiries</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF9500"/><stop offset=".55" stop-color="#FF5E3A"/><stop offset="1" stop-color="#FF2D55"/>
+    </linearGradient>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.6" fill="#fff" opacity=".13"/></pattern>
+    <pattern id="wall" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="8" cy="8" r="2" fill="#D9CFC3"/><circle cx="28" cy="26" r="1.6" fill="#D9CFC3"/></pattern>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#5A1020" flood-opacity=".35"/></filter>
+    <filter id="sh2" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#5A1020" flood-opacity=".28"/></filter>
+    <filter id="sh3" x="-10%" y="-20%" width="120%" height="150%"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity=".12"/></filter>
+    <clipPath id="scr"><rect x="626" y="126" width="348" height="648" rx="38"/></clipPath>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#dots)"/>
+  <circle cx="1400" cy="150" r="270" fill="#fff" opacity=".09"/>
+  <circle cx="170" cy="790" r="300" fill="#fff" opacity=".08"/>
+  <circle cx="800" cy="450" r="390" fill="#fff" opacity=".06"/>
+
+  <!-- phone -->
+  <g filter="url(#sh)"><rect x="610" y="110" width="380" height="680" rx="54" fill="#0B1220"/></g>
+  <g clip-path="url(#scr)">
+    <rect x="626" y="126" width="348" height="648" fill="#ECE5DD"/>
+    <rect x="626" y="126" width="348" height="648" fill="url(#wall)" opacity=".5"/>
+    <!-- header -->
+    <rect x="626" y="126" width="348" height="112" fill="#075E54"/>
+    <circle cx="672" cy="200" r="20" fill="#25D366"/>
+    <text x="672" y="207" font-size="18" font-weight="700" fill="#fff" text-anchor="middle">T</text>
+    <text x="704" y="196" font-size="17" font-weight="700" fill="#fff">Tiwaa Realty</text>
+    <text x="704" y="218" font-size="13" fill="#fff" fill-opacity=".8">online</text>
+    <!-- incoming -->
+    <g filter="url(#sh3)">
+      <rect x="644" y="262" width="224" height="58" rx="14" fill="#fff"/>
+    </g>
+    <text x="660" y="290" font-size="15" fill="#111B21">Hi, what is the price</text>
+    <text x="660" y="310" font-size="15" fill="#111B21">for a 3 BHK?</text>
+    <!-- auto reply -->
+    <g filter="url(#sh3)">
+      <rect x="704" y="336" width="252" height="132" rx="14" fill="#DCF8C6"/>
+    </g>
+    <text x="720" y="364" font-size="15" fill="#111B21">Hi Rahul, 3 BHK homes</text>
+    <text x="720" y="384" font-size="15" fill="#111B21">start at ₹1.6 Cr. Here is</text>
+    <text x="720" y="404" font-size="15" fill="#111B21">the brochure.</text>
+    <rect x="720" y="416" width="220" height="40" rx="10" fill="#fff" fill-opacity=".75"/>
+    <rect x="730" y="424" width="22" height="26" rx="4" fill="#FF3B30"/>
+    <text x="741" y="442" font-size="9" font-weight="800" fill="#fff" text-anchor="middle">PDF</text>
+    <text x="762" y="442" font-size="14" font-weight="600" fill="#111B21">Brochure.pdf</text>
+    <!-- incoming -->
+    <g filter="url(#sh3)">
+      <rect x="644" y="486" width="220" height="40" rx="14" fill="#fff"/>
+    </g>
+    <text x="660" y="512" font-size="15" fill="#111B21">Can I visit on Saturday?</text>
+    <!-- slots -->
+    <g filter="url(#sh3)">
+      <rect x="704" y="542" width="252" height="112" rx="14" fill="#DCF8C6"/>
+    </g>
+    <text x="720" y="570" font-size="15" fill="#111B21">Pick a time for Saturday:</text>
+    <rect x="720" y="584" width="104" height="54" rx="10" fill="#fff"/>
+    <text x="772" y="617" font-size="15" font-weight="700" fill="#075E54" text-anchor="middle">11:00 AM</text>
+    <rect x="836" y="584" width="104" height="54" rx="10" fill="#fff"/>
+    <text x="888" y="617" font-size="15" font-weight="700" fill="#075E54" text-anchor="middle">4:00 PM</text>
+    <!-- input bar -->
+    <rect x="640" y="704" width="262" height="48" rx="24" fill="#fff"/>
+    <text x="662" y="734" font-size="15" fill="#8696A0">Message</text>
+    <circle cx="934" cy="728" r="24" fill="#25D366"/>
+    <path d="M924 728h18M934 719l9 9-9 9" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <rect x="740" y="140" width="120" height="26" rx="13" fill="#0B1220"/>
+
+  <!-- reply time card -->
+  <g filter="url(#sh2)"><rect x="250" y="270" width="300" height="170" rx="28" fill="#fff"/></g>
+  <circle cx="300" cy="320" r="24" fill="#FFF1E0"/>
+  <circle cx="300" cy="322" r="12" fill="none" stroke="#FF9500" stroke-width="3.5"/>
+  <path d="M300 315v7l5 4M296 306h8" fill="none" stroke="#FF9500" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="338" y="328" font-size="18" font-weight="600" fill="#6B7489">First reply time</text>
+  <text x="282" y="406" font-size="24" font-weight="600" fill="#9AA2B5" text-decoration="line-through">6 hrs</text>
+  <text x="372" y="410" font-size="46" font-weight="800" fill="#0B1220" letter-spacing="-1">52 sec</text>
+
+  <!-- booked card -->
+  <g filter="url(#sh2)"><rect x="1050" y="470" width="300" height="150" rx="28" fill="#fff"/></g>
+  <circle cx="1098" cy="520" r="22" fill="#E7F8EC"/>
+  <path d="M1087 520l8 8 15-16" fill="none" stroke="#1E9E52" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="1134" y="515" font-size="18" font-weight="700" fill="#0B1220">Site visit booked</text>
+  <text x="1134" y="539" font-size="15" fill="#6B7489">Sat · 11:00 AM</text>
+  <rect x="1076" y="566" width="248" height="34" rx="17" fill="#F2F4F8"/>
+  <text x="1200" y="589" font-size="14" font-weight="600" fill="#475069" text-anchor="middle">Reminder sent on WhatsApp</text>
+
+  <path d="M550 355 C 585 355, 585 300, 640 292" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="3" stroke-dasharray="7 8" stroke-linecap="round"/>
+  <path d="M960 600 C 1005 600, 1005 545, 1050 545" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="3" stroke-dasharray="7 8" stroke-linecap="round"/>
+</svg>

@@ -52,24 +52,39 @@ pub fn client_logo(clients: &[Client], assets: &Assets, name: &str) -> String {
 }
 
 /// One article card (home Insights and /blog). `i` staggers the reveal animation.
-pub fn blog_card(p: &Post, i: usize, excerpt: bool) -> String {
+pub fn blog_card(p: &Post, assets: &Assets, i: usize, excerpt: bool) -> String {
     let arrow = r#"<svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>"#;
     let (href, cta, label) = match &p.url {
         Some(u) => (escape(u), String::new(), "Read article"),
         None => ("#contact".to_string(), format!(r#" data-cta="{}""#, escape(&p.cta)), "Get the guide"),
     };
     let d = if i % 3 != 0 { format!(r#" style="--d:{}""#, i % 3) } else { String::new() };
+    // Thumbnail photo (content/blog.toml "image"), else the colour gradient.
+    let img = match p.image.as_deref().map(|s| s.trim_start_matches('/')).filter(|s| !s.is_empty()) {
+        Some(path) if assets.exists(&format!("images/{path}")) => format!(
+            r#"<img src="{}" alt="" width="400" height="300" loading="lazy" decoding="async">"#,
+            escape(&assets.url(&format!("images/{path}")))
+        ),
+        Some(path) => {
+            eprintln!("warning: blog image assets/images/{path} not found, using the colour thumbnail for \"{}\"", p.title);
+            String::new()
+        }
+        None => String::new(),
+    };
+    let art_class = if img.is_empty() { "ins-art" } else { "ins-art has-img" };
     let ex = if excerpt { format!(r#"<p class="ins-x">{}</p>"#, escape(&p.excerpt)) } else { String::new() };
     format!(
         concat!(
             r#"<a class="ins rv" href="{href}"{cta}{d} data-tag="{tag}">"#,
-            r#"<div class="ins-art" style="--g1:{g1};--g2:{g2}"><span>{tag}</span></div>"#,
+            r#"<div class="{art_class}" style="--g1:{g1};--g2:{g2}">{img}<span>{tag}</span></div>"#,
             r#"<div class="ins-b"><small>{cat} · {mins} min read</small><h3>{title}</h3>{ex}"#,
             r#"<span class="y-link">{label} {arrow}</span></div></a>"#
         ),
         href = href,
         cta = cta,
         d = d,
+        art_class = art_class,
+        img = img,
         tag = escape(&p.tag),
         g1 = escape(&p.g1),
         g2 = escape(&p.g2),

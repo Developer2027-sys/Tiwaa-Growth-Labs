@@ -2,6 +2,10 @@
 #
 # Each post links to its article page (url). A post without url opens the lead popup offering
 # the guide (cta) instead, useful for an article that is not written yet.
+#
+# Thumbnail photo: put the file in assets/images/blog/ and set  image = "blog/<file>.webp"
+# (path inside assets/images/). Landscape works best, about 800x600 px; it is cropped to fit.
+# Without image (or if the file is missing) the card shows the g1 -> g2 colour gradient.
 
 [[posts]]
 tag     = "Real Estate"
@@ -13,6 +17,7 @@ title   = "How to cut cost per site visit with Meta lead forms"
 excerpt = "The form type, three qualifying questions and five-minute follow-up that bring buyers who visit, not cheap leads."
 cta     = "Send me the real estate lead playbook"
 url     = "/blog/cut-cost-per-site-visit-meta-lead-forms"
+image   = "blog/meta-lead-forms.svg"
 
 [[posts]]
 tag     = "Pre-launch"
@@ -24,6 +29,7 @@ title   = "How to build an EOI list before your project launch"
 excerpt = "When to start, what to offer, which content and ads to run, and how to turn EOIs into bookings."
 cta     = "Send me the pre-launch playbook"
 url     = "/blog/build-eoi-list-before-project-launch"
+image   = "blog/eoi-list.svg"
 
 [[posts]]
 tag     = "WhatsApp"
@@ -35,4 +41,5 @@ title   = "Reply in under 60 seconds: WhatsApp auto-replies for property enquiri
 excerpt = "Send the brochure in seconds, qualify buyers, book site visits and hand serious buyers to sales."
 cta     = "Send me the WhatsApp automation guide"
 url     = "/blog/whatsapp-auto-replies-property-enquiries"
+image   = "blog/whatsapp-auto-replies.svg"
 

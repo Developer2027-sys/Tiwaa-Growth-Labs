@@ -58,8 +58,9 @@ impl Site {
         env.add_function("client_logo", move |name: String| {
             Value::from_safe_string(brands::client_logo(&c.clients, &a, &name))
         });
-        env.add_function("blog_card", |p: ViaDeserialize<Post>, i: usize, excerpt: Option<bool>| {
-            Value::from_safe_string(brands::blog_card(&p, i, excerpt.unwrap_or(false)))
+        let a = assets.clone();
+        env.add_function("blog_card", move |p: ViaDeserialize<Post>, i: usize, excerpt: Option<bool>| {
+            Value::from_safe_string(brands::blog_card(&p, &a, i, excerpt.unwrap_or(false)))
         });
 
         Ok(Self { root: root.to_path_buf(), content, assets, env })

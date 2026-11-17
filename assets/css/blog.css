@@ -202,3 +202,15 @@ a.bl-c:hover .bf-go svg{transform:translateX(4px)}
 .toc-share a.sh-li{color:#0A66C2}
 .toc-share a.sh-wa:hover{color:#fff;background:#25D366;border-color:#25D366}
 .toc-share a.sh-li:hover{color:#fff;background:#0A66C2;border-color:#0A66C2}
+
+/* Cover images (assets/images/blog/*.svg): article cover, /blog cards, "Keep reading" cards */
+.cover-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.bp-cv.has-img{display:block;padding:0;min-height:0;aspect-ratio:16/7;background:#0A84FF}
+.bp-cv.has-img::before{display:none}
+.bf-art.has-img{padding:0;background:#0A84FF}
+.bf-art.has-img .bf-badge{z-index:1}
+.bc-art.has-img::after,.rel-art.has-img::after{display:none}
+.bc-art.has-img i,.rel-art.has-img i{z-index:1;background:rgba(0,0,0,.45);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.bl-feat:hover .cover-img,a.bl-c:hover .cover-img,.rel:hover .cover-img{transform:scale(1.04)}
+@media (max-width:700px){.bp-cv.has-img{aspect-ratio:4/3}}
+.rel-art.has-img{overflow:hidden}

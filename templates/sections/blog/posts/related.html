@@ -1,15 +1,15 @@
 {# "Keep reading" under every article: the other articles, then one more link. Closes <div class="bp">.
-   To add an article here, add a row to `posts` (page id, url, colours, label, small text, title). #}
+   To add an article here, add a row to `posts` (page id, url, colours, label, small text, title, cover image). #}
 {%- set posts = [
-  ["blog-meta-lead-forms", "/blog/cut-cost-per-site-visit-meta-lead-forms", "#0A84FF", "#5856D6", "Lead generation", "Meta lead forms", "How to cut cost per site visit with Meta lead forms"],
-  ["blog-eoi-list", "/blog/build-eoi-list-before-project-launch", "#34C759", "#30B0C7", "Launch marketing", "Pre-launch", "How to build an EOI list before your project launch"],
-  ["blog-whatsapp-auto-replies", "/blog/whatsapp-auto-replies-property-enquiries", "#FF9500", "#FF2D55", "WhatsApp & CRM", "WhatsApp", "Reply in under 60 seconds: WhatsApp auto-replies for property enquiries"],
+  ["blog-meta-lead-forms", "/blog/cut-cost-per-site-visit-meta-lead-forms", "#0A84FF", "#5856D6", "Lead generation", "Meta lead forms", "How to cut cost per site visit with Meta lead forms", "images/blog/meta-lead-forms.svg"],
+  ["blog-eoi-list", "/blog/build-eoi-list-before-project-launch", "#34C759", "#30B0C7", "Launch marketing", "Pre-launch", "How to build an EOI list before your project launch", "images/blog/eoi-list.svg"],
+  ["blog-whatsapp-auto-replies", "/blog/whatsapp-auto-replies-property-enquiries", "#FF9500", "#FF2D55", "WhatsApp & CRM", "WhatsApp", "Reply in under 60 seconds: WhatsApp auto-replies for property enquiries", "images/blog/whatsapp-auto-replies.svg"],
 ] %}
   <section class="section bp-rel" aria-labelledby="rel-h">
     <div class="wrap">
       <div class="rel-hd"><h2 class="h2" id="rel-h">Keep reading</h2><a class="y-link" href="{{ url('/blog') }}">All articles →</a></div>
       <div class="rel-g">
-{%- for p in posts if p[0] != page_id %}<a class="rel" href="{{ url(p[1]) }}"><span class="rel-art" style="--g1:{{ p[2] }};--g2:{{ p[3] }}"><i>{{ p[4] }}</i></span><small>{{ p[5] }}</small><b>{{ p[6] }}</b></a>{% endfor -%}
+{%- for p in posts if p[0] != page_id %}<a class="rel" href="{{ url(p[1]) }}"><span class="rel-art has-img" style="--g1:{{ p[2] }};--g2:{{ p[3] }}"><img class="cover-img" src="{{ asset(p[7]) }}" alt="" width="1600" height="900" loading="lazy" decoding="async"><i>{{ p[4] }}</i></span><small>{{ p[5] }}</small><b>{{ p[6] }}</b></a>{% endfor -%}
 {%- if page_id == "blog-whatsapp-auto-replies" -%}
 <a class="rel" href="{{ url('/services/whatsapp-automation') }}"><span class="rel-art" style="--g1:#25D366;--g2:#30B0C7"><i>Service</i></span><small>WhatsApp automation</small><b>Our WhatsApp automation for real estate</b></a>
 {%- else -%}

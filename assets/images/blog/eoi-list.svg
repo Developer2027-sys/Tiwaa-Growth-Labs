@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title>How to build an EOI list before your project launch</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2FBF5B"/><stop offset=".55" stop-color="#25B39A"/><stop offset="1" stop-color="#2A9FC4"/>
+    </linearGradient>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#34C759"/><stop offset="1" stop-color="#30B0C7"/>
+    </linearGradient>
+    <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#34C759" stop-opacity=".35"/><stop offset="1" stop-color="#34C759" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.6" fill="#fff" opacity=".13"/></pattern>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#06372E" flood-opacity=".35"/></filter>
+    <filter id="sh2" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#06372E" flood-opacity=".28"/></filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#dots)"/>
+  <circle cx="1420" cy="760" r="300" fill="#fff" opacity=".08"/>
+  <circle cx="160" cy="120" r="260" fill="#fff" opacity=".08"/>
+  <circle cx="800" cy="450" r="390" fill="#fff" opacity=".06"/>
+
+  <!-- EOI page card -->
+  <g filter="url(#sh)">
+    <rect x="560" y="170" width="480" height="560" rx="36" fill="#fff"/>
+  </g>
+  <rect x="560" y="170" width="480" height="150" rx="36" fill="url(#g)"/>
+  <rect x="560" y="280" width="480" height="40" fill="url(#g)"/>
+  <rect x="592" y="202" width="148" height="34" rx="17" fill="#fff" fill-opacity=".25"/>
+  <text x="666" y="225" font-size="15" font-weight="700" fill="#fff" text-anchor="middle">PRE-LAUNCH</text>
+  <text x="592" y="282" font-size="30" font-weight="800" fill="#fff" letter-spacing="-.5">Sector 65 Residences</text>
+  <text x="592" y="308" font-size="16" fill="#fff" fill-opacity=".9">Register your interest · EOI open</text>
+
+  <rect x="592" y="348" width="416" height="62" rx="16" fill="#F2F7F4"/>
+  <text x="614" y="386" font-size="17" fill="#475069">Priority allotment</text>
+  <text x="986" y="386" font-size="17" font-weight="700" fill="#1E9E52" text-anchor="end">Register now</text>
+  <rect x="592" y="422" width="416" height="62" rx="16" fill="#F2F7F4"/>
+  <text x="614" y="460" font-size="17" fill="#475069">Refundable EOI</text>
+  <text x="986" y="460" font-size="17" font-weight="700" fill="#1E9E52" text-anchor="end">₹2 lakh</text>
+  <rect x="592" y="496" width="416" height="62" rx="16" fill="#F2F7F4"/>
+  <text x="614" y="534" font-size="17" fill="#475069">Launch date</text>
+  <text x="986" y="534" font-size="17" font-weight="700" fill="#1E9E52" text-anchor="end">12 Jan</text>
+  <rect x="592" y="580" width="416" height="60" rx="16" fill="url(#g)"/>
+  <text x="800" y="617" font-size="19" font-weight="700" fill="#fff" text-anchor="middle">Submit my EOI</text>
+  <text x="800" y="686" font-size="14" fill="#8A93A6" text-anchor="middle">RERA registered · Fully refundable</text>
+
+  <!-- EOI counter + growth -->
+  <g filter="url(#sh2)">
+    <rect x="1090" y="230" width="300" height="250" rx="28" fill="#fff"/>
+  </g>
+  <text x="1120" y="276" font-size="17" font-weight="600" fill="#6B7489">EOIs before launch</text>
+  <text x="1120" y="338" font-size="58" font-weight="800" fill="#0B1220" letter-spacing="-2">410</text>
+  <rect x="1250" y="306" width="110" height="34" rx="17" fill="#E7F8EC"/>
+  <text x="1305" y="329" font-size="16" font-weight="700" fill="#1E9E52" text-anchor="middle">↑ from 140</text>
+  <path d="M1120 452 L1170 440 L1220 424 L1270 398 L1320 380 L1360 352 L1360 460 L1120 460 Z" fill="url(#area)"/>
+  <path d="M1120 452 L1170 440 L1220 424 L1270 398 L1320 380 L1360 352" fill="none" stroke="#1E9E52" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="1360" cy="352" r="7" fill="#fff" stroke="#1E9E52" stroke-width="4"/>
+
+  <!-- launch calendar -->
+  <g filter="url(#sh2)">
+    <rect x="230" y="420" width="270" height="200" rx="28" fill="#fff"/>
+  </g>
+  <rect x="262" y="452" width="96" height="104" rx="18" fill="#fff" stroke="#E6EAF0" stroke-width="2"/>
+  <path d="M262 470 a18 18 0 0 1 18 -18 h60 a18 18 0 0 1 18 18 v12 h-96 z" fill="#FF3B30"/>
+  <text x="310" y="476" font-size="14" font-weight="800" fill="#fff" text-anchor="middle">JAN</text>
+  <text x="310" y="536" font-size="40" font-weight="800" fill="#0B1220" text-anchor="middle">12</text>
+  <text x="376" y="490" font-size="18" font-weight="700" fill="#0B1220">Launch day</text>
+  <text x="376" y="514" font-size="15" fill="#6B7489">6 weeks of</text>
+  <text x="376" y="534" font-size="15" fill="#6B7489">pre-launch</text>
+  <g fill="#34C759">
+    <rect x="262" y="580" width="30" height="10" rx="5"/><rect x="298" y="580" width="30" height="10" rx="5"/><rect x="334" y="580" width="30" height="10" rx="5"/>
+    <rect x="370" y="580" width="30" height="10" rx="5"/><rect x="406" y="580" width="30" height="10" rx="5"/>
+  </g>
+  <rect x="442" y="580" width="30" height="10" rx="5" fill="#E6EAF0"/>
+
+  <path d="M500 520 C 530 520, 530 470, 560 470" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="3" stroke-dasharray="7 8" stroke-linecap="round"/>
+  <path d="M1040 400 C 1065 400, 1065 360, 1090 360" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="3" stroke-dasharray="7 8" stroke-linecap="round"/>
+</svg>

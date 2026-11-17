@@ -38,6 +38,10 @@ pub struct Post {
     /// Article page, e.g. "/blog/meta-lead-forms". None = card opens the lead popup.
     #[serde(default)]
     pub url: Option<String>,
+    /// Thumbnail photo inside assets/images/, e.g. "blog/meta-lead-forms.webp".
+    /// None (or a missing file) = the g1/g2 colour gradient is shown instead.
+    #[serde(default)]
+    pub image: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
