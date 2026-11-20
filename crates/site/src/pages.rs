@@ -30,7 +30,9 @@ pub fn routes() -> &'static [(&'static str, &'static str)] {
         ("/about", "about"),
         ("/our-work", "work"),
         ("/contact", "contact"),
-        ("/industries/real-estate", "real-estate"),
+                ("/industries/real-estate", "real-estate"),
+        ("/privacy-policy", "privacy"),
+        ("/terms", "terms"),
     ]
 }
 
@@ -135,8 +137,7 @@ pub struct Page {
 
 pub enum HeadExtra {
     None,
-    Html(&'static str),
-    /// A file in templates/ whose contents are added as-is.
+    /// A template in templates/ (structured data), rendered with `site` and `abs_url()`.
     File(String),
 }
 
@@ -196,13 +197,14 @@ pub fn page(id: &str) -> Option<Page> {
     let p = match id {
         "home" => Page {
             id: "home",
-            title: "Tiwaa Growth Labs",
-            og_title: Some("Tiwaa Growth Labs | Digital Marketing & Web Development Agency in Gurugram"),
-            description: "Tiwaa Growth Labs is a real estate marketing agency in Gurugram for developers, builders, channel partners and brokers: launch campaigns, walkthrough films, Meta and Google lead ads, landing pages, WhatsApp follow-up and LeadsPulse CRM.",
-            keywords: "real estate marketing agency gurugram, real estate digital marketing, property marketing agency delhi ncr, real estate lead generation, builder marketing, channel partner marketing, site visit campaigns, leadspulse crm, tiwaa growth labs",
+            // SEO: title < 60 chars, description < 160 chars (keyword plan in README, "Homepage SEO").
+            title: "Real Estate Marketing Agency in Gurgaon | Tiwaa Growth Labs",
+            og_title: Some("Real Estate Marketing Agency in Gurugram | Tiwaa Growth Labs"),
+            description: "Real estate digital marketing agency in Gurugram (Gurgaon). Lead generation for builders and channel partners with Meta and Google ads, landing pages and CRM.",
+            keywords: "real estate marketing agency in gurugram, real estate marketing agency in gurgaon, real estate digital marketing agency, real estate lead generation, property marketing agency delhi ncr, digital marketing for builders, real estate developers marketing, channel partner leads, real estate google ads, real estate facebook ads, pre-launch campaigns, real estate crm",
             path: "/",
-            // FAQ structured data is filled in by assets/js/main.js from the FAQ list.
-            head_extra: HeadExtra::Html(r#"<script type="application/ld+json" id="faq-ld"></script>"#),
+            // WebSite + service catalogue + FAQPage structured data (FAQ text matches 13-faq.html).
+            head_extra: HeadExtra::File("layout/ld/home.html".into()),
             sections: vec![
                 s("home/01-hero"),       // headline + "Talk to Us" form
                 s("home/02-logo-band"),  // scrolling client + platform logos
@@ -226,8 +228,11 @@ pub fn page(id: &str) -> Option<Page> {
         },
         "services" => Page {
             id: "services",
-            title: "Digital Marketing Services | Tiwaa Growth Labs",
-            description: "SEO, Google Ads, Meta and Instagram ads, social media, WhatsApp automation, websites, content, analytics and Conversions API from Tiwaa Growth Labs, a digital marketing agency in Gurugram. Get a free growth audit.",
+            // SEO: "real estate (digital) marketing services" + Gurugram/Gurgaon + service names. Title < 60, description < 160.
+            title: "Real Estate Digital Marketing Services | Tiwaa Growth Labs",
+            og_title: Some("Real Estate Marketing Services in Gurugram | Tiwaa Growth Labs"),
+            description: "Real estate marketing services in Gurugram (Gurgaon): Meta and Google lead ads, SEO, project films, landing pages, WhatsApp automation and CRM. Free audit.",
+            keywords: "real estate marketing services, real estate digital marketing services, real estate marketing services gurugram, real estate marketing services gurgaon, real estate lead generation services, property marketing services, google ads for real estate, meta ads for real estate, seo for real estate, real estate crm",
             path: "/services",
             // Hub page only; css/services.css belongs to the service detail pages.
             css: vec!["css/services-hub.css"],
@@ -235,6 +240,11 @@ pub fn page(id: &str) -> Option<Page> {
             platform_icons: false,
             // Service list + breadcrumb + FAQ structured data.
             head_extra: HeadExtra::File("layout/services-ld.html".into()),
+            contact_form: Some(CfConfig {
+                title: Some(r#"Tell us about your project. <span class="gt">We'll plan the launch.</span>"#),
+                lead: Some("Share your project location, configurations and launch date, and a real estate marketing strategist will get back to you within one working day with a plan that fits your budget."),
+                ..CfConfig::default()
+            }),
             sections: vec![
                 s("services/01-sv-hero"),
                 s("services/02-marquee"),
@@ -255,8 +265,8 @@ pub fn page(id: &str) -> Option<Page> {
         },
         "blog" => Page {
             id: "blog",
-            title: "Real Estate Marketing Blog: Lead Generation & Launch Playbooks | Tiwaa",
-            description: "Practical real estate marketing guides for developers and channel partners: Meta and Google lead ads, launch campaigns, WhatsApp follow-up and cost per site visit.",
+            title: "Real Estate Marketing Blog: Lead Gen & Launch Playbooks",
+            description: "Real estate marketing guides for developers and channel partners: Meta and Google lead ads, launch campaigns, WhatsApp follow-up and cost per site visit.",
             keywords: "real estate marketing blog, real estate lead generation tips, property marketing guides, meta ads for real estate, real estate launch marketing",
             path: "/blog",
             css: vec!["css/blog.css"],
@@ -271,7 +281,7 @@ pub fn page(id: &str) -> Option<Page> {
         "blog-meta-lead-forms" => Page {
             id: "blog-meta-lead-forms",
             title: "How to Cut Cost per Site Visit with Meta Lead Forms | Tiwaa",
-            description: "Real estate guide to Meta lead forms that bring site visits, not cheap leads: Higher intent forms, 3 qualifying questions, 5-minute follow-up and a free calculator.",
+            description: "Meta lead forms that bring site visits, not cheap leads: Higher Intent forms, 3 qualifying questions, 5-minute follow-up and a free cost per visit calculator.",
             keywords: "cost per site visit, meta lead forms real estate, facebook lead ads for real estate, real estate lead generation gurugram, property leads to site visits, real estate marketing agency",
             path: "/blog/cut-cost-per-site-visit-meta-lead-forms",
             css: vec!["css/blog.css"],
@@ -307,10 +317,11 @@ pub fn page(id: &str) -> Option<Page> {
         },
         "about" => Page {
             id: "about",
-            title: "About Us | Tiwaa Growth Labs, Full-Service Digital Marketing Agency in Gurugram",
-            og_title: Some("About Tiwaa Growth Labs"),
-            description: "Tiwaa Growth Labs is a Gurugram-based digital marketing and growth team: strategy, performance ads, content, WhatsApp automation, websites and CRM under one roof, measured in customers.",
-            keywords: "about tiwaa growth labs, digital marketing agency gurugram, growth marketing team india, tiwaa.io, leadspulse",
+            // SEO: brand + "real estate marketing company" (the homepage targets "agency"). Title < 60, description < 160.
+            title: "About Tiwaa Growth Labs | Real Estate Marketing Company",
+            og_title: Some("About Tiwaa Growth Labs, Real Estate Marketing Company in Gurugram"),
+            description: "Tiwaa Growth Labs is a real estate marketing company in Gurugram (Gurgaon). Meet the team behind 300+ project launches, LeadsPulse CRM and how we work.",
+            keywords: "about tiwaa growth labs, tiwaa growth lab private limited, real estate marketing company in gurugram, real estate marketing company in gurgaon, real estate marketing team, property marketing company, leadspulse crm, tiwaa.io",
             path: "/about",
             css: vec!["css/about.css"],
             js: vec!["js/about.js".into()],
@@ -320,7 +331,8 @@ pub fn page(id: &str) -> Option<Page> {
             contact_form: None,
             sections: vec![
                 s("about/01-hero"),      // story hero + growth curve, logo band (#lbRow1, main.js), numbers
-                s("about/02-journey"),   // "What we built for real estate" timeline
+                s("about/02-journey"),   // "Who we are": five teams timeline
+                s("about/02b-mission"),  // mission, vision and what we believe
                 s("about/03-offer"),     // service list + live preview, pinned on desktop
                 s("about/04-software"),  // dark LeadsPulse app demo + capture/assign/alert/report flow
                 s("about/05-process"),   // 5-step timeline
@@ -333,9 +345,9 @@ pub fn page(id: &str) -> Option<Page> {
         },
         "work" => Page {
             id: "work",
-            title: "Our Work | Real Estate Marketing Case Studies | Tiwaa Growth Labs",
+            title: "Real Estate Marketing Case Studies | Tiwaa Growth Labs",
             og_title: Some("Our Work | Tiwaa Growth Labs"),
-            description: "Real estate marketing case studies from Tiwaa Growth Labs: launch campaigns, walkthrough films, lead ads, landing pages and LeadsPulse CRM for developers and channel partners across Delhi NCR.",
+            description: "Real estate marketing case studies: launch campaigns, walkthrough films, lead ads, landing pages and LeadsPulse CRM for developers across Delhi NCR.",
             keywords: "real estate marketing case studies, real estate campaign results, property launch campaign, tiwaa growth labs portfolio, real estate lead generation results",
             path: "/our-work",
             css: vec!["css/work.css"],
@@ -351,10 +363,11 @@ pub fn page(id: &str) -> Option<Page> {
         },
         "contact" => Page {
             id: "contact",
-            title: "Contact Tiwaa Growth Labs | Digital Marketing Agency in Gurugram",
-            og_title: Some("Contact Tiwaa Growth Labs"),
-            description: "Contact Tiwaa Growth Labs, a digital marketing agency in Gurugram. Call or WhatsApp +91 90501 26213, email info@tiwaagrowthlab.com or visit Spaze I Tech Park, Sector 49.",
-            keywords: "contact tiwaa growth labs, digital marketing agency gurugram contact, marketing agency sohna road, free marketing audit, seo company gurugram contact",
+            // SEO: brand + contact intent + real estate marketing + location. Title < 60, description < 160.
+            title: "Contact Tiwaa Growth Labs | Real Estate Marketing Gurugram",
+            og_title: Some("Contact Tiwaa Growth Labs, Real Estate Marketing Agency in Gurugram"),
+            description: "Contact Tiwaa Growth Labs, a real estate marketing agency in Gurugram (Gurgaon). Call or WhatsApp +91 90501 26213 or visit us at Sector 49, Sohna Road.",
+            keywords: "contact tiwaa growth labs, tiwaa growth labs phone number, real estate marketing agency gurugram contact, real estate marketing agency sohna road, marketing agency sector 49 gurgaon, free real estate marketing audit",
             path: "/contact",
             css: vec!["css/contact.css"],
             js: vec!["js/contact.js".into()],
@@ -376,8 +389,8 @@ pub fn page(id: &str) -> Option<Page> {
         // service-page.css); sections are wrapped in .rp, opened in 01-hero and closed in 07-faq.
         "real-estate" => Page {
             id: "real-estate",
-            title: "Real Estate Digital Marketing Agency in Gurugram | Tiwaa Growth Labs",
-            description: "Real estate marketing in Gurugram for developers, channel partners and brokers: pre-launch campaigns, qualified buyer leads, WhatsApp follow-up, site visits and CRM by Tiwaa Growth Labs.",
+            title: "Real Estate Marketing in Gurugram for Developers | Tiwaa",
+            description: "Real estate marketing in Gurugram for developers, channel partners and brokers: pre-launch campaigns, qualified buyer leads, WhatsApp follow-up and CRM.",
             keywords: "real estate digital marketing agency gurugram, real estate lead generation, property marketing agency, real estate marketing delhi ncr, site visit campaigns, real estate whatsapp marketing",
             path: "/industries/real-estate",
             css: vec!["css/real-estate.css"],
@@ -402,8 +415,8 @@ pub fn page(id: &str) -> Option<Page> {
         // Conversions API (CAPI) service page. Sections in templates/sections/service/conversions-api/.
         "conversions-api" => Page {
             id: "conversions-api",
-            title: "Conversions API (CAPI) Setup for Meta & Google Ads | Tiwaa Growth Labs",
-            description: "Meta Conversions API (CAPI) and Google enhanced conversions setup in Gurugram: server-side tracking that sends leads, site visits and bookings from your CRM back to your ads.",
+            title: "Conversions API for Real Estate Ads | Tiwaa Growth Labs",
+            description: "Meta Conversions API and Google enhanced conversions for real estate: server-side tracking that sends site visits and bookings from your CRM back to your ads.",
             keywords: "conversions api setup, meta capi setup india, facebook conversions api agency, server side tracking gurugram, google enhanced conversions, capi for real estate, offline conversions meta",
             path: "/services/conversions-api",
             css: vec!["css/services.css", "css/service-page.css", "css/conversions-api.css"],
@@ -429,8 +442,8 @@ pub fn page(id: &str) -> Option<Page> {
         },
         "seo" => service_page(ServicePage {
             id: "seo",
-            title: "SEO Services in Gurugram | SEO Company | Tiwaa Growth Labs",
-            description: "SEO services in Gurugram and Delhi NCR from Tiwaa Growth Labs: technical, local, content and AI search optimisation that brings leads, not just traffic. Get a free SEO audit.",
+            title: "Real Estate SEO Services in Gurugram | Tiwaa Growth Labs",
+            description: "Real estate SEO in Gurugram (Gurgaon): project and locality pages, local SEO, technical fixes and AI search optimisation that bring buyer enquiries.",
             keywords: "seo services gurugram, seo company gurugram, seo agency delhi ncr, local seo, technical seo, ai search optimisation, geo seo",
             path: "/services/seo",
             service: "Search Engine Optimization",
@@ -454,8 +467,8 @@ pub fn page(id: &str) -> Option<Page> {
         }),
         "google-ads" => service_page(ServicePage {
             id: "google-ads",
-            title: "Google Ads Agency in Gurugram | PPC Management | Tiwaa Growth Labs",
-            description: "Google Ads (PPC) management in Gurugram: Search, Maps, YouTube, Shopping and Performance Max campaigns with full conversion tracking and weekly optimisation by Tiwaa Growth Labs.",
+            title: "Google Ads for Real Estate in Gurugram | Tiwaa Growth Labs",
+            description: "Google Ads for real estate in Gurugram: Search, Performance Max, YouTube and Demand Gen campaigns with site visit tracking and weekly optimisation.",
             keywords: "google ads agency gurugram, ppc management, google ads management india, performance max agency, ppc company delhi ncr",
             path: "/services/google-ads",
             service: "Google Ads (PPC)",
@@ -479,8 +492,8 @@ pub fn page(id: &str) -> Option<Page> {
         }),
         "meta-ads" => service_page(ServicePage {
             id: "meta-ads",
-            title: "Meta & Instagram Ads Agency in Gurugram | Tiwaa Growth Labs",
-            description: "Facebook and Instagram ads that bring real enquiries: lead forms, Reels, click-to-WhatsApp and retargeting, with in-house creatives and instant follow-up. Meta ads agency in Gurugram.",
+            title: "Meta Ads for Real Estate in Gurugram | Tiwaa Growth Labs",
+            description: "Facebook and Instagram ads for real estate: lead forms, Reels, click-to-WhatsApp and retargeting, with in-house creatives and instant follow-up. Gurugram.",
             keywords: "meta ads agency gurugram, facebook ads agency, instagram ads agency, instagram marketing gurugram, lead generation ads, click to whatsapp ads",
             path: "/services/meta-ads",
             service: "Meta & Instagram Ads",
@@ -502,8 +515,8 @@ pub fn page(id: &str) -> Option<Page> {
         }),
         "social-media" => service_page(ServicePage {
             id: "social-media",
-            title: "Social Media Marketing Agency in Gurugram | Tiwaa Growth Labs",
-            description: "Social media marketing in Gurugram: strategy, monthly content calendars, Reels, design, community management and reporting for Instagram, LinkedIn, YouTube and Facebook by Tiwaa Growth Labs.",
+            title: "Real Estate Social Media Marketing | Tiwaa Growth Labs",
+            description: "Social media marketing for real estate projects in Gurugram: content calendars, Reels, construction updates, community management and monthly reporting.",
             keywords: "social media marketing agency gurugram, social media management, instagram marketing agency, linkedin marketing, smm company delhi ncr",
             path: "/services/social-media-marketing",
             service: "Social Media Management",
@@ -526,8 +539,8 @@ pub fn page(id: &str) -> Option<Page> {
         }),
         "whatsapp-automation" => service_page(ServicePage {
             id: "whatsapp-automation",
-            title: "WhatsApp Automation & Business API Agency in Gurugram | Tiwaa Growth Labs",
-            description: "WhatsApp Business API, chatbots, broadcasts and lead automation powered by Tiwaa.io. Reply to every lead in seconds, qualify automatically and sync to your CRM. Live in 7 days.",
+            title: "WhatsApp Automation for Real Estate | Tiwaa Growth Labs",
+            description: "WhatsApp Business API for real estate on Tiwaa.io: instant replies, brochures, buyer qualification and site visit booking, synced to your CRM. Live in 7 days.",
             keywords: "whatsapp business api, whatsapp automation agency, whatsapp chatbot india, whatsapp marketing gurugram, whatsapp broadcast, tiwaa.io",
             path: "/services/whatsapp-automation",
             service: "WhatsApp Marketing & Automation",
@@ -550,9 +563,9 @@ pub fn page(id: &str) -> Option<Page> {
         }),
         "website-design" => service_page(ServicePage {
             id: "website-design",
-            title: "Website Design Company in Gurugram | Tiwaa Growth Labs",
-            description: "Website design and development in Gurugram: fast, mobile-first business websites, landing pages and online stores built for leads and SEO by Tiwaa Growth Labs.",
-            keywords: "website design company gurugram, web development gurugram, landing page design, ecommerce website development, wordpress website design delhi ncr",
+            title: "Real Estate Website Design in Gurugram | Tiwaa Growth Labs",
+            description: "Real estate website design in Gurugram: developer websites, project microsites and launch landing pages with floor plans, price sheets and site visit booking.",
+            keywords: "real estate website design, real estate website design gurugram, project microsite, real estate landing page design, developer website design, wordpress website design delhi ncr",
             path: "/services/website-design",
             service: "Website Design & Development",
             sections: vec![
@@ -574,8 +587,8 @@ pub fn page(id: &str) -> Option<Page> {
         }),
         "content-video" => service_page(ServicePage {
             id: "content-video",
-            title: "Content & Video Production Agency in Gurugram | Tiwaa Growth Labs",
-            description: "Reels, brand films, product and property shoots, ad creatives and copy from Tiwaa Growth Labs, an in-house content and video studio in Gurugram with 48-hour turnaround.",
+            title: "Real Estate Video & Content Production | Tiwaa Growth Labs",
+            description: "Walkthrough films, drone shoots, Reels, 3D renders and ad creatives for real estate projects, from our in-house studio in Gurugram with 48-hour turnaround.",
             keywords: "video production gurugram, content marketing agency, reels agency, brand film production, product photography gurugram, ad creatives",
             path: "/services/content-video",
             service: "Content Marketing",
@@ -598,8 +611,8 @@ pub fn page(id: &str) -> Option<Page> {
         }),
         "analytics-crm" => service_page(ServicePage {
             id: "analytics-crm",
-            title: "Analytics & CRM Setup for Marketing in Gurugram | Tiwaa Growth Labs",
-            description: "Marketing analytics and CRM setup in Gurugram: GA4, Tag Manager, call tracking, live dashboards, lead scoring and CRM pipelines that link every lead to its source by Tiwaa Growth Labs.",
+            title: "Real Estate CRM & Marketing Analytics | Tiwaa Growth Labs",
+            description: "Real estate CRM and analytics in Gurugram: GA4, Tag Manager, call tracking, LeadsPulse pipelines and dashboards that link every booking to its campaign.",
             keywords: "crm setup gurugram, ga4 setup agency, marketing analytics india, lead tracking, conversion tracking, looker studio dashboard, crm for real estate",
             path: "/services/analytics-crm",
             service: "Analytics, CRM & Reporting",
@@ -620,6 +633,26 @@ pub fn page(id: &str) -> Option<Page> {
                 s("service/analytics-crm/13-related"),
             ],
         }),
+                "privacy" => Page {
+            id: "privacy",
+            title: "Privacy Policy | Tiwaa Growth Labs",
+            description: "How Tiwaa Growth Labs collects, uses and protects personal data from website visitors and enquiries, and how to access, correct or delete your data.",
+            path: "/privacy-policy",
+            css: vec!["css/legal.css"],
+            contact_form: None,
+            sections: vec![s("legal/privacy")],
+            ..Page::default()
+        },
+        "terms" => Page {
+            id: "terms",
+            title: "Terms & Conditions | Tiwaa Growth Labs",
+            description: "Terms for using the Tiwaa Growth Labs website: information on the site, enquiries, intellectual property, liability and governing law.",
+            path: "/terms",
+            css: vec!["css/legal.css"],
+            contact_form: None,
+            sections: vec![s("legal/terms")],
+            ..Page::default()
+        },
         "404" => Page {
             id: "404",
             title: "Page not found | Tiwaa Growth Labs",

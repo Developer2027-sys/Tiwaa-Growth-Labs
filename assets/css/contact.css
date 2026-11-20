@@ -107,7 +107,7 @@
 .ct-ok{display:grid;gap:12px;justify-items:start;animation:ctOk .6s cubic-bezier(.2,.8,.2,1) both}
 .ok-ic{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#34C759,#30B0C7);box-shadow:0 14px 30px -14px #34C759}
 .ok-ic svg{width:26px;height:26px;fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:30;stroke-dashoffset:30;animation:ctTick .6s .25s forwards}
-.ct-ok h2{margin:0;font:600 1.45rem var(--f-display)}
+.ct-ok h2,.ct-ok .ok-h{margin:0;font:600 1.45rem var(--f-display)}
 .ct-ok > p{margin:0;color:var(--xc-mut)}
 .ok-steps{list-style:none;margin:4px 0;padding:0;display:grid;width:100%;counter-reset:s}
 .ok-steps li{position:relative;padding:0 0 14px 34px;counter-increment:s;display:grid}
@@ -409,3 +409,6 @@ html.anim .page-contact .cf::before{animation:cfBar .8s var(--ease) 1s both paus
 .page-contact .cf{transition:box-shadow .6s var(--ease)}
 .page-contact .cf:focus-within{box-shadow:0 30px 70px -40px rgba(var(--p-rgb),.55)}
 @media (prefers-reduced-motion:reduce){.page-contact .cf,.page-contact .cf *,.page-contact .cf::before{animation:none!important}}
+
+/* SEO: brand line inside the H1 (templates/sections/contact/01-hero.html) */
+.ch h1 .ch-k{display:block;width:fit-content;margin-bottom:16px;font-size:.8rem;line-height:1.3;letter-spacing:.02em;-webkit-text-fill-color:currentColor}

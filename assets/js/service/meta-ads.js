@@ -33,11 +33,11 @@
   addEventListener('scroll',mspy,{passive:true});mspy();if(window.__lenis&&window.__lenis.on)window.__lenis.on('scroll',mspy);
   /* keyword finder */
   var KW={re:[['flats in {c}',2400,58],['3 bhk flats in {c}',1900,46],['new projects in {c}',1600,52],['ready to move flats {c}',880,38],['luxury apartments {c}',720,61]],
-    health:[['best hospital in {c}',3600,64],['dentist near me {c}',2900,41],['skin clinic in {c}',1300,36],['ivf centre {c}',1000,55],['physiotherapy {c}',590,28]],
-    edu:[['best coaching in {c}',2200,54],['ielts coaching {c}',1600,42],['cbse schools in {c}',1300,47],['neet coaching {c}',1000,57],['computer courses {c}',720,31]],
-    ecom:[['buy kurtis online',8100,66],['cotton kurtis for women',4400,48],['ethnic wear brands india',2900,59],['boutique in {c}',1300,33],['handloom sarees online',1000,44]],
-    hos:[['hotels in {c}',6600,62],['banquet hall in {c}',1900,43],['rooftop restaurant {c}',1300,35],['wedding venues {c}',1000,51],['cafe near me {c}',880,29]],
-    b2b:[['logistics company in {c}',1300,49],['packaging manufacturers {c}',880,37],['crm software india',2400,68],['digital marketing agency {c}',1600,63],['courier service {c}',1000,44]]};
+    lux:[['luxury apartments in {c}',1300,61],['villas in {c}',1000,52],['penthouse in {c}',590,44],['golf course road apartments',880,63],['4 bhk flats in {c}',720,49]],
+    plot:[['plots in {c}',2900,47],['residential plots {c}',1300,42],['plots on sohna road',590,33],['township plots {c}',480,36],['sco plots {c}',390,40]],
+    com:[['office space in {c}',1900,58],['retail shops for sale {c}',880,46],['commercial property {c}',1300,55],['co-working space {c}',1000,52],['sco plots for sale',480,41]],
+    cp:[['new projects in {c}',1600,52],['pre launch projects {c}',1000,48],['upcoming projects {c}',880,45],['property dealer in {c}',720,39],['resale flats {c}',590,35]],
+    aff:[['affordable housing {c}',1600,44],['2 bhk flats in {c}',2400,50],['flats under 50 lakh {c}',880,37],['dwarka expressway flats',1000,53],['ready to move 2 bhk {c}',590,38]]};
   var CM={Gurugram:1,Delhi:1.6,Noida:.9,Faridabad:.6,Mumbai:1.8,Bengaluru:1.7};
   function kwDraw(){var ind=$('kwInd').value,c=$('kwCity').value,m=CM[c]||1,tot=0;
     $('kwList').innerHTML=KW[ind].map(function(k,i){var v=Math.round(k[1]*(k[0].indexOf('{c}')>-1?m:1)/10)*10;tot+=v;var d=k[2],col=d<40?'#34C759':d<55?'#FF9500':'#FF3B30',lab=d<40?'Easy':d<55?'Medium':'Hard';
@@ -60,7 +60,7 @@
     if(reduce)mh.setAttribute('data-s','3');else{go();setInterval(function(){if(mh.getAttribute('data-s')==='0'||mh.getAttribute('data-s')==='1'){rN+=7+Math.floor(Math.random()*20);rEl.textContent=rN.toLocaleString('en-IN');}},500);
       if('IntersectionObserver' in window)new IntersectionObserver(function(e){mv=e[0].isIntersecting;}).observe(mh);}}
   /* ad formats */
-  var FT=$('fmtTabs'),FI=$('fmtInfo'),FD={"reels": ["Reels", "Reach and attention", "Full-screen vertical video, 9\u201330 seconds. Best for reaching new people and showing your product or project in action."], "carousel": ["Carousel", "Show several options", "Up to 10 swipeable cards. Great for multiple projects, products, courses or before-and-after stories."], "form": ["Lead form", "Enquiries", "A pre-filled form opens inside Instagram or Facebook, so people enquire in two taps without leaving the app."], "wa": ["Click to WhatsApp", "Conversations", "The ad opens a WhatsApp chat with you. Our bot replies instantly and books calls or visits."], "story": ["Stories", "Retargeting", "Quick full-screen ads between Stories. Ideal for reminders, offers and people who already know you."]},fk=Object.keys(FD),fi=0,ft=null,fvis=false;
+  var FT=$('fmtTabs'),FI=$('fmtInfo'),FD={"reels": ["Reels", "Reach and attention", "Full-screen vertical video, 9\u201330 seconds. Best for reaching new buyers and showing your project in action."], "carousel": ["Carousel", "Show several options", "Up to 10 swipeable cards. Great for several projects, configurations, amenities or construction progress."], "form": ["Lead form", "Enquiries", "A pre-filled form opens inside Instagram or Facebook, so people enquire in two taps without leaving the app."], "wa": ["Click to WhatsApp", "Conversations", "The ad opens a WhatsApp chat with you. Our bot replies instantly and books calls or visits."], "story": ["Stories", "Retargeting", "Quick full-screen ads between Stories. Ideal for reminders, launch offers and buyers who already know your project."]},fk=Object.keys(FD),fi=0,ft=null,fvis=false;
   function fset(k){fi=fk.indexOf(k);[].forEach.call(FT.children,function(b){b.setAttribute('aria-selected',b.dataset.f===k);});
     [].forEach.call(document.querySelectorAll('.pf'),function(p){p.classList.remove('on');if(p.dataset.f===k){void p.offsetWidth;p.classList.add('on');}});
     var b=FT.querySelector('[data-f="'+k+'"]');FI.style.setProperty('--c',b.style.getPropertyValue('--c'));FI.innerHTML='<b>'+FD[k][0]+' · best for '+FD[k][1].toLowerCase()+'.</b> '+FD[k][2];FI.style.animation='none';void FI.offsetWidth;FI.style.animation='';}

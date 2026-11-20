@@ -14,8 +14,8 @@
       ai=sx.querySelector('.sxr-ai'),rk=sx.querySelector('.sxr-rank');
     var SC=[
       {f:'YP',q:'3 bhk flats sector 65 gurugram',d:'yourproject.com › sector-65',t:'3 & 4 BHK Homes in Sector 65 | Your Project',l:[40,132]},
-      {f:'SC',q:'best dentist in gurugram',d:'smileclinic.in › gurugram',t:'Painless Dental Care in Gurugram | Smile Clinic',l:[18,74]},
-      {f:'BA',q:'ielts coaching near me',d:'brightacademy.in › ielts',t:'IELTS Coaching in Gurugram, Band 7+ | Bright Academy',l:[25,96]}
+      {f:'PL',q:'plots on sohna road',d:'yourtownship.in › plots',t:'Residential Plots on Sohna Road, Gurugram | Your Township',l:[18,74]},
+      {f:'OS',q:'office space golf course road',d:'yourtower.in › offices',t:'Office Space on Golf Course Road | Your Tower',l:[25,96]}
     ];
     var RANKS=[27,18,9,4,1],si=0,seen=true;
     function place(k){me.style.setProperty('--i',k);var j=0;others.forEach(function(o){if(j===k)j++;o.style.setProperty('--i',j);j++;});}

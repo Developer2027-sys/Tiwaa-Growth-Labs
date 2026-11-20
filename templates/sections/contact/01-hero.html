@@ -2,11 +2,10 @@
   <section class="cg ch" id="ct-form" aria-labelledby="cth">
     <div class="wrap cg-in ch-in">
       <div class="ch-copy">
-        <span class="pill rv">Contact us</span>
-        <h1 class="rv" id="cth" style="--d:1"><span class="gt">Get in touch</span><br>with our team</h1>
-        <p class="ch-lead rv" style="--d:2">Fill out the form and a senior strategist will get back to you within 2 working hours, with honest next steps for your growth.</p>
+        <h1 class="rv" id="cth" style="--d:1"><span class="pill ch-k">Contact Tiwaa Growth Labs</span> <span class="gt">Get in touch</span><br> with our team</h1>
+        <p class="ch-lead rv" style="--d:2">Planning a project launch or need more site visits? Fill out the form and a senior real estate marketing strategist will get back to you within 2 working hours, with honest next steps for your project.</p>
         <div class="ci-grid">
-          <div class="ci rv" style="--d:2"><span class="ci-h"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1M14 9h1M9 13h1M14 13h1M10 21v-4h4v4"/></svg>Head office</span><p>Spaze I Tech Park, Sector 49, Sohna Road, Gurugram</p><a href="#ct-office">View on map →</a></div>
+          <div class="ci rv" style="--d:2"><span class="ci-h"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1M14 9h1M9 13h1M14 13h1M10 21v-4h4v4"/></svg>Head office</span><p>Spaze I Tech Park, Sector 49, Sohna Road, Gurugram (Gurgaon)</p><a href="#ct-office">View on map →</a></div>
           <div class="ci rv" style="--d:3"><span class="ci-h"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-3 2a11 11 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Call or WhatsApp</span><p><a class="ci-v" href="tel:+{{ site.phone_intl }}">{{ site.phone_display }}</a></p><span class="ci-a"><button type="button" data-copy="{{ site.phone_display }}">Copy</button><a href="https://wa.me/{{ site.phone_intl }}?text=Hi%20Tiwaa%2C%20I%27d%20like%20to%20discuss%20my%20marketing." target="_blank" rel="noopener">WhatsApp →</a></span></div>
           <div class="ci rv" style="--d:3"><span class="ci-h"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Email</span><p><a class="ci-v" href="mailto:{{ site.email }}">{{ site.email }}</a></p><span class="ci-a"><button type="button" data-copy="{{ site.email }}">Copy email</button></span></div>
           <div class="ci rv" style="--d:4"><span class="ci-h"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Working hours</span><p>Monday – Saturday<br>10:00 AM – 7:00 PM</p><span class="ci-st" id="ctSt"><i></i><b>Open now</b></span></div>
@@ -21,8 +20,8 @@
               <label class="fl"><span>Work email</span><input id="cEmail" type="email" autocomplete="email" placeholder="Enter work email"></label>
               <label class="fl"><span>Phone number *</span><span class="ph-in"><select id="cCc" aria-label="Country code"><option>+91</option><option>+971</option><option>+1</option><option>+44</option><option>+61</option></select><input id="cPhone" type="tel" autocomplete="tel-national" placeholder="98765 43210" required></span></label>
               <label class="fl"><span>Company or website</span><input id="cCo" type="text" autocomplete="organization" placeholder="Enter company name"></label>
-              <label class="fl"><span>Service you need</span><span class="sel"><select id="cSvcSel"><option value="">Select a service</option><option>Free growth audit</option><option>SEO</option><option>Google Ads</option><option>Meta &amp; Instagram Ads</option><option>Social media</option><option>Content &amp; video</option><option>WhatsApp automation</option><option>Website design</option><option>Analytics &amp; CRM</option><option>Not sure yet</option></select></span></label>
-              <label class="fl cf-full"><span>Message</span><textarea id="cMsg" rows="4" placeholder="Tell us about your goals, budget or current challenges"></textarea></label>
+              <label class="fl"><span>Service you need</span><span class="sel"><select id="cSvcSel"><option value="">Select a service</option><option>Free real estate marketing audit</option><option>Project launch campaign</option><option>Meta &amp; Google lead ads</option><option>Walkthrough films &amp; creatives</option><option>Project landing page &amp; SEO</option><option>Social media for projects</option><option>WhatsApp follow-up</option><option>LeadsPulse CRM</option><option>Not sure yet</option></select></span></label>
+              <label class="fl cf-full"><span>Message</span><textarea id="cMsg" rows="4" placeholder="Tell us about your project, location, launch date or budget"></textarea></label>
             </div>
             <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" id="cHp" tabindex="-1" autocomplete="off"></label></div>
             <p class="ct-err" id="cErr" role="alert"></p>
@@ -31,7 +30,7 @@
           </form>
           <div class="ct-ok" id="ctOk" hidden tabindex="-1">
             <span class="ok-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
-            <h2 id="okH">Thanks!</h2>
+            <p class="ok-h" id="okH">Thanks!</p>
             <p id="okP"></p>
             <ol class="ok-steps"><li><b>Within 2 working hours</b><span>A strategist reviews your details</span></li><li><b>Same or next day</b><span>We call you to understand your goals</span></li><li><b>Within 3 days</b><span>You get a free audit and a clear plan</span></li></ol>
             <button type="button" class="cf-back" id="okBack">Send another message</button>

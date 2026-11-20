@@ -23,12 +23,12 @@
 :root[data-mode="light"]{--bg:#FFFFFF; --bg2:#F5F5F7; --surface:#FFFFFF; --ink:#1D1D1F; --muted:#6E6E73; --line:#D2D2D7; --soft:var(--p-soft); --tint:#FBFBFD; --green-ink:var(--p-d); --gt:linear-gradient(92deg,var(--p-d) 0%,var(--p) 55%,#5856D6 100%); --logo-l:block; --logo-d:none; --x-bg:#F5F5F7; --x-card:#FFFFFF; --x-card-solid:#FFFFFF; --x-line:#D2D2D7; --x-ink:#1D1D1F; --x-muted:#6E6E73; --x-grid:rgba(0,0,0,.05); --x-hover:rgba(0,0,0,.05); --hdr-bg:rgba(255,255,255,.88); --hdr-solid:#FFFFFF; --talk-b:linear-gradient(150deg,var(--p),var(--p-soft) 45%,#5856D6); --glow-a:rgba(var(--p-rgb),.22); --glow-b:rgba(88,86,214,.14); --sheet-sh:0 -24px 50px -34px rgba(0,0,0,.35); color-scheme:light}
 :root[data-mode="dark"]{--bg:#000000; --bg2:#161617; --surface:#1C1C1E; --ink:#F5F5F7; --muted:#A1A1A6; --line:#38383A; --soft:var(--p-soft-d); --tint:#111113; --green-ink:var(--p-l); --gt:var(--gt-d); --logo-l:none; --logo-d:block; --x-bg:#000000; --x-card:rgba(255,255,255,.04); --x-card-solid:rgba(0,0,0,.88); --x-line:rgba(255,255,255,.08); --x-ink:#F5F5F7; --x-muted:#A1A1A6; --x-grid:rgba(255,255,255,.035); --x-hover:rgba(255,255,255,.06); --hdr-bg:rgba(0,0,0,.82); --hdr-solid:#000000; --talk-b:linear-gradient(150deg,var(--p),var(--p-deep) 40%,#5856D6); --glow-a:rgba(var(--p-rgb),.16); --glow-b:rgba(88,86,214,.12); --sheet-sh:none; color-scheme:dark}
 *{box-sizing:border-box}
-html{scroll-padding-top:90px}
+html{scroll-padding-top:90px;overflow-x:clip}
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
 .lenis.lenis-stopped{overflow:hidden}
 .lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
-body{margin:0;background:var(--x-bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--x-bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.65;overflow-x:hidden;overflow-x:clip;-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:80;background:var(--hdr-solid)}
 [hidden]{display:none!important}
 a{color:inherit}
@@ -114,6 +114,11 @@ nav.main a.on{color:var(--green-ink)}
 .hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--x-grid) 1px,transparent 1px),linear-gradient(90deg,var(--x-grid) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse at 60% 40%,#000 20%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at 60% 40%,#000 20%,transparent 75%)}
 .hero .wrap{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,6vw,90px);align-items:center;padding-block:clamp(56px,8vw,110px) clamp(56px,7vw,96px)}
 .hero h1{font-size:clamp(2.2rem,4.6vw,3.7rem);font-weight:700;color:var(--x-ink);line-height:1.12}
+/* SEO keyword line inside the H1, styled as a small eyebrow above the headline */
+.hero h1 .h1-k{display:block;width:fit-content;margin-bottom:16px;padding:7px 14px;border-radius:999px;font:600 clamp(.74rem,1vw,.84rem)/1.3 var(--f-body);letter-spacing:.02em;color:var(--p);background:rgba(var(--p-rgb),.08);border:1px solid rgba(var(--p-rgb),.18)}
+/* homepage service names link to their service pages */
+.y-stage li b a{color:inherit;text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .35s,color .25s}
+.y-stage li b a:hover,.y-stage li b a:focus-visible{color:var(--p);background-size:100% 1px}
 .hero .tagline{margin-top:22px;font:700 clamp(1.15rem,2vw,1.5rem) var(--f-display);line-height:1.3}
 .hero p.lead{margin-top:18px;color:var(--x-muted);max-width:52ch}
 .hero-badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
@@ -1671,7 +1676,7 @@ nav.main .nv-promo:hover{background:var(--band);filter:brightness(1.08)}
 }
 @media (max-width:640px){.y-stages,.y-ind-grid{grid-template-columns:1fr}.y-stats dd{font-size:2rem}}
 
-@media (min-width:981px){.y-steps::before{right:auto;width:calc(80% + 16px)}.y-steps.on::after{width:calc(80% + 16px)}}
+@media (min-width:981px){.y-steps li{justify-items:center;text-align:center}.y-steps::before,.y-steps::after{left:calc(10% - 8px)}.y-steps::before{right:auto;width:calc(80% + 16px)}.y-steps.on::after{width:calc(80% + 16px)}}
 .sec-hd.split > .btn{justify-self:end;align-self:end;width:auto}
 @media (max-width:860px){.sec-hd.split > .btn{justify-self:start}}
 
@@ -2313,3 +2318,10 @@ form.is-done{align-content:center}
 @media (max-width:1100px){.st-groups{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:760px){.stack-hd{grid-template-columns:1fr;align-items:start}}
 @media (max-width:520px){.stack{padding:18px 14px;border-radius:22px}.st-groups{grid-template-columns:1fr}.st-g{padding:14px}}
+
+
+
+/* Phones: the hero badges repeat the lead text, so hide them to bring the call-back form up. */
+@media (max-width:760px){.hero .hero-badges{display:none}}
+.fbar a{color:inherit;text-decoration:none}
+.fbar a:hover{color:#fff;text-decoration:underline;text-underline-offset:3px}

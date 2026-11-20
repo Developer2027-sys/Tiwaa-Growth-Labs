@@ -16,13 +16,12 @@ use crate::content::{Content, Post};
 use crate::pages::{self, HeadExtra, Page};
 use crate::util::{self, escape, Assets};
 use minijinja::value::ViaDeserialize;
-use minijinja::{context, path_loader, Environment, Error, ErrorKind, State, Value};
+use minijinja::{context, path_loader, Environment, Error, State, Value};
 use serde_json::json;
-use std::path::{Path, PathBuf};
+use std::path::Path;
 use std::sync::Arc;
 
 pub struct Site {
-    pub root: PathBuf,
     pub content: Arc<Content>,
     pub assets: Arc<Assets>,
     env: Environment<'static>,
@@ -63,7 +62,7 @@ impl Site {
             Value::from_safe_string(brands::blog_card(&p, &a, i, excerpt.unwrap_or(false)))
         });
 
-        Ok(Self { root: root.to_path_buf(), content, assets, env })
+        Ok(Self { content, assets, env })
     }
 
     /// Render a page by id ("home", "services", "blog", "404").
@@ -97,15 +96,15 @@ impl Site {
         let abs = |p: &str| format!("{}{}", site.site_url.trim_end_matches('/'), p);
         let head_extra = match &page.head_extra {
             HeadExtra::None => String::new(),
-            HeadExtra::Html(h) => (*h).to_string(),
-            HeadExtra::File(f) => std::fs::read_to_string(self.root.join("templates").join(f))
-                .map_err(|e| Error::new(ErrorKind::TemplateNotFound, format!("{f}: {e}")))?,
+            // Rendered as a template, so structured data can use {{ abs_url() }} and {{ site.* }}.
+            HeadExtra::File(f) => self.env.get_template(f)?.render(context! { site => Value::from_serialize(site) })?,
         };
         let a = &site.address;
         let intl = &site.phone_intl;
-        let org = json!({
+        let mut org = json!({
             "@context": "https://schema.org",
             "@type": "ProfessionalService",
+            "@id": abs("/#organization"),
             "name": site.name,
             "legalName": site.legal_name,
             "url": abs("/"),
@@ -113,7 +112,7 @@ impl Site {
             "image": abs("/assets/images/og-image.png"),
             "telephone": format!("+{}-{}", &intl[..2.min(intl.len())], &intl[2.min(intl.len())..]),
             "email": site.email,
-            "description": "Digital marketing and website development agency in Gurugram.",
+            "description": "Real estate digital marketing agency in Gurugram for developers, builders and channel partners: lead generation, Meta and Google ads, landing pages, WhatsApp automation and CRM.",
             "address": {
                 "@type": "PostalAddress",
                 "streetAddress": a.street,
@@ -122,9 +121,30 @@ impl Site {
                 "postalCode": a.postcode,
                 "addressCountry": a.country,
             },
-            "areaServed": ["Gurugram", "Delhi NCR", "India"],
-            "knowsAbout": ["Search Engine Optimization", "Social Media Marketing", "Pay Per Click Advertising", "WhatsApp Marketing", "Content Marketing", "Website Development"],
+            "areaServed": [
+                { "@type": "City", "name": "Gurugram" },
+                { "@type": "AdministrativeArea", "name": "Delhi NCR" },
+                { "@type": "Country", "name": "India" },
+            ],
+            "openingHoursSpecification": [{
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                "opens": "10:00",
+                "closes": "19:00",
+            }],
+            "contactPoint": [{
+                "@type": "ContactPoint",
+                "telephone": format!("+{intl}"),
+                "email": site.email,
+                "contactType": "sales",
+                "areaServed": "IN",
+            }],
+            "knowsAbout": ["Real Estate Marketing", "Real Estate Lead Generation", "Search Engine Optimization", "Google Ads", "Meta Ads", "Social Media Marketing", "WhatsApp Marketing", "Content Marketing", "Website Development", "CRM"],
         });
+        let same_as = site.social.urls();
+        if !same_as.is_empty() {
+            org["sameAs"] = json!(same_as);
+        }
         let tgl = json!({ "api": site.api_path, "phone": site.phone_display, "wa": site.phone_intl, "brands": "/assets/images/brands/" });
         let favicon = self.assets.exists("images/favicon.png").then(|| self.assets.url("images/favicon.png"));
 
@@ -148,7 +168,9 @@ impl Site {
             // /services and every /services/... page: highlights "Services" in the nav
             in_services => page.path.starts_with("/services"),
             year => util::now_utc().0,
-            canonical => abs(page.path),
+            // Empty until the final domain is live (content/site.toml: canonical_url).
+            canonical => (!site.canonical_url.is_empty()).then(|| format!("{}{}", site.canonical_url.trim_end_matches('/'), page.path)).unwrap_or_default(),
+            og_url => abs(page.path),
             favicon => favicon,
             tgl_json => tgl.to_string(),
             org_json => pretty_json(&org),

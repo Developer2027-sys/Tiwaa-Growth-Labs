@@ -1075,3 +1075,22 @@
 @media (max-height:760px){.sv2.pin .sv2-st{min-height:330px}.sv2.pin .sv2-in{margin-top:16px}}
 .sv2-sc{padding-bottom:40px}.sv2-note{bottom:10px}
 .wy3-m.sm{font-size:clamp(1.9rem,2.8vw,2.5rem);line-height:1.05;white-space:normal}
+
+/* SEO: brand line inside the H1 (01-hero.html) */
+.a8-h1 .a8-k{display:block;width:fit-content;margin-bottom:18px;font-size:.8rem;line-height:1.3;letter-spacing:.02em}
+.a8-h1 .a8-k::before{display:none}
+
+/* Mission, vision and values (02b-mission.html) */
+.a8-mv{background:var(--bg)}
+.a8-mv .mv-g{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.a8-mv .mv-c{position:relative;overflow:hidden;padding:clamp(22px,3vw,32px);border-radius:22px;background:var(--xc-bg);border:1px solid var(--xc-line)}
+.a8-mv .mv-c::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--c)}
+.a8-mv .mv-l{display:inline-block;margin-bottom:10px;font:700 .74rem var(--f-display);letter-spacing:.1em;text-transform:uppercase;color:var(--c)}
+.a8-mv .mv-c p{margin:0;font:600 clamp(1.05rem,1.6vw,1.25rem)/1.5 var(--f-display);letter-spacing:-.01em;color:var(--x-ink)}
+.a8-mv .mv-vh{margin:clamp(28px,4vw,40px) 0 14px;font:700 1.05rem var(--f-display);color:var(--x-ink)}
+.a8-mv .mv-vals{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.a8-mv .mv-vals li{display:grid;gap:6px;align-content:start;padding:16px 18px;border-radius:16px;background:var(--xc-bg);border:1px solid var(--xc-line)}
+.a8-mv .mv-vals b{font:600 .96rem var(--f-display);color:var(--x-ink)}
+.a8-mv .mv-vals span{font-size:.86rem;line-height:1.55;color:var(--xc-mut)}
+@media (max-width:900px){.a8-mv .mv-vals{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.a8-mv .mv-g,.a8-mv .mv-vals{grid-template-columns:1fr}}

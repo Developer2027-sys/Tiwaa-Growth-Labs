@@ -1,0 +1,66 @@
+{%- from "sections/home/_faqs.html" import faqs -%}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "WebSite",
+            "@id": "{{ abs_url('/#website') }}",
+            "url": "{{ abs_url('/') }}",
+            "name": "{{ site.name }}",
+            "inLanguage": "en-IN",
+            "publisher": { "@type": "Organization", "name": "{{ site.legal_name }}", "url": "{{ abs_url('/') }}" }
+        },
+        {
+            "@type": "WebPage",
+            "@id": "{{ abs_url('/#webpage') }}",
+            "url": "{{ abs_url('/') }}",
+            "name": "Real Estate Marketing Agency in Gurgaon | {{ site.name }}",
+            "description": "Real estate digital marketing agency in Gurugram (Gurgaon). Lead generation for builders and channel partners with Meta and Google ads, landing pages and CRM.",
+            "inLanguage": "en-IN",
+            "isPartOf": { "@id": "{{ abs_url('/#website') }}" },
+            "primaryImageOfPage": "{{ abs_url('/assets/images/og-image.png') }}"
+        },
+        {
+            "@type": "Service",
+            "name": "Real estate digital marketing",
+            "serviceType": "Real estate marketing and lead generation",
+            "provider": { "@type": "ProfessionalService", "name": "{{ site.name }}", "url": "{{ abs_url('/') }}" },
+            "areaServed": [
+                { "@type": "City", "name": "Gurugram" },
+                { "@type": "AdministrativeArea", "name": "Delhi NCR" },
+                { "@type": "Country", "name": "India" }
+            ],
+            "audience": { "@type": "BusinessAudience", "audienceType": "Real estate developers, builders, channel partners and brokers" },
+            "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Real estate marketing services",
+                "itemListElement": [
+{% for s in [
+  ["SEO for real estate", "/services/seo"],
+  ["Google Ads for real estate", "/services/google-ads"],
+  ["Meta and Instagram lead ads", "/services/meta-ads"],
+  ["Social media marketing for real estate projects", "/services/social-media-marketing"],
+  ["WhatsApp automation for property enquiries", "/services/whatsapp-automation"],
+  ["Real estate website and landing page design", "/services/website-design"],
+  ["Walkthrough films and real estate content", "/services/content-video"],
+  ["Real estate CRM and analytics", "/services/analytics-crm"]
+] %}
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "{{ s[0] }}", "url": "{{ abs_url(s[1]) }}" } }{% if not loop.last %},{% endif %}
+
+{% endfor %}
+                ]
+            }
+        },
+        {
+            "@type": "FAQPage",
+            "mainEntity": [
+{% for f in faqs %}
+                { "@type": "Question", "name": {{ f[0] | tojson }}, "acceptedAnswer": { "@type": "Answer", "text": {{ f[1] | tojson }} } }{% if not loop.last %},{% endif %}
+
+{% endfor %}
+            ]
+        }
+    ]
+}
+</script>

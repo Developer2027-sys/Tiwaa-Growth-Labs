@@ -8,12 +8,47 @@ pub struct Site {
     pub name: String,
     pub legal_name: String,
     pub site_url: String,
+    /// Base for <link rel="canonical">; empty leaves the tag empty (set once the domain is live).
+    #[serde(default)]
+    pub canonical_url: String,
     pub phone_display: String,
     pub phone_intl: String,
     pub email: String,
     pub api_path: String,
     pub palette: String,
     pub address: Address,
+    /// Social profile URLs. Empty ones are hidden in the footer and left out of structured data.
+    #[serde(default)]
+    pub social: Social,
+    /// Tracking IDs. Empty ones are not loaded.
+    #[serde(default)]
+    pub analytics: Analytics,
+}
+
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
+#[serde(default)]
+pub struct Social {
+    pub facebook: String,
+    pub linkedin: String,
+    pub instagram: String,
+    pub youtube: String,
+}
+
+impl Social {
+    pub fn urls(&self) -> Vec<&str> {
+        [&self.facebook, &self.linkedin, &self.instagram, &self.youtube].into_iter().map(|s| s.as_str()).filter(|s| !s.is_empty()).collect()
+    }
+}
+
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
+#[serde(default)]
+pub struct Analytics {
+    /// Google Tag Manager container, e.g. "GTM-XXXXXXX". If set, add GA4 and Meta Pixel inside GTM instead of below.
+    pub gtm_id: String,
+    /// Google Analytics 4 measurement ID, e.g. "G-XXXXXXXXXX".
+    pub ga4_id: String,
+    /// Meta Pixel ID, digits only.
+    pub meta_pixel_id: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

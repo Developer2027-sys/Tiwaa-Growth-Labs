@@ -7,6 +7,7 @@
   [].forEach.call(document.querySelectorAll('.wk-cu'),function(el){var to=+el.dataset.to,done=false;
     function fmt(n){return Math.round(n).toLocaleString('en-IN');}
     if(reduce){el.textContent=fmt(to);return;}
+    el.textContent='0'; // real number is in the HTML for search engines and no-JS visitors
     inView(el,function(v){if(!v||done)return;done=true;var t0=performance.now();(function st(t){var p=Math.min(1,(t-t0)/1600);el.textContent=fmt(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(st);})(t0);},.6);});
   /* hero deck */
   var deck=$('wkDeck');

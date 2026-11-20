@@ -105,3 +105,68 @@ Each lead stores the form (`hero`, `popup` or `contact`), name, phone, email, se
 - **Validation rules:** `crates/leads/src/lib.rs`. They are used by both the Worker and the dev server; run `npm test` after changing them.
 
 Placeholders still in the design: testimonials, the client logo names and case-study numbers are marked as samples in the artifact. Replace them before launch.
+
+## Homepage SEO
+
+| What | Where |
+| --- | --- |
+| Title (< 60 chars: "Real Estate Marketing Agency in Gurgaon | Tiwaa Growth Labs"), description (< 160), keywords | `crates/site/src/pages.rs`, `"home"` |
+| Canonical tag | `content/site.toml` → `canonical_url` (empty for now: set it to the live domain and rebuild) |
+| WebSite / Service catalogue / FAQPage structured data | `templates/layout/ld/home.html` |
+| FAQ questions (page and structured data share them) | `templates/sections/home/_faqs.html` |
+
+Keyword plan (real estate marketing, Gurugram / Delhi NCR):
+
+- **Primary:** real estate marketing agency in Gurugram (Gurgaon); real estate digital marketing agency
+- **Secondary:** real estate lead generation; property marketing agency Delhi NCR; digital marketing for builders / real estate developers; channel partner leads
+- **Supporting:** pre-launch / EOI campaigns; NRI buyers; cost per site visit; real estate Google Ads; real estate Facebook / Meta lead ads; real estate SEO; real estate landing pages; WhatsApp marketing for real estate; real estate CRM; site visits; cost per lead
+- **Local:** Gurugram / Gurgaon, Delhi NCR, Golf Course Road & Extension, Dwarka Expressway, New Gurugram, Southern Peripheral Road, Sohna Road, Noida & Yamuna Expressway (micro-market list in `templates/sections/home/05-industries.html`)
+
+Competitor check (Nov 2026): the strongest Gurugram page (AAJneeti) uses "Gurugram (Gurgaon)" in title and description, names sectors and corridors, answers about 10 FAQs and has ProfessionalService + Service + FAQPage schema. Our homepage now covers all of these; its remaining edge is local market data (launch lists, price trends), which belongs in blog posts or a /gurugram landing page.
+
+Use each phrase where it reads naturally (headings, intro copy, FAQ). Do not repeat keywords for their own sake.
+
+## About page SEO
+
+| What | Where |
+| --- | --- |
+| Title ("About Tiwaa Growth Labs \| Real Estate Marketing Company"), description, keywords | `crates/site/src/pages.rs`, `"about"` |
+| AboutPage + breadcrumb + FAQPage structured data | `templates/layout/ld/about.html` |
+| FAQ questions (page and structured data share them) | `templates/sections/about/_faqs.html` |
+| Mission, vision and values | `templates/sections/about/02b-mission.html` |
+| Client logo row (homepage and about page) | `templates/sections/shared/client-logos.html` |
+
+Keywords: the brand ("Tiwaa Growth Labs", "Tiwaa Growth Lab Private Limited") plus "real estate marketing company in Gurugram / Gurgaon". The homepage owns "real estate marketing agency", so the two pages don't compete for the same search.
+
+## Contact page SEO
+
+| What | Where |
+| --- | --- |
+| Title ("Contact Tiwaa Growth Labs \| Real Estate Marketing Gurugram"), description, keywords | `crates/site/src/pages.rs`, `"contact"` |
+| ContactPage + contact points + map + breadcrumb + FAQPage structured data | `templates/layout/contact-ld.html` |
+| FAQ questions by topic (page and structured data share them) | `templates/sections/contact/_faqs.html` |
+
+Structured data templates use `{{ value | tojson }}` for any text that may contain quotes.
+
+## Services page SEO
+
+| What | Where |
+| --- | --- |
+| Title ("Real Estate Digital Marketing Services \| Tiwaa Growth Labs"), description, keywords | `crates/site/src/pages.rs`, `"services"` |
+| CollectionPage + ItemList of 9 Services + breadcrumb + FAQPage structured data | `templates/layout/services-ld.html` |
+| FAQ questions (page and structured data share them) | `templates/sections/services/_faqs.html` |
+| Real estate segments grid (only used on /services) | `templates/sections/shared/industries.html` |
+
+The "Sample result" figures in `templates/sections/services/06-service-details.html` are placeholders. Replace them with real project results before launch.
+
+## Launch settings (content/site.toml)
+
+| Setting | What it does |
+| --- | --- |
+| `canonical_url` | Base for `<link rel="canonical">`. Set to the live domain at launch. |
+| `[social]` facebook / linkedin / instagram / youtube | Footer icons appear only for URLs that are set; set URLs are also added to the organisation schema as `sameAs`. |
+| `[analytics]` gtm_id / ga4_id / meta_pixel_id | Tracking tags in `templates/layout/analytics.html`; empty IDs load nothing. With GTM, add GA4 and the Pixel inside GTM instead. |
+
+Legal pages: `/privacy-policy` and `/terms` (`templates/sections/legal/`). They are drafts based on what the site collects; have them reviewed before launch.
+
+Lead popup: auto-opens once per visit on desktop only (`tgl-auto` in sessionStorage), and that also uses up the exit-intent popup for the visit.

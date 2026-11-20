@@ -5,8 +5,12 @@
 name          = "Tiwaa Growth Labs"
 legal_name    = "Tiwaa Growth Lab Private Limited"
 
-# Public site address, used for canonical URLs, Open Graph and the sitemap.
+# Public site address, used for Open Graph, structured data and the sitemap.
 site_url      = "https://www.tiwaagrowthlab.com"
+
+# Canonical tag base. Left empty for now, so pages output <link rel="canonical" href="">.
+# When the domain is live, set it (e.g. "https://www.tiwaagrowthlab.com") and rebuild.
+canonical_url = ""
 
 phone_display = "+91 90501 26213"
 phone_intl    = "919050126213"     # digits only, used for tel: and WhatsApp links
@@ -24,3 +28,17 @@ city     = "Gurugram"
 region   = "Haryana"
 postcode = "122018"
 country  = "IN"
+
+# Social profiles (full URLs). Empty ones are hidden in the footer and left out of structured data.
+[social]
+facebook  = ""
+linkedin  = ""
+instagram = ""
+youtube   = ""
+
+# Tracking IDs. Leave empty to load nothing. If you use Google Tag Manager,
+# set only gtm_id and add GA4 / Meta Pixel inside GTM instead.
+[analytics]
+gtm_id        = ""   # e.g. "GTM-XXXXXXX"
+ga4_id        = ""   # e.g. "G-XXXXXXXXXX"
+meta_pixel_id = ""   # digits only

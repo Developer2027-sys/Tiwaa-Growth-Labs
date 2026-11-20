@@ -1,6 +1,7 @@
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="{{ asset('js/leads.js') }}"></script>
-<script src="{{ asset('js/main.js') }}"></script>
+{#- defer: scripts download in parallel with the page and run in this order once it is parsed -#}
+<script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script defer src="{{ asset('js/leads.js') }}"></script>
+<script defer src="{{ asset('js/main.js') }}"></script>
 {% for js in page.js %}
-<script src="{{ asset(js) }}"></script>
+<script defer src="{{ asset(js) }}"></script>
 {% endfor %}

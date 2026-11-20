@@ -1,0 +1,14 @@
+{#- SAMPLE real estate testimonials (not real client quotes). Replace each one with a genuine quote, name/role and result
+    before launch, then remove the "sample" notes in contact/03-clients.html and shared/reviews.html.
+    The homepage/about reviews strip (assets/js/main.js, xrTrack) uses the first six of these, in the same order.
+    [quote, role, company, segment tag, colour, result, result label] -#}
+{% set testimonials = [
+  ["Our site visits tripled in the first quarter, and WhatsApp follow-ups mean no enquiry goes cold.", "Marketing Head", "Real estate developer, Gurugram", "Developer", "#007AFF", "3.2x", "site visits"],
+  ["We sell twelve projects at once. Separate lead ads and LeadsPulse auto-assignment mean every buyer gets a call within minutes.", "Director", "Channel partner firm, Delhi NCR", "Channel Partner", "#5856D6", "4 min", "to first call"],
+  ["The walkthrough film and Reels filled our EOI list before bookings opened, including NRI buyers in the Gulf.", "Sales Head", "Luxury villa project, Sohna", "Luxury", "#FF9500", "3.1x", "EOI sign-ups"],
+  ["A fast landing page with the plot map and price, plus Google Search ads, brought investors who actually came to the site.", "Founder", "Plotted township developer", "Plots", "#34C759", "+210%", "visit requests"],
+  ["Leasing enquiries arrive with budget and size already filled in, so our team only calls serious tenants and investors.", "Leasing Head", "Commercial project, Golf Course Ext. Road", "Commercial", "#30B0C7", "+60%", "qualified enquiries"],
+  ["The weekly report shows leads, site visits and cost per visit for every campaign. We finally know which ads bring buyers.", "VP Marketing", "Residential developer, Noida", "Developer", "#FF2D55", "-32%", "cost per site visit"],
+  ["Leads for our own listings at last, not portal enquiries shared with ten other brokers.", "Owner", "Real estate brokerage, Gurugram", "Brokerage", "#AF52DE", "2x", "buyer enquiries"],
+  ["From the first audit call to monthly reviews, it feels like an extension of our own team. Leads and reports are always on time.", "Managing Director", "Real estate group, Delhi NCR", "Developer", "#1F6FEB", "2.8x", "qualified leads"]
+] %}

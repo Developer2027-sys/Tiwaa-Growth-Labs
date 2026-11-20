@@ -27,6 +27,8 @@
       var sp=li.querySelector('span'),k=0,iv=setInterval(function(){if(!li.isConnected||k>=SG.length||(k===2&&Math.random()<.5)){clearInterval(iv);return;}sp.className=SG[k][0];sp.textContent=SG[k][1];if(k===2){K3++;bump('a7K3',K3);}k++;},1000);
     },3800);}
 
+    /* the real numbers are in the HTML (for search engines); reset to 0 just before counting up */
+  if(!reduce)[].forEach.call(document.querySelectorAll('.a7-cu'),function(b){b.textContent='0';});
   [].forEach.call(document.querySelectorAll('.a7-cu'),function(b){inView(b,function(v){if(!v||b.dataset.done)return;b.dataset.done=1;var to=+b.dataset.to;if(reduce)b.textContent=to.toLocaleString('en-IN');else countUp(b,to,1600);},.6);});
 
   /* journey line + events */
@@ -45,7 +47,7 @@
 
   /* about hero growth curve */
   var abv=$('abv');
-  if(abv){var pth=abv.querySelector('.abv-l'),L=pth.getTotalLength();[].forEach.call(abv.querySelectorAll('.abv-m'),function(m){var pt=pth.getPointAtLength(L*+m.dataset.t);m.style.setProperty('--x',(pt.x/480*100)+'%');m.style.setProperty('--y',(22+pt.y/300*78)+'%');});
+  if(abv){var pth=abv.querySelector('.abv-l'),pLen=pth.getTotalLength();[].forEach.call(abv.querySelectorAll('.abv-m'),function(m){var pt=pth.getPointAtLength(pLen*+m.dataset.t);m.style.setProperty('--x',(pt.x/480*100)+'%');m.style.setProperty('--y',(22+pt.y/300*78)+'%');});
     var cb=abv.querySelector('.c1 b'),N=+cb.dataset.n;setTimeout(function(){var t0=performance.now();(function st(t){var p=Math.min(1,(t-t0)/1800);cb.textContent=Math.round(N*(1-Math.pow(1-p,3))).toLocaleString('en-IN');if(p<1)requestAnimationFrame(st);})(t0);},reduce?0:700);
     if(!reduce){var cs=[].slice.call(abv.querySelectorAll('.abv-c')),F=[-.06,.05,-.03];function par(){var y=Math.min(scrollY,600);cs.forEach(function(c,i){c.style.transform='translateY('+(y*F[i])+'px)';});}addEventListener('scroll',par,{passive:true});if(window.__lenis&&window.__lenis.on)window.__lenis.on('scroll',par);
       setInterval(function(){if(document.hidden)return;N+=1+Math.floor(Math.random()*3);cb.textContent=N.toLocaleString('en-IN');},2000);}}
